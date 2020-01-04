@@ -1,0 +1,169 @@
+{
+  "data": [
+    {
+      "shopName" : "店铺名称1",
+      "shopId" : "0001",
+      "shopItems": [
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1573566063&di=4e90820bd1f2fab59c4429bc2f3bd8c5&src=http://img01.tooopen.com/Download/2012/2/1/20120201115652042013.jpg",
+          "itemPrice": 100.00,
+          "minQuantity": 2,
+          "maxQuantity": 10,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 110.00,
+          "minQuantity": 1,
+          "maxQuantity": 20,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 120.00,
+          "minQuantity": 5,
+          "maxQuantity": 30,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 130.00,
+          "minQuantity": 2,
+          "maxQuantity": 40,
+          "itemDes": "这个测试商品"
+        }
+      ]
+    },
+    {
+      "shopName" : "店铺名称2",
+      "shopId" : "0001",
+      "shopItems": [
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 140.00,
+          "minQuantity": 2,
+          "maxQuantity": 5,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 150.00,
+          "minQuantity": 10,
+          "maxQuantity": 15,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 160.00,
+          "minQuantity": 20,
+          "maxQuantity": 22,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 170.00,
+          "minQuantity": 2,
+          "maxQuantity": 24,
+          "itemDes": "这个测试商品"
+        }
+      ]
+    },
+    {
+      "shopName" : "店铺名称3",
+      "shopId" : "0001",
+      "shopItems": [
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 180.00,
+          "minQuantity": 2,
+          "maxQuantity": 6,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 2,
+          "maxQuantity": 8,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 2,
+          "maxQuantity": 10,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 2,
+          "maxQuantity": 100,
+          "itemDes": "这个测试商品"
+        }
+      ]
+    },
+    {
+      "shopName" : "店铺名称4",
+      "shopId" : "0001",
+      "shopItems": [
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 1,
+          "maxQuantity": 3,
+          "itemDes": "这个测试商品"
+        },
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 3,
+          "maxQuantity": 9,
+          "itemDes": "这个测试商品"
+        }
+      ]
+    },
+    {
+      "shopName" : "店铺名称5",
+      "shopId" : "0001",
+      "shopItems": [
+        {
+          "itemName": "商品一",
+          "itemId": "10001",
+          "itemimg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573576148011&di=2b9b71bb3bb6057afa6ff1689d8d00e7&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201510%2F29%2F20151029140701_LXET5.jpeg",
+          "itemPrice": 100.00,
+          "minQuantity": 1,
+          "maxQuantity": 20,
+          "itemDes": "这个测试商品"
+        }
+      ]
+    }
+  ]
+}
