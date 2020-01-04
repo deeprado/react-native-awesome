@@ -60,6 +60,8 @@ target 'AwesomeProject2' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RNLGeetestSensebot', :path => '../node_modules/@yyyyu/react-native-geetest-sensebot'
+
   target 'AwesomeProject2Tests' do
     inherit! :search_paths
     # Pods for testing

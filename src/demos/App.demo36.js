@@ -9,6 +9,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import SettingsScreen from '../pages/SettingsScreen';
 import PDFExample from '../pages/PDFExample';
+import GeetestPage from '../pages/GeetestPage';
+
 
 import Login from '../pages/User/Login';
 import Register from '../pages/User/Register';
@@ -18,7 +20,7 @@ import SplashPageExample from '../pages/SplashPageExample';
 
 const AppTabNavigator = createBottomTabNavigator(
   {
-    Home: PDFExample,
+    Home: GeetestPage,
     Settings: SettingsScreen,
     Cart: AuthPage,
     Category: AuthSyncPage,

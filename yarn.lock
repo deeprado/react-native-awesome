@@ -1416,6 +1416,14 @@
     "@types/prop-types" "*"
     "@types/react" "*"
 
+"@types/react-native@^0.57.45":
+  version "0.57.65"
+  resolved "https://registry.npm.taobao.org/@types/react-native/download/@types/react-native-0.57.65.tgz#9da4773aaa95924bce42a54a5c19cfd8ffd5022b"
+  integrity sha1-naR3OqqVkkvOQqVKXBnP2P/VAis=
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react@*":
   version "16.9.11"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
@@ -1524,6 +1532,13 @@
     invariant "^2.2.4"
     lodash "^4.5.0"
     prop-types "^15.6.1"
+
+"@yyyyu/react-native-geetest-sensebot@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.npm.taobao.org/@yyyyu/react-native-geetest-sensebot/download/@yyyyu/react-native-geetest-sensebot-2.1.1.tgz#eb91bc3f94d3c2e2348b1245aae88c2888389492"
+  integrity sha1-65G8P5TTwuI0ixJFquiMKIg4lJI=
+  dependencies:
+    "@types/react-native" "^0.57.45"
 
 abab@^2.0.0:
   version "2.0.2"

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
@@ -65,6 +66,7 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new CameraRollPackage());
                     // 视频播放
                     // packages.add(new MainReactPackage(),
+                    // new RNLGeetestSensebotPackage(),
                     // new RNFetchBlobPackage(),
                     // new AlipayPackage(),
                     // new WeChatPackage(),
