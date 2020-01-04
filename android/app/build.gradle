@@ -146,6 +146,7 @@ android {
             JPUSH_APPKEY : "ff15f3bb6b893eee0c43bdf6", //在极光推送后台申请的APPKey
             JPUSH_CHANNEL: "developer-default"
         ]
+        // multiDexEnabled true
     }
     splits {
         abi {
@@ -229,6 +230,9 @@ dependencies {
     implementation project(':jpush-react-native')  // 添加 jpush 依赖
     implementation project(':jcore-react-native')  // 添加 jcore 依赖
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    // implementation("com.facebook.react:react-native:0.61.2"){ // From node_modules
+    //     exclude module: 'android.support.v4'
+    // }
 
     implementation project(':react-native-contacts')
     implementation project(':aliyun-oss-react-native')
