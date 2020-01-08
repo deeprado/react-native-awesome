@@ -1,7 +1,7 @@
 'use strict';
 
 import {Dimensions, Platform} from 'react-native';
-export default module = {
+export default {
   screenWidth: Dimensions.get('window').width,
   screenHeight: Dimensions.get('window').height,
   btnActiveOpacity: 0.5,
@@ -18,7 +18,7 @@ export default module = {
   lightBlack: '#333333',
 };
 
-export function isIphoneX() {
+function isIphoneX() {
   let dimension = Dimensions.get('window');
   return (
     Platform.OS === 'ios' &&

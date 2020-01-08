@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -7,23 +7,36 @@ import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import SettingsScreen from '../pages/SettingsScreen';
-import PDFExample from '../pages/PDFExample';
+import Profile from '../pages/Profile';
+import Github from '../pages/Profile/github';
+import Setting from '../pages/Profile/setting';
 import GeetestPage from '../pages/GeetestPage';
-
 
 import Login from '../pages/User/Login';
 import Register from '../pages/User/Register';
 import AuthPage from '../pages/AuthPage';
 import AuthSyncPage from '../pages/AuthSyncPage';
 import SplashPageExample from '../pages/SplashPageExample';
+import MineScene from '../pages/MineScene';
+
+let ProfileStack = createStackNavigator(
+  {
+    Profile: MineScene,
+    Github: Github,
+    Setting: Setting,
+  },
+  {
+    initialRouteName: 'Profile',
+  },
+);
 
 const AppTabNavigator = createBottomTabNavigator(
   {
     Home: GeetestPage,
-    Settings: SettingsScreen,
+    Settings: Setting,
     Cart: AuthPage,
     Category: AuthSyncPage,
+    Profile: ProfileStack,
   },
   {
     defaultNavigationOptions: ({navigation}) => ({
@@ -42,6 +55,8 @@ const AppTabNavigator = createBottomTabNavigator(
           iconName = `ios-cart`;
         } else if (routeName === 'Category') {
           iconName = `ios-basketball`;
+        } else if (routeName === 'Profile') {
+          iconName = `ios-alarm`;
         }
 
         // You can return any component that you like here!

@@ -8,8 +8,14 @@
     "lib": ["es6"],
     "moduleResolution": "node",
     "noEmit": true,
-    "strict": false,
+    "strict": true,
     "target": "esnext",
-    "resolveJsonModule": true
-  }
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app": ["./src/"],
+      "@app/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.xx.js"]
 }
