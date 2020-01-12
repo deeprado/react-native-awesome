@@ -5,7 +5,7 @@ import {refreshToken} from './request';
 export const storage = new Storage({
   size: 1000,
   storageBackend: AsyncStorage,
-  defaultExpires: null,
+  defaultExpires: 3600,
   sync: {
     accessToken(params) {
       let {resolve, reject} = params;
