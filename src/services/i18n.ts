@@ -67,7 +67,7 @@ export function getDeviceLanguage(): Promise<TLanguage> {
     : NativeModules.I18nManager.localeIdentifier;
   return language
     ? Promise.resolve(language)
-    : NativeModules.RNi18n.getLanguages().then(
-        ([language]: TLanguage[]) => language,
-      );
+    : NativeModules.RNi18n.getLanguages()
+        .then(([language]: TLanguage[]) => language)
+        .catch((err: any) => console.log(err));
 }

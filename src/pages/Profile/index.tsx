@@ -2,7 +2,6 @@
  * About
  * @file 关于我页面
  * @module pages/about
- * @author Surmon <https://github.com/surmon-china>
  */
 
 import React, {Component} from 'react';

@@ -68,7 +68,6 @@ export default class Counter extends Component {
 
   _checkNumber() {
     let value = this.state.value;
-    console.log(value);
     let numReg = new RegExp('^[0-9]*$');
     if (!numReg.test(value)) {
       value = 1;

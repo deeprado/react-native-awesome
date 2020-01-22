@@ -3,8 +3,6 @@ include ':@yyyyu_react-native-geetest-sensebot'
 project(':@yyyyu_react-native-geetest-sensebot').projectDir = new File(rootProject.projectDir, '../node_modules/@yyyyu/react-native-geetest-sensebot/android')
 include ':rn-fetch-blob'
 project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
-include ':react-native-yunpeng-alipay'
-project(':react-native-yunpeng-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-yunpeng-alipay/android')
 include ':react-native-wechat'
 project(':react-native-wechat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wechat/android')
 include ':react-native-webview'

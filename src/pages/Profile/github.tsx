@@ -2,7 +2,6 @@
  * Github
  * @file Github 项目列表
  * @module pages/about/github
- * @author Surmon <https://github.com/surmon-china>
  */
 
 import React, {PureComponent} from 'react';

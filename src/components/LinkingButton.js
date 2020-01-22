@@ -14,7 +14,6 @@ export default class LinkingButton extends Component {
 
   openURL() {
     let url = this.props.url;
-    console.log('url', url);
     Linking.canOpenURL(url)
       .then(supported => {
         if (!supported) {

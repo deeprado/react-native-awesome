@@ -7,7 +7,6 @@ import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -68,7 +67,6 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new MainReactPackage(),
                     // new RNLGeetestSensebotPackage(),
                     // new RNFetchBlobPackage(),
-                    // new AlipayPackage(),
                     // new WeChatPackage(),
                     // new RNCWebViewPackage(),
                     // new VectorIconsPackage(),

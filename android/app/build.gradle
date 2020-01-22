@@ -215,7 +215,6 @@ android {
 dependencies {
     implementation project(':@yyyyu_react-native-geetest-sensebot')
     implementation project(':rn-fetch-blob')
-    implementation project(':react-native-yunpeng-alipay')
     implementation project(':react-native-wechat')
     implementation project(':react-native-webview')
     implementation project(':react-native-vector-icons')

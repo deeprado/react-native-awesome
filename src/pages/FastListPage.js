@@ -59,7 +59,6 @@ export default class FastListPage extends Component {
   }
 
   componentDidMount() {
-    console.log('mmmmmmmmmmmmm');
     let that = this;
     // 间隔2秒结束下拉刷新
     let timer = setTimeout(function() {
@@ -75,8 +74,6 @@ export default class FastListPage extends Component {
     let page = this.state.page;
     let count = this.state.count;
 
-    console.log(this.state, 'zzzzzzzzzzz');
-
     let rowData = Array.from(new Array(count)).map((val, i) => ({
       id: this.state.loaded + i,
       text: '加载_' + '页码' + page + '_' + (this.state.loaded + i),
@@ -85,12 +82,10 @@ export default class FastListPage extends Component {
 
     // 若是上滑加载
     if (this.state.isLoadingMore) {
-      console.log('yyyyyyyyyyyy');
       // .concat拼接字符串，数组
       rowData = rowData.concat(this.state.rowData);
     }
 
-    console.log(this.state.cc);
     // 初始化和刷新直接覆盖
     this.setState({
       loaded: this.state.loaded + count,
@@ -173,10 +168,7 @@ export default class FastListPage extends Component {
   };
 
   _loadMore = distanceFromEnd => {
-    console.log('distanceFromEnd ', distanceFromEnd);
     let page = this.state.page + 1;
-    console.log('start loading', page);
-
     this.setState({
       page: page,
       isRefreshing: false,

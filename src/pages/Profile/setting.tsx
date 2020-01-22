@@ -2,7 +2,6 @@
  * About setting
  * @file 设置页面
  * @module pages/about/setting
- * @author Surmon <https://github.com/surmon-china>
  */
 
 import React, {Component} from 'react';
