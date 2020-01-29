@@ -16,7 +16,7 @@ const UIWIDTH = 750;
 export function rx(UIPX) {
   return Math.round((UIPX * width) / UIWIDTH);
 }
-import cityIndex from '../data/City';
+import cityIndex from '../../data/City';
 // 字母的高度
 const CONTENT_LIST_INDEX = rx(60);
 // 每一个城市的高度

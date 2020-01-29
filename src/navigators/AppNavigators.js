@@ -8,7 +8,7 @@ import {
 } from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import HomePage from '../pages/DrawerHome';
+import HomePage from '../pages/Drawer/DrawerHome';
 import Page1 from '../pages/Demo/Page1';
 import Page2 from '../pages/Demo/Page2';
 import Page3 from '../pages/Demo/Page3';

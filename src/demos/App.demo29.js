@@ -4,9 +4,9 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import ShoppingCart from '../pages/ShoppingCart';
-import CategoryList from '../pages/CategoryList';
+import CategoryList from '../pages/Category/CategoryList';
 import SettingsScreen from '../pages/SettingsScreen';
-import ModalDemo from '../pages/ModalDemo';
+import ModalDemo from '../pages/Modal/ModalDemo';
 
 const TabNavigator = createBottomTabNavigator(
   {

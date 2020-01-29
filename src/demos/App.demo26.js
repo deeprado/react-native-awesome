@@ -6,11 +6,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import ShoppingCart from '../pages/ShoppingCart';
 import CameraRollPage from '../pages/CameraRollPage';
-import ImagePickerPage from '../pages/ImagePickerPage';
+import ImagePickerPage from '../pages/Image/ImagePickerPage';
 import PositionPage from '../pages/PositionPage';
 import ClipboardPage from '../pages/ClipboardPage';
 import VideoPlayer from '../pages/Video/VideoPlayer';
-import CategoryList from '../pages/CategoryList';
+import CategoryList from '../pages/Category/CategoryList';
 
 class SettingsScreen extends Component {
   render() {

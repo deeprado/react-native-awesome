@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow ScrollView组件
- */
-
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -14,9 +8,9 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import {Heading1, Paragraph} from '../components/mine/Text';
-import MineItemCell from '../components/mine/MineItemCell';
-import SpacingView from '../components/mine/SpacingView';
+import {Heading1, Paragraph} from '../../components/mine/Text';
+import MineItemCell from '../../components/mine/MineItemCell';
+import SpacingView from '../../components/mine/SpacingView';
 
 var screenWidth = Dimensions.get('window').width;
 var screenHeight = Dimensions.get('window').height;

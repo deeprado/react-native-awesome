@@ -4,7 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import GaodeMapPage from '../pages/GaodeMapPage';
+import GaodeMapPage from '../pages/Map/GaodeMapPage';
 
 class SettingsScreen extends Component {
   render() {

@@ -5,10 +5,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import ShoppingCart from '../pages/ShoppingCart';
-import CategoryList from '../pages/CategoryList';
+import CategoryList from '../pages/Category/CategoryList';
 import SettingsScreen from '../pages/SettingsScreen';
-import LinkingDemo from '../pages/LinkingDemo';
-import DeepLinkingDemo from '../pages/DeepLinkingDemo';
+import LinkingDemo from '../pages/Link/LinkingDemo';
+import DeepLinkingDemo from '../pages/Link/DeepLinkingDemo';
 
 const TabNavigator = createBottomTabNavigator(
   {

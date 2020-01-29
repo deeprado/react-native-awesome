@@ -8,7 +8,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import AnimHeartPage from '../pages/Animate/AnimHeartPage';
-import PanDemo from '../pages/PanResponder/Demo';
 import Github from '../pages/Profile/github';
 import Setting from '../pages/Profile/setting';
 

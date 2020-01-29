@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import React from 'react';
 //导入 react-navigation 组件
 
@@ -18,12 +13,12 @@ import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 // 矢量图
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../config/theme';
-import SplashPage from '../pages/SplashPage';
-import IndexPage from '../pages/IndexPage';
-import CategoryPage from '../pages/CategoryPage';
+import SplashPage from '../pages/Splash/SplashPage';
+import IndexPage from '../pages/Home/IndexPage';
+import CategoryPage from '../pages/Category/CategoryPage';
 import BrandPage from '../pages/BrandPage';
-import CartPage from '../pages/CartPage';
-import MyPage from '../pages/MyPage';
+import CartPage from '../pages/Chat/CartPage';
+import MyPage from '../pages/Mine/MyPage';
 import CustomTabBar from '../components/CustomTabBar';
 import SearchPage from '../pages/SearchPage';
 

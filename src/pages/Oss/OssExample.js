@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {AuthManager} from '../components/oss/AuthManager';
-import {UploadManager} from '../components/oss/UploadManager';
-import {DownloadManager} from '../components/oss/DownloadManager';
-import {ImageProcessManager} from '../components/oss/ImageProcessManager';
-import {BucketManager} from '../components/oss/BucketManager';
-import {ObjectManager} from '../components/oss/ObjectManager';
+import {AuthManager} from '../../components/oss/AuthManager';
+import {UploadManager} from '../../components/oss/UploadManager';
+import {DownloadManager} from '../../components/oss/DownloadManager';
+import {ImageProcessManager} from '../../components/oss/ImageProcessManager';
+import {BucketManager} from '../../components/oss/BucketManager';
+import {ObjectManager} from '../../components/oss/ObjectManager';
 
 import AliyunOSS from 'aliyun-oss-react-native';
 

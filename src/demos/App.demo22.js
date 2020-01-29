@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import DongFang from '../components/yao/DongFangPick';
-import MyPager from '../pages/MyPager';
+import MyPager from '../pages/Mine/MyPager';
 
 class HomeScreen extends Component {
   render() {

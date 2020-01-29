@@ -13,7 +13,7 @@ import {
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const CateData = require('../data/CategoryListData.json');
+const CateData = require('../../data/CategoryListData.json');
 const itemPng = require('../assets/image/item.png');
 
 export default class CategoryList extends Component {
