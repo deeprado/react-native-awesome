@@ -8,10 +8,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import SafeAreaPage from '../pages/SafeAreaPage';
-import MovieTalk from '../pages/MovieTalk';
-import MovieDetail from '../pages/MovieDetail';
-import AppIntroDemo from '../pages/AppIntroDemo';
+import SafeAreaPage from '../pages/Example/SafeAreaPage';
+import MovieTalk from '../pages/Movie/MovieTalk';
+import MovieDetail from '../pages/Movie/MovieDetail';
+import AppIntroDemo from '../pages/AppIntro/AppIntroDemo';
 
 const StackNavigator = createStackNavigator(
   {

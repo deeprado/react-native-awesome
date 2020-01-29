@@ -14,7 +14,7 @@ import {
 // var {width, height} = Dimensions.get('window');
 
 // 引入外部的json数据
-import Shops from '../data/shops.json';
+import Shops from '../../data/shops.json';
 
 export default class ShopCenter extends React.Component {
   // props 传值，默认传的值 默认商品 id 为1.

@@ -26,8 +26,8 @@ import {
 } from 'react-native-elements';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-import MovieTalk from '../pages/MovieTalk';
-import MovieDetail from '../pages/MovieDetail';
+import MovieTalk from '../pages/Movie/MovieTalk';
+import MovieDetail from '../pages/Movie/MovieDetail';
 
 const isAndroid = Platform.OS === 'ios' ? false : true;
 

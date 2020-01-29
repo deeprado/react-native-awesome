@@ -1,8 +1,3 @@
-/**
- * ShoppingCartDemo
- * 作者Git：https://github.com/guangqiang-liu
- */
-
 import React, {Component} from 'react';
 import {
   View,
@@ -13,8 +8,8 @@ import {
   SectionList,
   Alert,
 } from 'react-native';
-import ShoppingCartStyle from '../styles/ShoppingCartStyle';
-const shoppingCartData = require('../data/ShoppingCartData.json');
+import ShoppingCartStyle from '../../styles/ShoppingCartStyle';
+const shoppingCartData = require('../../data/ShoppingCartData.json');
 
 const ic_selected = require('../assets/image/ic_selected.png');
 const ic_default = require('../assets/image/ic_default.png');

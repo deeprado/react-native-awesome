@@ -62,27 +62,27 @@ class MineScene extends Component {
           <TouchableOpacity>
             <Image
               style={[styles.icon, {marginRight: 15}]}
-              source={require('../assets/image/mine/icon_navigation_item_message_white.png')}
+              source={require('../../assets/image/mine/icon_navigation_item_message_white.png')}
             />
           </TouchableOpacity>
           <TouchableOpacity>
             <Image
               style={[styles.icon, {marginRight: 10}]}
-              source={require('../assets/image/mine/icon_navigation_item_set_white.png')}
+              source={require('../../assets/image/mine/icon_navigation_item_set_white.png')}
             />
           </TouchableOpacity>
         </View>
         <View style={styles.userContainer}>
           <Image
             style={styles.avatar}
-            source={require('../assets/image/mine/avatar.png')}
+            source={require('../../assets/image/mine/avatar.png')}
           />
           <View>
             <View style={{flexDirection: 'row'}}>
               <Heading1 style={{color: 'white'}}>code_xzh</Heading1>
               <Image
                 style={{marginLeft: 4}}
-                source={require('../assets/image/mine/beauty_technician.png')}
+                source={require('../../assets/image/mine/beauty_technician.png')}
               />
             </View>
             <Paragraph style={{color: 'white', marginTop: 4}}>
@@ -100,57 +100,57 @@ class MineScene extends Component {
         {
           title: '我的钱包',
           subtitle: '办信用卡',
-          image: require('../assets/image/mine/icon_mine_wallet.png'),
+          image: require('../../assets/image/mine/icon_mine_wallet.png'),
         },
         {
           title: '余额',
           subtitle: '￥95872385',
-          image: require('../assets/image/mine/icon_mine_balance.png'),
+          image: require('../../assets/image/mine/icon_mine_balance.png'),
         },
         {
           title: '抵用券',
           subtitle: '63',
-          image: require('../assets/image/mine/icon_mine_voucher.png'),
+          image: require('../../assets/image/mine/icon_mine_voucher.png'),
         },
         {
           title: '会员卡',
           subtitle: '2',
-          image: require('../assets/image/mine/icon_mine_membercard.png'),
+          image: require('../../assets/image/mine/icon_mine_membercard.png'),
         },
       ],
       [
         {
           title: '好友去哪',
-          image: require('../assets/image/mine/icon_mine_friends.png'),
+          image: require('../../assets/image/mine/icon_mine_friends.png'),
         },
         {
           title: '我的评价',
-          image: require('../assets/image/mine/icon_mine_comment.png'),
+          image: require('../../assets/image/mine/icon_mine_comment.png'),
         },
         {
           title: '我的收藏',
-          image: require('../assets/image/mine/icon_mine_collection.png'),
+          image: require('../../assets/image/mine/icon_mine_collection.png'),
         },
         {
           title: '会员中心',
           subtitle: 'v15',
-          image: require('../assets/image/mine/icon_mine_mineorder.png'),
+          image: require('../../assets/image/mine/icon_mine_mineorder.png'),
         },
         {
           title: '积分商城',
           subtitle: '好礼已上线',
-          image: require('../assets/image/mine/icon_mine_member.png'),
+          image: require('../../assets/image/mine/icon_mine_member.png'),
         },
       ],
       [
         {
           title: '客服中心',
-          image: require('../assets/image/mine/icon_mine_service.png'),
+          image: require('../../assets/image/mine/icon_mine_service.png'),
         },
         {
           title: '关于美团',
           subtitle: '我要合作',
-          image: require('../assets/image/mine/icon_mine_about.png'),
+          image: require('../../assets/image/mine/icon_mine_about.png'),
         },
       ],
     ];

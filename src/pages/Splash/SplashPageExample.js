@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 
-const logo = require('../../static/img/logo.png');
+const logo = require('../../../static/img/logo.png');
 
 export default class SplashPageExample extends Component {
   static navigationOptions = ({navigation, navigationOptions}) => {

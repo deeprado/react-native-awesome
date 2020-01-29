@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Button, Text, DeviceEventEmitter, Alert} from 'react-native';
-import MyMainModule from '../modules/MyMainModule';
-import ToastExample from '../modules/ToastExample';
+import MyMainModule from '../../modules/MyMainModule';
+import ToastExample from '../../modules/ToastExample';
 
 class NativePage extends Component {
   static navigationOptions = {

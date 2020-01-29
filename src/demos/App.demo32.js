@@ -5,9 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import CodePush from 'react-native-code-push'; //引入code-push
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import ShoppingCart from '../pages/ShoppingCart';
+import ShoppingCart from '../pages/Cart/ShoppingCart';
 import CategoryList from '../pages/Category/CategoryList';
-import SettingsScreen from '../pages/SettingsScreen';
+import SettingsScreen from '../pages/Settings/SettingsScreen';
 import CodePushDemo from '../pages/CodePush/CodePushDemo';
 
 const TabNavigator = createBottomTabNavigator(

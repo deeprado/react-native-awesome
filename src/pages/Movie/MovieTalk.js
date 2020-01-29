@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-import styles from '../styles/Main';
+import styles from '../../styles/Main';
 
 const REQUEST_URL =
   'https://api.douban.com/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a';

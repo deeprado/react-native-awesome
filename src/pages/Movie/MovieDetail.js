@@ -9,8 +9,8 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import ShopCenter from './ShopCenter';
-import styles from '../styles/Main';
+import ShopCenter from '../Cart/ShopCenter';
+import styles from '../../styles/Main';
 import {ScrollView} from 'react-native-gesture-handler';
 const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 

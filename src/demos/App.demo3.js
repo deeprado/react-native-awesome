@@ -16,11 +16,11 @@ import theme from '../config/theme';
 import SplashPage from '../pages/Splash/SplashPage';
 import IndexPage from '../pages/Home/IndexPage';
 import CategoryPage from '../pages/Category/CategoryPage';
-import BrandPage from '../pages/BrandPage';
+import BrandPage from '../pages/Example/BrandPage';
 import CartPage from '../pages/Chat/CartPage';
 import MyPage from '../pages/Mine/MyPage';
 import CustomTabBar from '../components/CustomTabBar';
-import SearchPage from '../pages/SearchPage';
+import SearchPage from '../pages/Search/SearchPage';
 
 const CategoryTab = createMaterialTopTabNavigator(
   {

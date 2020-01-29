@@ -7,7 +7,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import JPushDemo from '../pages/JPushDemo';
+import JPushDemo from '../pages/JPush/JPushDemo';
 
 class HomeScreen extends Component {
   render() {
