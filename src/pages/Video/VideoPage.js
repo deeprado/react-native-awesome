@@ -2,26 +2,30 @@
 
 import React, {Component} from 'react';
 
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import Video from 'react-native-video';
 
 class VideoPlayer extends Component {
-  static navigationOptions = {
-    tabBarLabel: '类别',
-    headerTitle: '类别',
-  };
-  state = {
-    rate: 1,
-    volume: 1,
-    muted: false,
-    resizeMode: 'contain',
-    duration: 0.0,
-    currentTime: 0.0,
-    paused: true,
-  };
+  constructor(props) {
+    super(props);
 
-  video: Video;
+    this.state = {
+      rate: 1,
+      volume: 1,
+      muted: false,
+      resizeMode: 'contain',
+      duration: 0.0,
+      currentTime: 0.0,
+      paused: true,
+    };
+  }
 
   onLoad = data => {
     this.setState({duration: data.duration});
@@ -40,7 +44,7 @@ class VideoPlayer extends Component {
     this.setState({paused: true});
   };
 
-  onAudioFocusChanged = (event: {hasAudioFocus: boolean}) => {
+  onAudioFocusChanged = event => {
     this.setState({paused: !event.hasAudioFocus});
   };
 
@@ -120,7 +124,7 @@ class VideoPlayer extends Component {
           style={styles.fullScreen}
           onPress={() => this.setState({paused: !this.state.paused})}>
           <Video
-            ref={(ref: Video) => {
+            ref={ref => {
               this.video = ref;
             }}
             /* For ExoPlayer */

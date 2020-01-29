@@ -2,28 +2,28 @@
 
 import React, {Component} from 'react';
 
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import Video from 'react-native-video';
 
 class VideoPlayer extends Component {
-  state = {
-    rate: 1,
-    volume: 1,
-    muted: false,
-    resizeMode: 'contain',
-    duration: 0.0,
-    currentTime: 0.0,
-    paused: true,
+  static navigationOptions = {
+    tabBarLabel: '类别',
+    headerTitle: '类别',
   };
 
-  video: Video;
+  constructor(props) {
+    super(props);
+    this.state = {
+      rate: 1,
+      volume: 1,
+      muted: false,
+      resizeMode: 'contain',
+      duration: 0.0,
+      currentTime: 0.0,
+      paused: true,
+    };
+  }
 
   onLoad = data => {
     this.setState({duration: data.duration});
@@ -42,7 +42,7 @@ class VideoPlayer extends Component {
     this.setState({paused: true});
   };
 
-  onAudioFocusChanged = (event: {hasAudioFocus: boolean}) => {
+  onAudioFocusChanged = event => {
     this.setState({paused: !event.hasAudioFocus});
   };
 
@@ -122,12 +122,12 @@ class VideoPlayer extends Component {
           style={styles.fullScreen}
           onPress={() => this.setState({paused: !this.state.paused})}>
           <Video
-            ref={(ref: Video) => {
+            ref={ref => {
               this.video = ref;
             }}
             /* For ExoPlayer */
             /* source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }} */
-            source={require('./broadchurch.mp4')}
+            source={require('../assets/video/Animation_Custom.mp4')}
             style={styles.fullScreen}
             rate={this.state.rate}
             paused={this.state.paused}

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component} from '@app/pages/Amap/node_modules/react';
 import {StyleSheet, Switch, Text, View} from 'react-native';
-import {MapView} from 'react-native-amap3d';
+import {MapView} from '@app/pages/Amap/node_modules/react-native-amap3d';
 import {requestLocationPermission} from './utils';
 import styles from './styles';
 

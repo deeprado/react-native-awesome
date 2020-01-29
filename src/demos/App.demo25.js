@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {
   createBottomTabNavigator,
@@ -8,10 +7,10 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
 import AsyncStoragePage from '../pages/AsyncStoragePage';
-import Page1 from '../pages/Page1';
-import Page2 from '../pages/Page2';
-import Page3 from '../pages/Page3';
-import Page4 from '../pages/Page4';
+import Page1 from '../pages/Demo/Page1';
+import Page2 from '../pages/Demo/Page2';
+import Page3 from '../pages/Demo/Page3';
+import Page4 from '../pages/Demo/Page4';
 
 const AppTopNavigator = createMaterialTopTabNavigator(
   {

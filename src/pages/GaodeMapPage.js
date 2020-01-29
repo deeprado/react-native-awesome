@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text, Button, Image} from 'react-native';
+import {View} from 'react-native';
 
-import Example from './amap/circle';
+import Example from './Amap/circle';
 
 export default class GaodeMapPage extends Component {
   // 构造

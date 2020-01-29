@@ -1,16 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Dimensions,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Alert,
-  Button,
-  Platform,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {View, Text, Button, Platform, StyleSheet} from 'react-native';
 
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {
@@ -18,18 +7,16 @@ import {
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SafeAreaView from 'react-native-safe-area-view';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import HomePage from '../pages/DrawerHome';
-import Page1 from '../pages/Page1';
-import Page2 from '../pages/Page2';
-import Page3 from '../pages/Page3';
-import Page4 from '../pages/Page4';
-import Page5 from '../pages/Page5';
+import Page1 from '../pages/Demo/Page1';
+import Page2 from '../pages/Demo/Page2';
+import Page3 from '../pages/Demo/Page3';
+import Page4 from '../pages/Demo/Page4';
+import Page5 from '../pages/Demo/Page5';
 import Login from '../pages/DrawerLogin';
 
 const styles = StyleSheet.create({

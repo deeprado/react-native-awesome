@@ -16,7 +16,7 @@ import HomeIconWithBadge from '../components/HomeIconWithBadge';
 
 import MainStyles from '../styles/Main';
 
-import AnimatedPage from '../pages/AnimatedPage';
+import AnimatedPage from '../pages/Animate/AnimatedPage';
 
 const isAndroid = Platform.OS === 'ios' ? false : true;
 

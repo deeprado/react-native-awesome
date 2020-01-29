@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from '@app/pages/Amap/node_modules/react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import {MapView} from 'react-native-amap3d';
+import {MapView} from '@app/pages/Amap/node_modules/react-native-amap3d';
 
 const styles = StyleSheet.create({
   body: {

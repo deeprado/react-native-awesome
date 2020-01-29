@@ -7,15 +7,15 @@ import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import FastListPage from '../pages/FastListPage';
+import AnimHeartPage from '../pages/Animate/AnimHeartPage';
+import PanDemo from '../pages/PanResponder/Demo';
 import Github from '../pages/Profile/github';
 import Setting from '../pages/Profile/setting';
-import GeetestPage from '../pages/GeetestPage';
 
 import Login from '../pages/User/Login';
 import Register from '../pages/User/Register';
-import AuthPage from '../pages/AuthPage';
-import AuthSyncPage from '../pages/AuthSyncPage';
+import AuthPage from '../pages/Auth/AuthPage';
+import AuthSyncPage from '../pages/Auth/AuthSyncPage';
 import SplashPageExample from '../pages/SplashPageExample';
 import MineScene from '../pages/MineScene';
 
@@ -32,7 +32,7 @@ let ProfileStack = createStackNavigator(
 
 const AppTabNavigator = createBottomTabNavigator(
   {
-    Home: FastListPage,
+    Home: AnimHeartPage,
     Settings: Setting,
     Cart: AuthPage,
     Category: AuthSyncPage,

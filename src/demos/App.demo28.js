@@ -7,7 +7,7 @@ import ShoppingCart from '../pages/ShoppingCart';
 import CategoryList from '../pages/CategoryList';
 import OssExample from '../pages/OssExample';
 import SettingsScreen from '../pages/SettingsScreen';
-import AliPayPage from '../pages/AliPayPage';
+import AliPayPage from '../pages/Pay/AliPayPage';
 import TabView from '../pages/TabView';
 import CustomTabView from '../pages/CustomTabView';
 

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import AuthLoadingScreen from '../pages/AuthLoadingScreen';
+import AuthLoadingScreen from '../pages/Auth/AuthLoadingScreen';
 import HomeScreen from '../pages/HomeScreen';
 import SignInScreen from '../pages/SignInScreen';
 import OtherScreen from '../pages/OtherScreen';

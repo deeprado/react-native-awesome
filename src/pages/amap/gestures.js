@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component} from '@app/pages/Amap/node_modules/react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
-import {MapView} from 'react-native-amap3d';
+import {MapView} from '@app/pages/Amap/node_modules/react-native-amap3d';
 import styles from './styles';
 
 export default class GesturesExample extends Component {

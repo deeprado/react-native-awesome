@@ -9,7 +9,7 @@ import CameraRollPage from '../pages/CameraRollPage';
 import ImagePickerPage from '../pages/ImagePickerPage';
 import PositionPage from '../pages/PositionPage';
 import ClipboardPage from '../pages/ClipboardPage';
-import VideoPlayer from '../pages/VideoPlayer';
+import VideoPlayer from '../pages/Video/VideoPlayer';
 import CategoryList from '../pages/CategoryList';
 
 class SettingsScreen extends Component {
