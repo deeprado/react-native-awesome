@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -24,7 +16,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Counters from '../components/Counters';
+import Counters from '../components/example/Counters';
 
 class App extends Component {
   render() {
@@ -34,7 +26,7 @@ class App extends Component {
       </>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {

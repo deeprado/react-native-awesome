@@ -5,7 +5,7 @@ import {
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 import AsyncStoragePage from '../pages/Storage/AsyncStoragePage';
 import Page1 from '../pages/Demo/Page1';
 import Page2 from '../pages/Demo/Page2';

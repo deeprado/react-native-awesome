@@ -5,9 +5,9 @@ import Button from '../../components/user/Button';
 import TextButton from '../../components/user/TextButton';
 import TextField from '../../components/user/TextField';
 import request from '../../utils/request';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/bar/NavBar';
 import GainIdentify from '../../components/GainIdentify';
-import CountDownButton from '../../components/CountDownButton';
+import CountDownButton from '../../components/button/CountDownButton';
 
 let platformContainerStyles;
 if (Platform.OS === 'ios') {

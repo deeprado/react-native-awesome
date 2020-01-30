@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  Alert,
-  Text,
-  TextInput,
-  Image,
-  Platform,
-} from 'react-native';
+import {View, StyleSheet, Alert, Text, Image, Platform} from 'react-native';
 
 import Button from '../../components/user/Button';
 import TextButton from '../../components/user/TextButton';
@@ -16,7 +8,7 @@ import request from '../../utils/request';
 import navigationUtil from '../../utils/navigation';
 import {saveToken} from '../../utils/storage';
 
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/bar/NavBar';
 
 let platformContainerStyles;
 if (Platform.OS === 'ios') {

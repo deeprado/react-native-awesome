@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Linking, AppState} from 'react-native';
-import LinkingButton from '../../components/LinkingButton';
+import LinkingButton from '../../components/button/LinkingButton';
 
 export default class LinkingDemo extends Component {
   constructor(props) {

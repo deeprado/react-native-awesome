@@ -5,7 +5,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFont from 'react-native-vector-icons/FontAwesome';
 
-import MyTabBar from '../../components/MyTabBar';
+import MyTabBar from '../../components/bar/MyTabBar';
 
 export default class CustomTabView extends Component {
   constructor(props) {

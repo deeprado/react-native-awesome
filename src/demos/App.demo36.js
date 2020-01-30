@@ -6,7 +6,7 @@ import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 import AnimHeartPage from '../pages/Animate/AnimHeartPage';
 import PanDemo from '../pages/PanResponder/Demo';
 import Github from '../pages/Profile/github';

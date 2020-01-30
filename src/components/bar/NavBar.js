@@ -1,20 +1,15 @@
-/**
- * @author Lei
- * @repo https://github.com/stoneWeb/elm-react-native
- */
 'use strict';
 
 import React, {Component} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   Animated,
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
 } from 'react-native';
-import px2dp from '../utils/px2dp';
+import px2dp from '../../utils/px2dp';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 

@@ -3,7 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 import ShoppingCart from '../pages/Cart/ShoppingCart';
 import CategoryList from '../pages/Category/CategoryList';
 import SettingsScreen from '../pages/Settings/SettingsScreen';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button, Platform} from 'react-native';
 
-import MyBackButton from '../../components/MyBackButton';
+import MyBackButton from '../../components/back/MyBackButton';
 
 const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 
