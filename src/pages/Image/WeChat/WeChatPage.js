@@ -12,8 +12,7 @@ import * as WeChat from 'react-native-wechat';
 import fs from 'react-native-fs';
 import Toast from 'react-native-root-toast';
 
-import OButton from '../../components/OButton';
-// console.log('WeChat', WeChat);
+import OButton from '../../../components/OButton';
 
 class WeChatPage extends Component {
   static navigationOptions = {
