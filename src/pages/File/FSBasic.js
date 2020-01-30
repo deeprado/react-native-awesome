@@ -285,8 +285,7 @@ export default class FSBasic extends Component {
             onPress={() => this.downloadFile(imageUrl, this.updateProgress)}
           />
           <Button title="停止下载" />
-          <Button title="获取文件大小" onPress={() => this.getFileSize()}
-          />
+          <Button title="获取文件大小" onPress={() => this.getFileSize()} />
           <Button title="上传文件IOS" />
           <Button title="停止上传IOS" />
         </View>

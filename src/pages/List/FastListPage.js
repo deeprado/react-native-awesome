@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   StyleSheet,
   ListView,
-  Dimensions,
 } from 'react-native';
 
 class Row extends Component {

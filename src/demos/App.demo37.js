@@ -7,7 +7,8 @@ import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackVi
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import AnimHeartPage from '../pages/Animate/AnimHeartPage';
+import VideoList from '../pages/Video/VideoList';
+import VideoDetail from '../pages/Video/VideoDetail';
 import Github from '../pages/Profile/github';
 import Setting from '../pages/Profile/setting';
 
@@ -29,9 +30,19 @@ let ProfileStack = createStackNavigator(
   },
 );
 
+let VideoStack = createStackNavigator(
+  {
+    VideoList: VideoList,
+    VideoDetail: VideoDetail,
+  },
+  {
+    initialRouteName: 'VideoList',
+  },
+);
+
 const AppTabNavigator = createBottomTabNavigator(
   {
-    Home: AnimHeartPage,
+    Home: VideoStack,
     Settings: Setting,
     Cart: AuthPage,
     Category: AuthSyncPage,
