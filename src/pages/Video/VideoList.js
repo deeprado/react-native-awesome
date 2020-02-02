@@ -104,6 +104,14 @@ class VideoList extends Component {
     return <View style={{height: 1}} />;
   }
 
+  _renderEmpty() {
+    return (
+      <View>
+        <Text>无数据</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <ScrollView>

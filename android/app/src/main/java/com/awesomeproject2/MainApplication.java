@@ -33,6 +33,7 @@ import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.reactlibrary.RNAliyunOssPackage;
 import com.theweflex.react.WeChatPackage;
 import com.microsoft.codepush.react.CodePush;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainApplication extends Application implements ReactApplication {
     // 设置为 true 将不弹出 toast
@@ -85,13 +86,16 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new RNAliyunOssPackage());
 
                     // 添加自定义包管理器
-//                    packages.add(new MyMainPackage());
+                    // packages.add(new MyMainPackage());
                     packages.add(myMainPackage);
-                    // <-- 添加这一行，类名替换成你的Package类的名字 name.
+                    // 添加这一行，类名替换成你的Package类的名字 name.
                     packages.add(new CustomToastPackage());
 
+                    // 渐变
+                    // packages.add(new LinearGradientPackage());
+
                     // 联系人
-//                    packages.add(new ReactNativeContacts());
+                    // packages.add(new ReactNativeContacts());
 
                     return packages;
                 }

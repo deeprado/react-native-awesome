@@ -2,7 +2,7 @@
 // import {AppearanceProvider, useColorScheme} from 'react-native-appearance';
 
 // import analytics from '@react-native-firebase/analytics';
-import AppDemo from './src/demos/App.demo37';
+import AppDemo from './src/demos/App.qimao';
 // import MyApp from './src/pages/BaiduMapApp';
 
 // gets the current screen from navigation state
