@@ -22,7 +22,7 @@ import {
 import {Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {IS_IOS} from '../../../../config';
-import data from './data';
+import data from '../Data/data';
 
 const categoryPng = require('../../../../assets/qimao/image/category.png');
 const rankPng = require('../../../../assets/qimao/image/rank.png');
@@ -137,9 +137,7 @@ class Nvsheng extends Component {
   };
 
   _fetchMore = info => {
-    console.log(info);
     let specialList = data.specialList;
-
     this.setState({
       specialList: specialList.concat(specialList),
     });

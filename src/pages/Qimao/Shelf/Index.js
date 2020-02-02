@@ -34,7 +34,6 @@ class Index extends Component {
 
     this.signIn = this.signIn.bind(this);
     this.record = this.record.bind(this);
-    this.search = this.search.bind(this);
     this.more = this.more.bind(this);
   }
 
@@ -52,9 +51,9 @@ class Index extends Component {
         <TouchableHighlight onPress={this.signIn} style={styles.topBtn}>
           <Icon name="pencil" type="foundation" color="#F9BC3A" />
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.search} style={styles.topBtn}>
+        {/* <TouchableHighlight onPress={this.search} style={styles.topBtn}>
           <Icon name="search" type="octicon" color="#000" size={22} />
-        </TouchableHighlight>
+        </TouchableHighlight> */}
         <TouchableHighlight onPress={this.record} style={styles.topBtn}>
           <Icon name="clock" type="feather" size={24} />
         </TouchableHighlight>

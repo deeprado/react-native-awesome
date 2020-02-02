@@ -22,7 +22,7 @@ import {
 import {Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {IS_IOS} from '../../../../config';
-import data from './data';
+import data from '../Data/data';
 
 const categoryPng = require('../../../../assets/qimao/image/category.png');
 const rankPng = require('../../../../assets/qimao/image/rank.png');
@@ -51,6 +51,7 @@ class Jingxuan extends Component {
     this.onHorizontalSelectedIndexChange = this.onHorizontalSelectedIndexChange.bind(
       this,
     );
+    this.goTarget = this.goTarget.bind(this);
   }
 
   onHorizontalSelectedIndexChange = index => {
@@ -168,9 +169,7 @@ class Jingxuan extends Component {
   };
 
   _fetchMore = info => {
-    console.log(info);
     let specialList = data.specialList;
-
     this.setState({
       specialList: specialList.concat(specialList),
     });
@@ -304,6 +303,10 @@ class Jingxuan extends Component {
     );
   };
 
+  goTarget = routeName => {
+    this.props.navigation.navigate(routeName);
+  };
+
   render() {
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -335,25 +338,25 @@ class Jingxuan extends Component {
           </View>
           {/* 导航 */}
           <View style={styles.navBox}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.goTarget('Category')}>
               <View style={styles.navBarBox}>
                 <Image source={categoryPng} style={styles.navBarIcon} />
                 <Text style={styles.navBarTxt}>分类</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.goTarget('Rank')}>
               <View style={styles.navBarBox}>
                 <Image source={rankPng} style={styles.navBarIcon} />
                 <Text style={styles.navBarTxt}>排行榜</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.goTarget('Product')}>
               <View style={styles.navBarBox}>
                 <Image source={newPng} style={styles.navBarIcon} />
                 <Text style={styles.navBarTxt}>独家新书</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.goTarget('Boutique')}>
               <View style={styles.navBarBox}>
                 <Image source={donePng} style={styles.navBarIcon} />
                 <Text style={styles.navBarTxt}>完结精品</Text>
@@ -380,6 +383,7 @@ class Jingxuan extends Component {
           </View>
           <View style={{marginTop: 10}}>
             <TouchableOpacity
+              onPress={() => this.goTarget('Boutique')}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -752,7 +756,7 @@ class Jingxuan extends Component {
                 renderItem={this._renderSpecialItem}
                 ListEmptyComponent={this._renderEmpty}
                 ListFooterComponent={this._renderFooter}
-                onEndReached={this._fetchMore}
+                // onEndReached={this._fetchMore}
                 onEndReachedThreshold={IS_IOS ? 0.02 : 0.2}
                 ItemSeparatorComponent={this._separator}
                 initialNumToRender={10}

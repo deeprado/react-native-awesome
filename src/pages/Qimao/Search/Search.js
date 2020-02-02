@@ -12,6 +12,14 @@ import {Header, Text, Icon, ThemeProvider, Image} from 'react-native-elements';
 const {width, height} = Dimensions.get('window');
 
 class Search extends Component {
+  static navigationOptions = {
+    title: '搜索',
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View>

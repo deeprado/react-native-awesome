@@ -16,10 +16,11 @@ import MineScene from '../pages/Mine/MineScene';
 
 // 书架
 import Shelf from '../pages/Qimao/Shelf/Index';
-import Search from '../pages/Qimao/Shelf/Search';
 import Record from '../pages/Qimao/Shelf/Record';
 import Pencil from '../pages/Qimao/Shelf/Pencil';
 
+// 搜索
+import Search from '../pages/Qimao/Search/Search';
 // 书城
 import Depot from '../pages/Qimao/Depot/Index';
 // 福利
@@ -44,21 +45,16 @@ let ProfileStack = createStackNavigator(
 
 let DepotStack = createStackNavigator(
   {
-    Depot: {
+    DepotBox: {
       screen: Depot,
       navigationOptions: {
         header: null,
       },
     },
-    Search: {
-      screen: Search,
-      navigationOptions: {
-        header: null,
-      },
-    },
+
   },
   {
-    initialRouteName: 'Depot',
+    initialRouteName: 'DepotBox',
     navigationOptions: {
       gesturesEnabled: true,
       headerTitle: null,
@@ -113,10 +109,16 @@ const AppTabNavigator = createBottomTabNavigator(
         title: '书架',
       },
     },
-    Depot: {
+    DepotStack: {
       screen: DepotStack,
       navigationOptions: {
         title: '书城',
+      },
+    },
+    Search: {
+      screen: Search,
+      navigationOptions: {
+        header: null,
       },
     },
     Welfare: {
@@ -133,6 +135,7 @@ const AppTabNavigator = createBottomTabNavigator(
     },
   },
   {
+    initialRouteName: 'DepotStack',
     defaultNavigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
         const {routeName} = navigation.state;
@@ -143,8 +146,10 @@ const AppTabNavigator = createBottomTabNavigator(
           // Sometimes we want to add badges to some icons.
           // You can check the implementation below.
           IconComponent = HomeIconWithBadge;
-        } else if (routeName === 'Depot') {
+        } else if (routeName === 'DepotStack') {
           iconName = `ios-book`;
+        } else if (routeName === 'Search') {
+          iconName = `ios-search`;
         } else if (routeName === 'Welfare') {
           iconName = `ios-gift`;
         } else if (routeName === 'Profile') {

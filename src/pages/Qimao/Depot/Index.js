@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import TabContainer from './Child/TabContainer';
+import TabContainer from './TabContainer';
 
 class Index extends Component {
   static navigationOptions = {
@@ -15,14 +15,6 @@ class Index extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.searchBox}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('Search');
-            }}>
-            <Icon name="search" type="octicon" color="#000" size={22} />
-          </TouchableOpacity>
-        </View>
         <TabContainer />
       </View>
     );
