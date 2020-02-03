@@ -15,6 +15,7 @@ import Category from './Category';
 import Rank from './Rank';
 import Product from './Product';
 import Boutique from './Boutique';
+import Filter from './Filter';
 
 const {width, height} = Dimensions.get('window');
 
@@ -109,11 +110,17 @@ const StackNavigator = createStackNavigator(
         gesturesEnabled: true,
       },
     },
+    Filter: {
+      screen: Filter,
+      navigationOptions: {
+        gesturesEnabled: true,
+      },
+    },
   },
   {
     mode: 'card',
     headerMode: 'none',
-    initialRouteName: 'Category',
+    initialRouteName: 'Boutique',
     transitionConfig: () => ({
       screenInterpolator: StackViewStyleInterpolator.forHorizontal,
     }),

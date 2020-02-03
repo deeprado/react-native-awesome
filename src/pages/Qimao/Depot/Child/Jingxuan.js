@@ -383,7 +383,7 @@ class Jingxuan extends Component {
           </View>
           <View style={{marginTop: 10}}>
             <TouchableOpacity
-              onPress={() => this.goTarget('Boutique')}
+              onPress={() => this.goTarget('Rank')}
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -405,7 +405,7 @@ class Jingxuan extends Component {
                 alignItems: 'flex-end',
               }}>
               <Text style={{fontSize: 24, fontWeight: '700'}}>分类佳作</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Category')}>
                 <Text style={{color: '#6D6963'}}>查看更多热门分类 ></Text>
               </TouchableOpacity>
             </View>

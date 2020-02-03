@@ -1,0 +1,140 @@
+{
+  "data": [
+    {
+      "firstCateName": "大热榜",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "我的手机连三界",
+          "total": 985,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "cateTitle": "异术超能"
+        },
+        {
+          "secondCateName": "绝品强少",
+          "total": 870,
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "secondCateId": "1000001",
+          "cateTitle": "都市高手"
+        },
+        {
+          "secondCateName": "九星霸体决",
+          "total": 558,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "异界大陆"
+        },
+        {
+          "secondCateName": "神龙兵王",
+          "total": 327,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "都市高手"
+        }
+      ]
+    },
+    {
+      "firstCateName": "完结榜",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "龙魂兵王",
+          "total": 985,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "cateTitle": "异术超能"
+        },
+        {
+          "secondCateName": "无敌剑魂",
+          "total": 870,
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "secondCateId": "1000001",
+          "cateTitle": "都市高手"
+        },
+        {
+          "secondCateName": "盖世帝尊",
+          "total": 558,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "异界大陆"
+        },
+        {
+          "secondCateName": "混沌天体",
+          "total": 327,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "都市高手"
+        }
+      ]
+    },
+    {
+      "firstCateName": "黑马榜",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "龙纹战神",
+          "total": 985,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "cateTitle": "异术超能"
+        },
+        {
+          "secondCateName": "龙王殿",
+          "total": 870,
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "secondCateId": "1000001",
+          "cateTitle": "都市高手"
+        },
+        {
+          "secondCateName": "女总裁的风流兵王",
+          "total": 558,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "异界大陆"
+        },
+        {
+          "secondCateName": "透视邪医混花都",
+          "total": 327,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "都市高手"
+        }
+      ]
+    },
+    {
+      "firstCateName": "热搜榜",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "上门女婿",
+          "total": 985,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "cateTitle": "异术超能"
+        },
+        {
+          "secondCateName": "逍遥战神",
+          "total": 870,
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "secondCateId": "1000001",
+          "cateTitle": "都市高手"
+        },
+        {
+          "secondCateName": "一品赘婿",
+          "total": 558,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "异界大陆"
+        },
+        {
+          "secondCateName": "抬龙棺",
+          "total": 327,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": "都市高手"
+        }
+      ]
+    }
+  ]
+}

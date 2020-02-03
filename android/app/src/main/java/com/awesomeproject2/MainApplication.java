@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.theweflex.react.WeChatPackage;
@@ -66,6 +67,7 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new CameraRollPackage());
                     // 视频播放
                     // packages.add(new MainReactPackage(),
+
                     // new RNLGeetestSensebotPackage(),
                     // new RNFetchBlobPackage(),
                     // new WeChatPackage(),
@@ -97,6 +99,8 @@ public class MainApplication extends Application implements ReactApplication {
                     // 联系人
                     // packages.add(new ReactNativeContacts());
 
+                    // 动画
+                    //packages.add(new LottiePackage());
                     return packages;
                 }
 

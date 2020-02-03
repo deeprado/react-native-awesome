@@ -213,6 +213,7 @@ android {
 }
 
 dependencies {
+    implementation project(':lottie-react-native')
     implementation project(':@yyyyu_react-native-geetest-sensebot')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-wechat')

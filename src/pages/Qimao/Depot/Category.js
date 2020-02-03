@@ -185,7 +185,8 @@ class Category extends Component {
       </TouchableOpacity>
     );
   }
-  renderItemCateNew() {
+
+  renderItemCate() {
     let secondCateItems =
       CateData.data[this.state.selectedRootCate].secondCateItems;
     return (
@@ -224,7 +225,7 @@ class Category extends Component {
             {this.renderRootCate()}
           </View>
           <View style={{flex: 1, backgroundColor: '#fff'}}>
-            {this.renderItemCateNew()}
+            {this.renderItemCate()}
           </View>
         </View>
       </View>
