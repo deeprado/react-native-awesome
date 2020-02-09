@@ -12,6 +12,7 @@ import {Header, Text, Icon, ThemeProvider, Image} from 'react-native-elements';
 const {width, height} = Dimensions.get('window');
 
 const logoPng = require('../../../assets/qimao/image/logo.png');
+const signinPng = require('../../../assets/qimao/image/signin.png');
 
 const theme = {
   Button: {
@@ -49,7 +50,7 @@ class Index extends Component {
     return (
       <View style={styles.topBtnBox}>
         <TouchableHighlight onPress={this.signIn} style={styles.topBtn}>
-          <Icon name="pencil" type="foundation" color="#F9BC3A" />
+          <Image source={signinPng} style={{width: 30, height: 30}} />
         </TouchableHighlight>
         {/* <TouchableHighlight onPress={this.search} style={styles.topBtn}>
           <Icon name="search" type="octicon" color="#000" size={22} />
@@ -58,7 +59,7 @@ class Index extends Component {
           <Icon name="clock" type="feather" size={24} />
         </TouchableHighlight>
         <TouchableHighlight onPress={this.more} style={styles.topBtn}>
-          <Icon name="list-bullet" type="foundation" size={30} />
+          <Icon name="more-vertical" type="feather" size={26} />
         </TouchableHighlight>
       </View>
     );

@@ -74,7 +74,12 @@ class Rank extends Component {
 
   renderLeftComponent() {
     return (
-      <Icon name="left" color="#000" type="antdesign" onPress={this.goBack} />
+      <Icon
+        name="left"
+        color="#9D9D9D"
+        type="antdesign"
+        onPress={this.goBack}
+      />
     );
   }
 

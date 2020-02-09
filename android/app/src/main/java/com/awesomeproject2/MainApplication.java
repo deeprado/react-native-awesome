@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -35,6 +36,8 @@ import com.reactlibrary.RNAliyunOssPackage;
 import com.theweflex.react.WeChatPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.facebook.react.ReactPackage;
+// import com.awesomeproject2.geetest.SensebotPackage;
 
 public class MainApplication extends Application implements ReactApplication {
     // 设置为 true 将不弹出 toast
@@ -87,11 +90,6 @@ public class MainApplication extends Application implements ReactApplication {
 
                     // packages.add(new RNAliyunOssPackage());
 
-                    // 添加自定义包管理器
-                    // packages.add(new MyMainPackage());
-                    packages.add(myMainPackage);
-                    // 添加这一行，类名替换成你的Package类的名字 name.
-                    packages.add(new CustomToastPackage());
 
                     // 渐变
                     // packages.add(new LinearGradientPackage());
@@ -101,6 +99,18 @@ public class MainApplication extends Application implements ReactApplication {
 
                     // 动画
                     //packages.add(new LottiePackage());
+
+                    // 添加自定义包管理器
+                    // packages.add(new MyMainPackage());
+                    packages.add(myMainPackage);
+                    // 添加这一行，类名替换成你的Package类的名字 name.
+                    packages.add(new CustomToastPackage());
+                    // 极验
+                    // packages.add(new SensebotPackage());
+
+                    // 权限
+                    // packages.add(new RNPermissionsPackage());
+
                     return packages;
                 }
 

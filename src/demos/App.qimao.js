@@ -3,16 +3,14 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
-import Github from '../pages/Profile/github';
-import Setting from '../pages/Profile/setting';
-
-import Login from '../pages/User/Login';
-import Register from '../pages/User/Register';
-import MineScene from '../pages/Mine/MineScene';
+// 认证
+import Panel from '../pages/Qimao/Auth/Panel';
+import Privacy from '../pages/Qimao/Auth/Privacy';
+import Agreement from '../pages/Qimao/Auth/Agreement';
+import Mobile from '../pages/Qimao/Auth/Mobile';
 
 // 书架
 import Shelf from '../pages/Qimao/Shelf/Index';
@@ -27,19 +25,234 @@ import Depot from '../pages/Qimao/Depot/Index';
 import Welfare from '../pages/Qimao/Welfare/Index';
 // 我的
 import Profile from '../pages/Qimao/Profile/Index';
+import Cash from '../pages/Qimao/Profile/Cash';
+import Gold from '../pages/Qimao/Profile/Gold';
+import Invitation from '../pages/Qimao/Profile/Invitation';
+import Notice from '../pages/Qimao/Profile/Notice';
+import Teenager from '../pages/Qimao/Profile/Teenager';
+import Privilege from '../pages/Qimao/Profile/Privilege';
+import Withdraw from '../pages/Qimao/Profile/Withdraw';
+import RedEnvelope from '../pages/Qimao/Profile/RedEnvelope';
+
+// 设置
+import Setting from '../pages/Qimao/Profile/Setting';
+import About from '../pages/Qimao/Profile/Setting/About';
+import BasicInfo from '../pages/Qimao/Profile/Setting/BasicInfo';
+import AccountSafe from '../pages/Qimao/Profile/Setting/AccountSafe';
+import ReadSetting from '../pages/Qimao/Profile/Setting/ReadSetting';
+import CacheClear from '../pages/Qimao/Profile/Setting/CacheClear';
+import Nickname from '../pages/Qimao/Profile/Setting/Nickname';
+import Avatar from '../pages/Qimao/Profile/Setting/Avatar';
+import AccountMobile from '../pages/Qimao/Profile/Setting/AccountMobile';
+import AccountMobileChange from '../pages/Qimao/Profile/Setting/AccountMobileChange';
+import AccountDestroy from '../pages/Qimao/Profile/Setting/AccountDestroy';
+import AccountDestroyApplication from '../pages/Qimao/Profile/Setting/AccountDestroyApplication';
+
+// 帮助
+import Help from '../pages/Qimao/Profile/Help';
+import Detail from '../pages/Qimao/Profile/Help/Detail';
+import Feedback from '../pages/Qimao/Profile/Help/Feedback';
+import FeedbackAdd from '../pages/Qimao/Profile/Help/FeedbackAdd';
+import MultiplePic from '../pages/Qimao/Profile/Help/MultiplePic';
+
 // 启动页
 import SplashPage from '../pages/Qimao/Splash/Index';
 // 广告
 import AdPage from '../pages/Qimao/Ad/Index';
 
-let ProfileStack = createStackNavigator(
+let SettingStack = createStackNavigator(
   {
-    Profile: MineScene,
-    Github: Github,
-    Setting: Setting,
+    Default: {
+      screen: Setting,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    About: {
+      screen: About,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    BasicInfo: {
+      screen: BasicInfo,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    AccountSafe: {
+      screen: AccountSafe,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    ReadSetting: {
+      screen: ReadSetting,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    CacheClear: {
+      screen: CacheClear,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Nickname: {
+      screen: Nickname,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Avatar: {
+      screen: Avatar,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    AccountMobile: {
+      screen: AccountMobile,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    AccountMobileChange: {
+      screen: AccountMobileChange,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    AccountDestroy: {
+      screen: AccountDestroy,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    AccountDestroyApplication: {
+      screen: AccountDestroyApplication,
+      navigationOptions: {
+        header: null,
+      },
+    },
   },
   {
-    initialRouteName: 'Profile',
+    initialRouteName: 'Default',
+    headerMode: 'none',
+    navigationOptions: {
+      gesturesEnabled: true,
+      headerTitle: null,
+      header: null,
+    },
+  },
+);
+
+let ProfileStack = createStackNavigator(
+  {
+    ProfileBox: {
+      screen: Profile,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Cash: {
+      screen: Cash,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Gold: {
+      screen: Gold,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Invitation: {
+      screen: Invitation,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Notice: {
+      screen: Notice,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Setting: {
+      screen: SettingStack,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Teenager: {
+      screen: Teenager,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Privilege: {
+      screen: Privilege,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Withdraw: {
+      screen: Withdraw,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    RedEnvelope: {
+      screen: RedEnvelope,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Record: {
+      screen: Record,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Help: {
+      screen: Help,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Detail: {
+      screen: Detail,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Feedback: {
+      screen: Feedback,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    FeedbackAdd: {
+      screen: FeedbackAdd,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    MultiplePic: {
+      screen: MultiplePic,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  },
+  {
+    initialRouteName: 'ProfileBox',
+    headerMode: 'none',
+    navigationOptions: {
+      gesturesEnabled: true,
+      headerTitle: null,
+      header: null,
+    },
   },
 );
 
@@ -51,10 +264,46 @@ let DepotStack = createStackNavigator(
         header: null,
       },
     },
-
   },
   {
     initialRouteName: 'DepotBox',
+    navigationOptions: {
+      gesturesEnabled: true,
+      headerTitle: null,
+      header: null,
+    },
+  },
+);
+
+let SearchStack = createStackNavigator(
+  {
+    Search: {
+      screen: Search,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  },
+  {
+    initialRouteName: 'Search',
+    navigationOptions: {
+      gesturesEnabled: true,
+      headerTitle: null,
+      header: null,
+    },
+  },
+);
+let WelfareStack = createStackNavigator(
+  {
+    WelfareBox: {
+      screen: Welfare,
+      navigationOptions: {
+        header: null,
+      },
+    },
+  },
+  {
+    initialRouteName: 'WelfareBox',
     navigationOptions: {
       gesturesEnabled: true,
       headerTitle: null,
@@ -115,27 +364,27 @@ const AppTabNavigator = createBottomTabNavigator(
         title: '书城',
       },
     },
-    Search: {
-      screen: Search,
+    SearchStack: {
+      screen: SearchStack,
       navigationOptions: {
-        header: null,
+        title: '搜索',
       },
     },
-    Welfare: {
-      screen: Welfare,
+    WelfareStack: {
+      screen: WelfareStack,
       navigationOptions: {
         title: '福利',
       },
     },
-    Profile: {
-      screen: Profile,
+    ProfileStack: {
+      screen: ProfileStack,
       navigationOptions: {
         title: '我的',
       },
     },
   },
   {
-    initialRouteName: 'DepotStack',
+    initialRouteName: 'ProfileStack',
     defaultNavigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
         const {routeName} = navigation.state;
@@ -148,11 +397,11 @@ const AppTabNavigator = createBottomTabNavigator(
           IconComponent = HomeIconWithBadge;
         } else if (routeName === 'DepotStack') {
           iconName = `ios-book`;
-        } else if (routeName === 'Search') {
+        } else if (routeName === 'SearchStack') {
           iconName = `ios-search`;
-        } else if (routeName === 'Welfare') {
+        } else if (routeName === 'WelfareStack') {
           iconName = `ios-gift`;
-        } else if (routeName === 'Profile') {
+        } else if (routeName === 'ProfileStack') {
           iconName = `ios-person`;
         }
         // You can return any component that you like here!
@@ -167,8 +416,30 @@ const AppTabNavigator = createBottomTabNavigator(
 );
 
 const AuthStack = createStackNavigator({
-  Login: Login,
-  Register: Register,
+  Panel: {
+    screen: Panel,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Privacy: {
+    screen: Privacy,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Mobile: {
+    screen: Mobile,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Agreement: {
+    screen: Agreement,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
 
 const SwitchStack = createSwitchNavigator(
@@ -178,6 +449,10 @@ const SwitchStack = createSwitchNavigator(
   },
   {
     initialRouteName: 'App',
+    headerMode: 'none',
+    navigationOptions: {
+      header: null,
+    },
   },
 );
 

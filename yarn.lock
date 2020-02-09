@@ -8453,6 +8453,11 @@ react-native-pdf@^6.0.1:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"
 
+react-native-permissions@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.npm.taobao.org/react-native-permissions/download/react-native-permissions-2.0.9.tgz#5eabdaa952dd099d14e3790af691f49ff2de0895"
+  integrity sha1-XqvaqVLdCZ0U43kK9pH0n/LeCJU=
+
 react-native-ratings@^6.3.0:
   version "6.5.0"
   resolved "https://registry.npm.taobao.org/react-native-ratings/download/react-native-ratings-6.5.0.tgz#a1606ccba3c5b54eec8e6cfa4765a45cf0e4ab8d"

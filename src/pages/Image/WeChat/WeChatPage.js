@@ -227,10 +227,7 @@ class WeChatPage extends Component {
     });
   }
   auth() {
-    WeChat.sendAuthRequest({
-      scope: [],
-      state: '',
-    }).then(authInfo => {
+    WeChat.sendAuthRequest([], '').then(authInfo => {
       /*
         errCode	Number	Error Code
         errStr	String	Error message if any error occurred
