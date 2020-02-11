@@ -26,8 +26,6 @@ project(':react-native-image-crop-picker').projectDir = new File(rootProject.pro
 
 include ':react-native-image-picker'
 project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
-include ':react-native-amap3d'
-project(':react-native-amap3d').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-amap3d/lib/android')
 include ':react-native-baidu-map'
 project(':react-native-baidu-map').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-baidu-map/android')
 
@@ -49,8 +47,7 @@ include ':react-native-video'
 project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android-exoplayer')
 include ':react-native-contacts'
 project(':react-native-contacts').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-contacts/android')
-include ':aliyun-oss-react-native'
-project(':aliyun-oss-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/aliyun-oss-react-native/android')
+
 include ':RCTWeChat'
 project(':RCTWeChat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wechat/android')
 include ':react-native-fs'
@@ -68,4 +65,5 @@ include ':@react-native-community_viewpager'
 project(':@react-native-community_viewpager').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/viewpager/android')
 include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+
 include ':app'

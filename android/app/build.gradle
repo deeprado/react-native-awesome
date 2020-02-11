@@ -226,7 +226,6 @@ dependencies {
     implementation project(':react-native-pdf')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-image-picker')
-    implementation project(':react-native-amap3d')
     implementation project(':react-native-baidu-map')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':jpush-react-native')  // 添加 jpush 依赖
@@ -237,7 +236,6 @@ dependencies {
     // }
 
     implementation project(':react-native-contacts')
-    implementation project(':aliyun-oss-react-native')
     implementation project(':RCTWeChat')
     implementation project(':react-native-fs')
     implementation project(':react-native-code-push')

@@ -32,7 +32,6 @@ import cn.reactnative.modules.update.UpdateContext;
 import com.reactnativecommunity.cameraroll.CameraRollPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
-import com.reactlibrary.RNAliyunOssPackage;
 import com.theweflex.react.WeChatPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -87,9 +86,6 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new WeChatPackage());
                     // packages.add(new ImagePickerPackage());
                     // packages.add(new ReactVideoPackage());
-
-                    // packages.add(new RNAliyunOssPackage());
-
 
                     // 渐变
                     // packages.add(new LinearGradientPackage());
