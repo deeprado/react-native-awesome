@@ -1859,11 +1859,6 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-aliyun-oss-react-native@^1.0.0-alpha.7:
-  version "1.0.0-alpha.7"
-  resolved "https://registry.npm.taobao.org/aliyun-oss-react-native/download/aliyun-oss-react-native-1.0.0-alpha.7.tgz#62f25ccd90ac0cff983c62f6f939d1862092ab4e"
-  integrity sha1-YvJczZCsDP+YPGL2+TnRhiCSq04=
-
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/amdefine/download/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
@@ -8271,11 +8266,6 @@ react-native-actionsheet@^2.4.2:
   version "2.4.2"
   resolved "https://registry.npm.taobao.org/react-native-actionsheet/download/react-native-actionsheet-2.4.2.tgz#6a00dd51a75ef2c8974312130e405af73191500f"
   integrity sha1-agDdUade8siXQxITDkBa9zGRUA8=
-
-react-native-amap3d@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npm.taobao.org/react-native-amap3d/download/react-native-amap3d-1.1.1.tgz#15f736907056a5ee451157cd7a948e0931bf8fe1"
-  integrity sha1-Ffc2kHBWpe5FEVfNepSOCTG/j+E=
 
 react-native-animatable@1.3.3:
   version "1.3.3"

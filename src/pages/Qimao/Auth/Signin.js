@@ -12,7 +12,7 @@ import {
 import {Header, Text, Icon} from 'react-native-elements';
 import {WebView} from 'react-native-webview';
 
-class Copyright extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
   }
@@ -39,7 +39,9 @@ class Copyright extends Component {
   renderCenterComponent() {
     return (
       <View>
-        <Text style={{color: '#000', fontSize: 24}}>用户协议</Text>
+        <Text style={{color: '#000', fontWeight: '700', fontSize: 24}}>
+          签到
+        </Text>
       </View>
     );
   }
@@ -66,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Copyright;
+export default Signin;

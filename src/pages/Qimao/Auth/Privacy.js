@@ -13,6 +13,10 @@ import {Header, Text, Icon} from 'react-native-elements';
 import {WebView} from 'react-native-webview';
 
 class Privacy extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   goBack = () => {
     this.props.navigation.goBack();
   };

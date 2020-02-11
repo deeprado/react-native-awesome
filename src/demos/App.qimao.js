@@ -11,11 +11,12 @@ import Panel from '../pages/Qimao/Auth/Panel';
 import Privacy from '../pages/Qimao/Auth/Privacy';
 import Agreement from '../pages/Qimao/Auth/Agreement';
 import Mobile from '../pages/Qimao/Auth/Mobile';
+// import Signin from '../pages/Qimao/Auth/Signin';
 
 // 书架
 import Shelf from '../pages/Qimao/Shelf/Index';
 import Record from '../pages/Qimao/Shelf/Record';
-import Pencil from '../pages/Qimao/Shelf/Pencil';
+import Pencil from '../pages/Qimao/Auth/Signin';
 
 // 搜索
 import Search from '../pages/Qimao/Search/Search';
@@ -59,6 +60,11 @@ import MultiplePic from '../pages/Qimao/Profile/Help/MultiplePic';
 import SplashPage from '../pages/Qimao/Splash/Index';
 // 广告
 import AdPage from '../pages/Qimao/Ad/Index';
+
+// 封面简介
+import Cover from '../pages/Qimao/Fiction/Cover';
+// 阅读器
+import Reader from '../pages/Qimao/Fiction/Reader';
 
 let SettingStack = createStackNavigator(
   {
@@ -365,7 +371,7 @@ const AppTabNavigator = createBottomTabNavigator(
       },
     },
     SearchStack: {
-      screen: SearchStack,
+      screen: Cover,
       navigationOptions: {
         title: '搜索',
       },
@@ -384,7 +390,7 @@ const AppTabNavigator = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'ProfileStack',
+    initialRouteName: 'SearchStack',
     defaultNavigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
         const {routeName} = navigation.state;

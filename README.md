@@ -14,6 +14,8 @@
 ### 2. aliyun-oss-react-native
 
 找到 build.gradle , 修改 compileSdkVersion 和 buildToolsVersion ， 与 项目的对应版本相同。
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
 ### 3. 打包
 

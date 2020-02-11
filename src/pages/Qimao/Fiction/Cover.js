@@ -12,7 +12,11 @@ import {
 import {Header, Text, Icon} from 'react-native-elements';
 import {WebView} from 'react-native-webview';
 
-class Copyright extends Component {
+/**
+ * 封面简介
+ */
+
+class Cover extends Component {
   constructor(props) {
     super(props);
   }
@@ -66,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Copyright;
+export default Cover;

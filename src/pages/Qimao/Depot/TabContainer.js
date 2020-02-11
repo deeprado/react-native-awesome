@@ -145,7 +145,7 @@ const DepotNavigator = createStackNavigator(
   {
     mode: 'card',
     headerMode: 'none',
-    initialRouteName: 'DepotStack',
+    initialRouteName: 'DepotTab',
     transitionConfig: () => ({
       screenInterpolator: StackViewStyleInterpolator.forHorizontal,
     }),

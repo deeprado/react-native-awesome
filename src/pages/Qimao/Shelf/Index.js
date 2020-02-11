@@ -8,17 +8,11 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import {Header, Text, Icon, ThemeProvider, Image} from 'react-native-elements';
+import {Header, Text, Icon, Image} from 'react-native-elements';
 const {width, height} = Dimensions.get('window');
 
 const logoPng = require('../../../assets/qimao/image/logo.png');
 const signinPng = require('../../../assets/qimao/image/signin.png');
-
-const theme = {
-  Button: {
-    raised: true,
-  },
-};
 
 class Index extends Component {
   static navigationOptions = {
@@ -88,6 +82,11 @@ class Index extends Component {
     });
   }
 
+  // 切换路由到书城
+  goDepot = () => {
+    this.props.navigation.navigate('DepotStack');
+  };
+
   _fetchRecords() {
     let max = 20;
     let books = [];
@@ -95,8 +94,11 @@ class Index extends Component {
       var tmp = {
         id: i + 1,
         title: '我的绝色美女老板',
-        summary:
-          '我的绝色美女老板我的绝色美女老板我的绝色美女老板我的绝色美女老板我的绝色美女老板',
+        summary: '阿斯顿发生的',
+        author: '一念汪洋',
+        reading: true,
+        lastChapter: '第二千八百一十五章',
+        hasUpdate: true,
         cover: logoPng,
       };
       books.push(tmp);
@@ -110,9 +112,21 @@ class Index extends Component {
 
   _renderFooter = () => {
     return (
-      <TouchableHighlight style={styles.footerBox}>
+      <TouchableHighlight
+        style={styles.footerBox}
+        onPress={() => this.goDepot()}>
         <View style={styles.footer}>
-          <Image source={logoPng} style={styles.footerPng} />
+          <View
+            style={{
+              height: 90,
+              width: 66,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: '#EBEBEB',
+            }}>
+            <Icon name="plus" type="feather" size={20} color="#9E9E9E" />
+          </View>
           <View style={styles.footerContentBox}>
             <Text style={styles.footerContent}>添加你喜欢的小说</Text>
           </View>
@@ -140,19 +154,52 @@ class Index extends Component {
     return (
       <TouchableHighlight onPress={() => this.onPress(data)}>
         <View style={styles.bookBox}>
-          <View>
-            <Image source={logoPng} style={styles.bookImage} />
-          </View>
-          <View style={styles.bookTextBox}>
-            <View style={styles.bookTitleBox}>
-              <Text style={styles.bookTitle}>{data.title}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View>
+              <Image source={logoPng} style={styles.bookImage} />
             </View>
-            <View style={styles.bookContentBox}>
-              <Text style={styles.bookContent} numberOfLines={1}>
-                {data.summary}
+            <View style={styles.bookTextBox}>
+              <View style={styles.bookTitleBox}>
+                <Text style={styles.bookTitle}>{data.title}</Text>
+              </View>
+              {data.reading ? (
+                <View style={styles.bookContentBox}>
+                  <Text style={styles.bookContent} numberOfLines={1}>
+                    {data.lastChapter}
+                  </Text>
+                  <Text style={styles.bookRead} numberOfLines={1}>
+                    继续阅读>
+                  </Text>
+                </View>
+              ) : (
+                <View style={styles.bookContentBox}>
+                  <Text style={styles.bookContent} numberOfLines={1}>
+                    {data.author}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+          {data.hasUpdate ? (
+            <View
+              style={{
+                backgroundColor: '#FF8D00',
+                alignItems: 'center',
+                borderRadius: 3,
+              }}>
+              <Text
+                style={{
+                  paddingTop: 1,
+                  paddingBottom: 3,
+                  paddingLeft: 5,
+                  paddingRight: 4,
+                  color: '#fff',
+                  fontSize: 12,
+                }}>
+                更新
               </Text>
             </View>
-          </View>
+          ) : null}
         </View>
       </TouchableHighlight>
     );
@@ -161,63 +208,59 @@ class Index extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ThemeProvider theme={theme}>
-          <Header
-            backgroundColor={'#E8E8E8'}
-            placement="left"
-            leftComponent={{
-              text: '七猫免费小说',
-              style: {color: '#000', fontSize: 20},
-            }}
-            // centerComponent={this.renderCenterComponent()}
-            rightComponent={this.renderRightComponent()}
-            containerStyle={styles.topContainer}
-          />
+        <Header
+          backgroundColor={'#E8E8E8'}
+          placement="left"
+          leftComponent={{
+            text: '七猫免费小说',
+            style: {color: '#000', fontSize: 20},
+          }}
+          // centerComponent={this.renderCenterComponent()}
+          rightComponent={this.renderRightComponent()}
+          containerStyle={styles.topContainer}
+        />
 
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.placeHolderBox}>
-              <View style={styles.placeHolderAd}>
-                <View>
-                  <Image source={logoPng} style={styles.placeHolderImage} />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.placeHolderBox}>
+            <View style={styles.placeHolderAd}>
+              <View>
+                <Image source={logoPng} style={styles.placeHolderImage} />
+              </View>
+              <View style={styles.placeHolderTextBox}>
+                <View style={styles.placeHolderTitleBox}>
+                  <Text style={styles.placeHolderTitle}>我的角色美女老板</Text>
+                  <Icon name={'rowing'} color={'#00aced'} size={20} />
                 </View>
-                <View style={styles.placeHolderTextBox}>
-                  <View style={styles.placeHolderTitleBox}>
-                    <Text style={styles.placeHolderTitle}>
-                      我的角色美女老板
-                    </Text>
-                    <Icon name={'rowing'} color={'#00aced'} size={20} />
-                  </View>
-                  <View style={styles.placeHolderContentBox}>
-                    <Text style={styles.placeHolderContent} numberOfLines={2}>
-                      颜家栋送外卖到一个绝色少妇家里，没想到这女人居然出钱让他陪睡，而且不同意就给差评，而且不同意就给差评而且不同意就给差评而且不同意就给差评而且不同意就给差评
-                    </Text>
-                  </View>
+                <View style={styles.placeHolderContentBox}>
+                  <Text style={styles.placeHolderContent} numberOfLines={2}>
+                    颜家栋送外卖到一个绝色少妇家里，没想到这女人居然出钱让他陪睡，而且不同意就给差评，而且不同意就给差评而且不同意就给差评而且不同意就给差评而且不同意就给差评
+                  </Text>
                 </View>
               </View>
-              <View style={styles.placeHolderUp}>
-                <Text>==</Text>
-              </View>
-              <View style={styles.placeHolderDown}>
-                <Text>==</Text>
-              </View>
             </View>
-            {/* 列表 */}
-            <View style={styles.booksBox}>
-              <FlatList
-                data={this.state.books}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
-                ListEmptyComponent={this._renderEmpty}
-                ListFooterComponent={this._renderFooter}
-                ItemSeparatorComponent={this._separator}
-                initialNumToRender={10}
-                numColumns={1}
-                onEndReachedThreshold={0.1}
-                flashScrollIndicators={true}
-              />
+            <View style={styles.placeHolderUp}>
+              <Text>==</Text>
             </View>
-          </ScrollView>
-        </ThemeProvider>
+            <View style={styles.placeHolderDown}>
+              <Text>==</Text>
+            </View>
+          </View>
+          {/* 列表 */}
+          <View style={styles.booksBox}>
+            <FlatList
+              data={this.state.books}
+              keyExtractor={this._keyExtractor}
+              renderItem={this._renderItem}
+              ListEmptyComponent={this._renderEmpty}
+              ListFooterComponent={this._renderFooter}
+              ItemSeparatorComponent={this._separator}
+              initialNumToRender={10}
+              numColumns={1}
+              onEndReachedThreshold={0.1}
+              flashScrollIndicators={true}
+            />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -300,27 +343,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  booksBox: {marginTop: 15},
+  booksBox: {
+    marginTop: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   bookBox: {
     marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  bookImage: {width: 60, height: 80},
+  bookImage: {width: 66, height: 90},
   bookTextBox: {
     marginLeft: 20,
-    width: width - 150,
+    width: width - 180,
   },
   bookTitleBox: {flexDirection: 'row', marginTop: 12, marginBottom: 12},
   bookTitle: {fontSize: 16},
 
-  bookContentBox: {},
+  bookContentBox: {
+    flexDirection: 'row',
+  },
   bookContent: {
     fontSize: 14,
-    color: '#666',
+    color: '#9D9D9D',
     lineHeight: 20,
+    marginRight: 10,
+  },
+  bookRead: {
+    fontSize: 14,
+    color: '#FF9B21',
+    lineHeight: 20,
+    marginRight: 10,
   },
 
   footerBox: {
@@ -340,8 +396,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerContent: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#9B9B9B',
   },
 });
 
