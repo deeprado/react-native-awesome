@@ -37,7 +37,7 @@ class ContactsPage extends Component {
   }
 
   checkPermission() {
-    Alert.alert('xxxxxxxx');
+    Alert.alert('检查权限');
 
     Contacts.checkPermission((err, permission) => {
       if (err) {

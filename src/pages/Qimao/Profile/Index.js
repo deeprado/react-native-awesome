@@ -7,20 +7,23 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import {Text, Icon} from 'react-native-elements';
+import {Text, SocialIcon, Icon} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import * as WeChat from 'react-native-wechat';
 
 const {width, height} = Dimensions.get('window');
 const adPng = require('../../../assets/qimao/image/ad.png');
 const avatarPng = require('../../../assets/qimao/image/avatar.png');
+const turntableGif = require('../../../assets/qimao/image/turntable.gif');
 
 class Index extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      logined: true,
+      leftCount: 6,
+      logined: false,
+      showTurntable: true,
     };
   }
 
@@ -29,11 +32,8 @@ class Index extends Component {
   }
 
   goTarget(routeName) {
-    if (this.state.logined) {
-      this.props.navigation.navigate(routeName);
-    } else {
-      this.props.navigation.navigate('AuthStack');
-    }
+    this.props.navigation.navigate(routeName);
+    // this.props.navigation.navigate('Panel');
   }
 
   auth() {
@@ -105,9 +105,31 @@ class Index extends Component {
             <TouchableOpacity onPress={() => this.goTarget('Gold')}>
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                  }}>
                   <Text style={{fontSize: 22, fontWeight: '700'}}>32973</Text>
                   <Text style={{color: '#A9A9A9'}}>我的金币</Text>
+
+                  <View
+                    style={{
+                      position: 'absolute',
+                      right: -60,
+                      top: -20,
+                      width: 66,
+                      backgroundColor: '#FF5F0F',
+                      borderTopLeftRadius: 15,
+                      borderTopRightRadius: 15,
+                      borderBottomRightRadius: 15,
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{fontSize: 12, color: '#fff'}}>约3.31元</Text>
+                  </View>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   <Text style={{fontSize: 22, fontWeight: '700'}}>0</Text>
@@ -139,7 +161,7 @@ class Index extends Component {
           <View
             style={{
               backgroundColor: '#39B900',
-              borderRadius: 25,
+              borderRadius: 35,
               paddingTop: 15,
               paddingBottom: 15,
               marginTop: 20,
@@ -151,10 +173,25 @@ class Index extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
+                {/* <SocialIcon
+                  type="twitter"
+                  raised={false}
+                  style={{
+                    backgroundColor: '#39B900',
+                    borderWidth: 0,
+                    padding: 0,
+                    margin: 0,
+                  }}
+                  iconStyle={{
+                    padding: 0,
+                    margin: 0,
+                    backgroundColor: '#39B900',
+                  }}
+                /> */}
                 <Icon
                   name="social-github"
                   type="foundation"
-                  size={25}
+                  size={28}
                   color="#fff"
                 />
                 <Text style={{color: '#fff', fontSize: 20, marginLeft: 5}}>
@@ -384,6 +421,96 @@ class Index extends Component {
       );
     }
   }
+
+  closeTurntable = () => {
+    this.setState({
+      showTurntable: false,
+    });
+  };
+
+  _renderTurntable = () => {
+    if (!this.state.showTurntable) {
+      return null;
+    }
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 50,
+          right: 15,
+        }}>
+        {/* 关闭按钮 */}
+        <View
+          style={{
+            position: 'absolute',
+            top: -30,
+            right: 2,
+            zIndex: 30,
+          }}>
+          <TouchableOpacity onPress={this.closeTurntable}>
+            <View
+              style={{
+                alignItems: 'center',
+                alignContent: 'center',
+                backgroundColor: '#D6D6D6',
+                borderRadius: 10,
+                paddingLeft: 6,
+                paddingRight: 6,
+                paddingTop: 3,
+                paddingBottom: 3,
+              }}>
+              <Icon name="x" type="foundation" color="#FEFEFE" size={12} />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            top: -5,
+            right: 2,
+            zIndex: 30,
+            alignItems: 'center',
+            alignContent: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#FB0000',
+              paddingTop: 1,
+              paddingBottom: 2,
+              paddingLeft: 7,
+              paddingRight: 8,
+              borderRadius: 10,
+              alignItems: 'center',
+              alignContent: 'center',
+            }}>
+            <Text style={{color: '#fff', fontSize: 14}}>
+              {this.state.leftCount}
+            </Text>
+          </View>
+        </View>
+        <TouchableOpacity onPress={() => this.goTarget('Lottery')}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{marginBottom: -15}}>
+              <Image source={turntableGif} style={{width: 72, height: 72}} />
+            </View>
+            <View
+              style={{
+                paddingTop: 2,
+                paddingBottom: 2,
+                paddingLeft: 8,
+                paddingRight: 8,
+                backgroundColor: '#FB0000',
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 12, fontWeight: '600', color: '#fff'}}>
+                抽大奖>>
+              </Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -562,9 +689,9 @@ class Index extends Component {
                         justifyContent: 'center',
                       }}>
                       <Icon
-                        name="setting"
-                        type="antdesign"
-                        size={24}
+                        name="bitcoin-circle"
+                        type="foundation"
+                        size={30}
                         color="#666666"
                       />
                     </View>
@@ -722,6 +849,8 @@ class Index extends Component {
             </View>
           </View>
         </ScrollView>
+        {/* 转盘 */}
+        {this._renderTurntable()}
       </View>
     );
   }

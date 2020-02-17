@@ -21,7 +21,7 @@ class ActivityIndicatorDemo extends React.Component {
   render() {
     return (
       <View>
-        <Text>xxxxxxxxxxxx</Text>
+        <Text>PDF</Text>
       </View>
     );
   }

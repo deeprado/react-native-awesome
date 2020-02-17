@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {
   View,
-  TouchableHighlight,
   StyleSheet,
+  StatusBar,
+  UIManager,
   ImageBackground,
+  Animated,
   Dimensions,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import {Header, Text, Icon, Image} from 'react-native-elements';
 const {width, height} = Dimensions.get('window');
 
 const logoPng = require('../../../assets/qimao/image/logo.png');
-const signinPng = require('../../../assets/qimao/image/signin.png');
-
 class Index extends Component {
   static navigationOptions = {
     title: '书架',
@@ -23,49 +24,96 @@ class Index extends Component {
     super(props);
 
     this.state = {
+      hideStatusBar: false,
+      fadeAnim: new Animated.Value(1),
       showMore: false,
       books: [],
+      scrollStatus: false,
+
+      recom: {
+        title: '我的角色美女老板',
+        summery:
+          '颜家栋送外卖到一个绝色少妇家里，没想到这女人居然出钱让他陪睡，而且不同意就给差评，而且不同意就给差评而且不同意就给差评而且不同意就给差评而且不同意就给差评',
+      },
+      ads: [
+        {
+          id: 100,
+          cover: logoPng,
+          title: '哔哩哔哩',
+          summery: '超好看的小姐姐宅舞视频~',
+          source: '腾讯广告',
+          type: 'ad',
+        },
+        {
+          id: 101,
+          cover: logoPng,
+          title: '哔哩哔哩',
+          summery: '经典国创资源，就来哔哩哔哩~',
+          source: '腾讯广告',
+          type: 'ad',
+        },
+      ],
     };
 
     this.signIn = this.signIn.bind(this);
+    this.search = this.search.bind(this);
     this.record = this.record.bind(this);
     this.more = this.more.bind(this);
-  }
-
-  renderCenterComponent() {
-    return (
-      <View>
-        <Text>xxxxxxxxxxx</Text>
-      </View>
-    );
-  }
-
-  renderRightComponent() {
-    return (
-      <View style={styles.topBtnBox}>
-        <TouchableHighlight onPress={this.signIn} style={styles.topBtn}>
-          <Image source={signinPng} style={{width: 30, height: 30}} />
-        </TouchableHighlight>
-        {/* <TouchableHighlight onPress={this.search} style={styles.topBtn}>
-          <Icon name="search" type="octicon" color="#000" size={22} />
-        </TouchableHighlight> */}
-        <TouchableHighlight onPress={this.record} style={styles.topBtn}>
-          <Icon name="clock" type="feather" size={24} />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.more} style={styles.topBtn}>
-          <Icon name="more-vertical" type="feather" size={26} />
-        </TouchableHighlight>
-      </View>
-    );
   }
 
   componentDidMount() {
     this._fetchRecords();
   }
 
+  renderCenterComponent() {
+    return null;
+  }
+
+  renderRightComponent() {
+    return (
+      <View style={styles.topBtnBox}>
+        <TouchableOpacity onPress={this.signIn} style={styles.topBtn}>
+          <Icon name="calendar" type="antdesign" size={24} color="#FF741C" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.search} style={styles.topBtn}>
+          <Icon name="search" type="octicon" color="#000" size={22} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.record} style={styles.topBtn}>
+          <Icon name="clock" type="feather" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.more} style={styles.topBtn}>
+          <Icon name="more-vertical" type="feather" size={26} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  // 滑动事件
+  onScroll = event => {
+    let scrollY = event.nativeEvent.contentOffset.y;
+    if (scrollY >= 50 && !this.state.scrollStatus) {
+      this.setState({
+        scrollStatus: true,
+      });
+      Animated.timing(this.state.fadeAnim, {
+        toValue: 1,
+        duration: 200,
+      }).start();
+    }
+    if (scrollY < 50 && this.state.scrollStatus) {
+      this.setState({
+        scrollStatus: false,
+      });
+      Animated.timing(this.state.fadeAnim, {
+        toValue: 1,
+        duration: 200,
+      }).start();
+    }
+  };
+
   // 签到
   signIn() {
-    this.props.navigation.navigate('Pencil');
+    this.props.navigation.navigate('Signin');
   }
   // 搜索
   search() {
@@ -84,7 +132,13 @@ class Index extends Component {
 
   // 切换路由到书城
   goDepot = () => {
-    this.props.navigation.navigate('DepotStack');
+    this.props.navigation.navigate('DepotBox');
+  };
+
+  openReader = data => {
+    this.props.navigation.navigate('Reader', {
+      id: 'sdfad',
+    });
   };
 
   _fetchRecords() {
@@ -100,9 +154,14 @@ class Index extends Component {
         lastChapter: '第二千八百一十五章',
         hasUpdate: true,
         cover: logoPng,
+        type: 'book',
       };
       books.push(tmp);
     }
+    // 插入广告
+    books.splice(0, 0, this.state.ads[0]);
+    books.splice(3, 0, this.state.ads[1]);
+    // 插入广告
     this.setState({
       books: books,
     });
@@ -112,9 +171,7 @@ class Index extends Component {
 
   _renderFooter = () => {
     return (
-      <TouchableHighlight
-        style={styles.footerBox}
-        onPress={() => this.goDepot()}>
+      <TouchableOpacity style={styles.footerBox} onPress={() => this.goDepot()}>
         <View style={styles.footer}>
           <View
             style={{
@@ -131,7 +188,7 @@ class Index extends Component {
             <Text style={styles.footerContent}>添加你喜欢的小说</Text>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   };
 
@@ -148,11 +205,60 @@ class Index extends Component {
     );
   }
 
-  _renderItem = row => {
-    let data = row.item;
+  openAd = data => {
+    console.log(data);
+  };
 
+  _renderAd = data => {
     return (
-      <TouchableHighlight onPress={() => this.onPress(data)}>
+      <TouchableOpacity onPress={() => this.openAd(data)} key={data.id}>
+        <View style={styles.bookBox}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View>
+              <Image source={logoPng} style={styles.bookImage} />
+            </View>
+            <View style={styles.bookTextBox}>
+              <View style={styles.bookTitleBox}>
+                <Text style={styles.bookTitle}>{data.title}</Text>
+              </View>
+              <View style={styles.bookContentBox}>
+                <Text style={styles.bookContent} numberOfLines={1}>
+                  {data.summery}
+                </Text>
+                <Text style={styles.adName} numberOfLines={1}>
+                  {data.source}
+                </Text>
+              </View>
+            </View>
+          </View>
+          {data.hasUpdate ? (
+            <View
+              style={{
+                backgroundColor: '#FF8D00',
+                alignItems: 'center',
+                borderRadius: 3,
+              }}>
+              <Text
+                style={{
+                  paddingTop: 1,
+                  paddingBottom: 3,
+                  paddingLeft: 5,
+                  paddingRight: 4,
+                  color: '#fff',
+                  fontSize: 12,
+                }}>
+                更新
+              </Text>
+            </View>
+          ) : null}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderBook = data => {
+    return (
+      <TouchableOpacity onPress={() => this.openReader(data)} key={data.id}>
         <View style={styles.bookBox}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View>
@@ -201,50 +307,93 @@ class Index extends Component {
             </View>
           ) : null}
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
+  };
+
+  _renderItem = row => {
+    let data = row.item;
+    if (data.type === 'ad') {
+      return this._renderAd(data);
+    } else {
+      return this._renderBook(data);
+    }
+  };
+
+  // 打开封面
+  openCover = () => {
+    this.props.navigation.navigate('Cover', {
+      id: '234234',
+    });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Header
-          backgroundColor={'#E8E8E8'}
-          placement="left"
-          leftComponent={{
-            text: '七猫免费小说',
-            style: {color: '#000', fontSize: 20},
-          }}
-          // centerComponent={this.renderCenterComponent()}
-          rightComponent={this.renderRightComponent()}
-          containerStyle={styles.topContainer}
+        <StatusBar
+          backgroundColor={this.state.scrollStatus ? '#fff' : '#EDEDED'}
+          translucent={true}
+          hidden={this.state.hideStatusBar}
+          animated={true}
         />
+        <Animated.View
+          style={{
+            opacity: this.state.fadeAnim,
+          }}>
+          <Header
+            // backgroundImage={logoPng}
+            backgroundColor={this.state.scrollStatus ? '#fff' : '#EDEDED'}
+            // backgroundImageStyle={{
+            //   opacity: 0.5,
+            // }}
+            placement="left"
+            leftComponent={{
+              text: '七猫免费小说',
+              style: {color: '#000', fontSize: 20},
+            }}
+            rightComponent={this.renderRightComponent()}
+            containerStyle={styles.topContainer}
+          />
+        </Animated.View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          nestedScrollEnabled={true}
+          showsVerticalScrollIndicator={false}
+          onScroll={this.onScroll}>
           <View style={styles.placeHolderBox}>
-            <View style={styles.placeHolderAd}>
-              <View>
-                <Image source={logoPng} style={styles.placeHolderImage} />
-              </View>
-              <View style={styles.placeHolderTextBox}>
-                <View style={styles.placeHolderTitleBox}>
-                  <Text style={styles.placeHolderTitle}>我的角色美女老板</Text>
-                  <Icon name={'rowing'} color={'#00aced'} size={20} />
+            <TouchableOpacity
+              onPress={this.openCover}
+              style={{
+                height: 100,
+                position: 'absolute',
+                top: 0,
+                left: 20,
+                width: width - 40,
+                zIndex: 20,
+              }}>
+              <View style={styles.placeHolderAd}>
+                <View>
+                  <Image source={logoPng} style={styles.placeHolderImage} />
                 </View>
-                <View style={styles.placeHolderContentBox}>
-                  <Text style={styles.placeHolderContent} numberOfLines={2}>
-                    颜家栋送外卖到一个绝色少妇家里，没想到这女人居然出钱让他陪睡，而且不同意就给差评，而且不同意就给差评而且不同意就给差评而且不同意就给差评而且不同意就给差评
-                  </Text>
+                <View style={styles.placeHolderTextBox}>
+                  <View style={styles.placeHolderTitleBox}>
+                    <Text style={styles.placeHolderTitle}>
+                      {this.state.recom.title}
+                    </Text>
+                    <Icon name={'rowing'} color={'#00aced'} size={20} />
+                  </View>
+                  <View style={styles.placeHolderContentBox}>
+                    <Text style={styles.placeHolderContent} numberOfLines={2}>
+                      {this.state.recom.summery}
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.placeHolderUp}>
-              <Text>==</Text>
-            </View>
-            <View style={styles.placeHolderDown}>
-              <Text>==</Text>
-            </View>
+            </TouchableOpacity>
+            <View style={styles.placeHolderUp} />
+            <View style={styles.placeHolderDow} />
           </View>
+
           {/* 列表 */}
           <View style={styles.booksBox}>
             <FlatList
@@ -272,8 +421,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   topContainer: {
-    opacity: 0.8,
-    paddingBottom: 20,
+    // backgroundColor: '#EDEDED',
+    // paddingBottom: 10,
   },
   topBackImg: {width: width},
   topBtnBox: {
@@ -290,22 +439,16 @@ const styles = StyleSheet.create({
     height: 100,
   },
   placeHolderAd: {
-    backgroundColor: '#fff',
-    borderWidth: 0,
-    borderColor: '#ccc',
-    height: 100,
-    borderRadius: 10,
-    position: 'absolute',
-    top: 0,
-    left: 20,
-    width: width - 40,
-    zIndex: 20,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderWidth: 0,
+    borderColor: '#ccc',
+    borderRadius: 10,
 
     shadowColor: '#000000',
     shadowOffset: {w: 10, h: 2},
@@ -368,9 +511,14 @@ const styles = StyleSheet.create({
   },
   bookContent: {
     fontSize: 14,
-    color: '#9D9D9D',
+    color: '#ACACAC',
     lineHeight: 20,
     marginRight: 10,
+  },
+  adName: {
+    fontSize: 12,
+    color: '#D0D0D0',
+    lineHeight: 20,
   },
   bookRead: {
     fontSize: 14,
@@ -380,8 +528,6 @@ const styles = StyleSheet.create({
   },
 
   footerBox: {
-    marginLeft: 20,
-    marginRight: 20,
     marginTop: 15,
     marginBottom: 15,
   },

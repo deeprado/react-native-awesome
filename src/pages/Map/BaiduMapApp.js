@@ -134,7 +134,7 @@ class App extends Component {
   }
 
   choosePosition(point) {
-    console.log('xxxxxxxx', point);
+    console.log('point', point);
     this.setState({
       location: point,
     });

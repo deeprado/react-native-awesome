@@ -16,9 +16,6 @@ const logoPng = require('../../../assets/qimao/image/logo.png');
 const CateData = require('./Data/CategoryData.json');
 
 class Category extends Component {
-  static navigationOptions = {
-    title: '书架',
-  };
   constructor(props) {
     super(props);
     this.state = {};
@@ -30,12 +27,25 @@ class Category extends Component {
     };
 
     this.goBack = this.goBack.bind(this);
+    this.goTarget = this.goTarget.bind(this);
+    this.search = this.search.bind(this);
+
+    this._renderCategoryItem = this._renderCategoryItem.bind(this);
   }
 
   componentDidMount() {}
 
   goBack() {
-    this.props.navigation.navigate('DepotTab');
+    this.props.navigation.goBack();
+  }
+
+  goTarget(routeName) {
+    this.props.navigation.navigate(routeName);
+  }
+
+  // 搜索
+  search() {
+    this.goTarget('Search');
   }
 
   // 给list设置的key，遍历item。这样就不会报黄线
@@ -57,7 +67,15 @@ class Category extends Component {
   }
 
   renderRightComponent() {
-    return null;
+    return (
+      <TouchableOpacity
+        onPress={this.search}
+        style={{alignSelf: 'flex-end', marginRight: 10}}>
+        <View>
+          <Icon name="search" type="octicon" color="#414141" size={24} />
+        </View>
+      </TouchableOpacity>
+    );
   }
 
   _renderItem = item => {
@@ -134,7 +152,7 @@ class Category extends Component {
   _renderCategoryItem(row) {
     let data = row.item;
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => this.goTarget('Filter')}>
         <View
           style={{
             flexDirection: 'row',

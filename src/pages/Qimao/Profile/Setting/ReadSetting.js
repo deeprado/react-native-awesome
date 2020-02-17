@@ -6,12 +6,14 @@ import {
   Platform,
   Image,
   Switch,
+  Dimensions,
 } from 'react-native';
 import {Header, Text, Icon} from 'react-native-elements';
 import {Modal, Provider} from '@ant-design/react-native';
 import {openSettings} from 'react-native-permissions';
 const readMenuPng = require('../../../../assets/qimao/image/read_menu.png');
 const readGoldPng = require('../../../../assets/qimao/image/read_gold.png');
+const {width} = Dimensions.get('window');
 
 class ReadSetting extends Component {
   constructor(props) {
@@ -232,10 +234,11 @@ class ReadSetting extends Component {
                     />
                   </View>
                 </View>
-                <View style={{paddingTop: 5, paddingBottom: 20}}>
+                <View style={{borderRadius: 5, overflow: 'hidden'}}>
                   <Image
                     source={readMenuPng}
-                    style={{width: 400, height: 50}}
+                    style={{width: width - 40, height: 60}}
+                    resizeMode="stretch"
                   />
                 </View>
               </TouchableOpacity>
@@ -246,7 +249,11 @@ class ReadSetting extends Component {
                   borderBottomWidth: 1,
                 }}
               />
-              <TouchableOpacity onPress={() => this.showSexModal()}>
+              <TouchableOpacity
+                onPress={() => this.showSexModal()}
+                style={{
+                  paddingBottom: 20,
+                }}>
                 <View
                   style={{
                     paddingTop: 15,
@@ -274,10 +281,11 @@ class ReadSetting extends Component {
                     />
                   </View>
                 </View>
-                <View style={{paddingTop: 5, paddingBottom: 20}}>
+                <View style={{borderRadius: 5, overflow: 'hidden'}}>
                   <Image
                     source={readGoldPng}
-                    style={{width: 400, height: 50}}
+                    style={{width: width - 40, height: 60}}
+                    resizeMode="stretch"
                   />
                 </View>
               </TouchableOpacity>

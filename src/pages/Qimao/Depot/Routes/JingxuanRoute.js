@@ -120,25 +120,25 @@ let searchList = [
   {
     id: 1,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 2,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 3,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 4,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
 ];
@@ -147,25 +147,25 @@ let originList = [
   {
     id: 1,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 2,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 3,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 4,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
 ];
@@ -363,9 +363,7 @@ const _fetchMore = info => {
     return;
   }
   count += 1;
-  console.log('xxxxxxxx');
   specialList = specialList.concat(specialList);
-  console.log(specialList.length);
 };
 
 const _renderSpecialItem = row => {

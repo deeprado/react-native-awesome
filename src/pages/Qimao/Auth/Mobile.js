@@ -22,6 +22,7 @@ class Mobile extends Component {
     this.state = {
       mobile: '',
       code: '',
+      readed: true,
 
       mobileFlag: false,
       codeFlag: false,
@@ -550,8 +551,16 @@ class Mobile extends Component {
           }}>
           <View
             style={{
-              backgroundColor: 'red',
-            }}></View>
+              paddingLeft: 5,
+              paddingRight: 5,
+            }}>
+            <Icon
+              name="check-circle"
+              size={18}
+              color={this.state.readed ? '#FF8D00' : '#E3E3E3'}
+              type="feather"
+            />
+          </View>
           <View
             style={{
               flexDirection: 'row',

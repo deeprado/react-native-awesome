@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, Image, StyleSheet, Dimensions, StatusBar} from 'react-native';
 
 const launcherPng = require('../../../assets/qimao/image/launcher.jpg');
 
@@ -34,6 +34,7 @@ class Index extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar translucent={true} hidden={true} animated={true} />
         <Image source={launcherPng} style={styles.launcher} />
       </View>
     );

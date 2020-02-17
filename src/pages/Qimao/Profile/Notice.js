@@ -75,6 +75,7 @@ class Notice extends Component {
     return (
       <View
         style={{
+          flex: 1,
           flexDirection: 'row',
           alignItems: 'flex-start',
           paddingBottom: 10,
@@ -86,12 +87,12 @@ class Notice extends Component {
           style={{width: 40, justifyContent: 'center', alignItems: 'center'}}>
           <Icon name="volume-2" type="feather" size={24} color="#383838" />
         </View>
-        <View>
+        <View style={{flex: 1}}>
           <View>
             <Text style={{fontSize: 20, color: '#676767'}}>{item.content}</Text>
           </View>
           <View style={{marginTop: 5}}>
-            <Text style={{fontSize: 16, color: '#676767'}}>
+            <Text style={{fontSize: 16, color: '#999999'}}>
               {item.dateTime}
             </Text>
           </View>

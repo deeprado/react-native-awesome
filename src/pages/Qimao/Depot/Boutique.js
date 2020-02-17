@@ -1,35 +1,13 @@
 import React, {Component} from 'react';
-import {
-  View,
-  TouchableHighlight,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  Easing,
-  Animated,
-  ScrollView,
-} from 'react-native';
-import moment from 'moment';
-import {
-  Header,
-  Text,
-  Image,
-  Icon,
-  Button,
-  CheckBox,
-} from 'react-native-elements';
-import {Tabs, Provider, Modal, Toast} from '@ant-design/react-native';
+import {View, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import {Header, Text, Image, Icon} from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 
 import data from './Data/data';
 
-const {width, height} = Dimensions.get('window');
 const logoPng = require('../../../assets/qimao/image/logo.png');
 
 class Boutique extends Component {
-  static navigationOptions = {
-    title: '书架',
-  };
   constructor(props) {
     super(props);
 
@@ -46,7 +24,7 @@ class Boutique extends Component {
   componentDidMount() {}
 
   goBack() {
-    this.props.navigation.navigate('DepotTab');
+    this.props.navigation.goBack();
   }
 
   _onPressLeft = () => {
@@ -114,7 +92,7 @@ class Boutique extends Component {
     return <View style={{height: 1}} />;
   };
 
-  _renderFourItems = bookList => {
+  _renderFourItems = (bookList, showFraction) => {
     let rows = bookList.slice(0, 4);
     return (
       <View
@@ -126,7 +104,40 @@ class Boutique extends Component {
         {rows.map((item, index) => {
           return (
             <View style={{width: 90}} key={item.id}>
-              <Image source={logoPng} style={{height: 124, width: 90}} />
+              <View style={{position: 'relative', backgroundColor: 'red'}}>
+                <Image source={logoPng} style={{height: 124, width: 90}} />
+                <View
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    flexDirection: 'row',
+                  }}>
+                  <LinearGradient
+                    colors={['#FF9300', '#FFB500']}
+                    start={{x: 0, y: 1}}
+                    end={{x: 1, y: 1}}
+                    style={{
+                      paddingLeft: 5,
+                    }}>
+                    <Text style={{fontSize: 12, color: '#fffaf3'}}>9.5分</Text>
+                  </LinearGradient>
+
+                  <View
+                    style={{
+                      marginLeft: 0,
+                      width: 0,
+                      height: 0,
+                      borderStyle: 'solid',
+                      borderWidth: 8,
+                      borderTopColor: '#FFB500', //下箭头颜色
+                      borderLeftColor: '#FFB500', //右箭头颜色
+                      borderBottomColor: 'transparent', //上箭头颜色
+                      borderRightColor: 'transparent', //左箭头颜色
+                    }}
+                  />
+                </View>
+              </View>
               <View
                 style={{
                   flexDirection: 'row',
@@ -179,8 +190,8 @@ class Boutique extends Component {
                 <Text style={{fontSize: 24, fontWeight: '600'}}>完结好书</Text>
               </View>
               <View>
-                {this._renderFourItems(this.state.goodList)}
-                {this._renderFourItems(this.state.goodList)}
+                {this._renderFourItems(this.state.goodList, true)}
+                {this._renderFourItems(this.state.goodList, true)}
               </View>
             </View>
             <View style={{marginTop: 30}}>

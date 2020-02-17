@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {Header, Text, Icon} from 'react-native-elements';
+import {Toast, Provider} from '@ant-design/react-native';
 
 const aboutPng = require('../../../../assets/qimao/image/about.png');
 
 class About extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      version: '3.8',
+    };
+    this.checkAppVersion = this.checkAppVersion.bind(this);
   }
 
   goBack = () => {
@@ -36,83 +41,89 @@ class About extends Component {
     );
   }
 
+  checkAppVersion = () => {
+    Toast.info('当前是最新版本');
+  };
+
   render() {
     return (
-      <View style={styles.container}>
-        <Header
-          backgroundColor={'#fff'}
-          leftComponent={this.renderLeftComponent()}
-          centerComponent={this.renderCenterComponent()}
-          rightComponent={this.renderRightComponent()}
-        />
+      <Provider>
+        <View style={styles.container}>
+          <Header
+            backgroundColor={'#fff'}
+            leftComponent={this.renderLeftComponent()}
+            centerComponent={this.renderCenterComponent()}
+            rightComponent={this.renderRightComponent()}
+          />
 
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 30,
-          }}>
-          <Image source={aboutPng} style={{width: 200, height: 200}} />
-        </View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 30,
+            }}>
+            <Image source={aboutPng} style={{width: 200, height: 200}} />
+          </View>
 
-        <View style={{marginTop: 40, backgroundColor: '#fff'}}>
-          <View style={{paddingLeft: 20, paddingRight: 20}}>
-            <TouchableOpacity>
+          <View style={{marginTop: 40, backgroundColor: '#fff'}}>
+            <View style={{paddingLeft: 20, paddingRight: 20}}>
+              <TouchableOpacity onPress={this.checkAppVersion}>
+                <View
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{fontSize: 16, color: '#686868'}}>
+                      版本信息： 3.11
+                    </Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon
+                      name="chevron-right"
+                      type="feather"
+                      size={24}
+                      color="#DADADA"
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
               <View
                 style={{
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontSize: 16, color: '#686868'}}>
-                    版本信息： 3.11
-                  </Text>
+                  height: 1,
+                  borderBottomColor: '#F2F2F2',
+                  borderBottomWidth: 1,
+                }}
+              />
+              <TouchableOpacity>
+                <View
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{fontSize: 16, color: '#686868'}}>
+                      官方QQ群：827296772
+                    </Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon
+                      name="chevron-right"
+                      type="feather"
+                      size={24}
+                      color="#DADADA"
+                    />
+                  </View>
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon
-                    name="chevron-right"
-                    type="feather"
-                    size={24}
-                    color="#DADADA"
-                  />
-                </View>
-              </View>
-            </TouchableOpacity>
-            <View
-              style={{
-                height: 1,
-                borderBottomColor: '#F2F2F2',
-                borderBottomWidth: 1,
-              }}
-            />
-            <TouchableOpacity>
-              <View
-                style={{
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontSize: 16, color: '#686868'}}>
-                    官方QQ群：827296772
-                  </Text>
-                </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon
-                    name="chevron-right"
-                    type="feather"
-                    size={24}
-                    color="#DADADA"
-                  />
-                </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </Provider>
     );
   }
 }

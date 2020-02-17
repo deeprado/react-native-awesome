@@ -31,7 +31,7 @@ class Counter extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.paragraph}>xxxxxxxx {this.state.count}</Text>
+        <Text style={styles.paragraph}>阿斯蒂芬 {this.state.count}</Text>
         <Button title="加一" onPress={this.add} />
         <Button
           title="去另外一个"

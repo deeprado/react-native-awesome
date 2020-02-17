@@ -38,7 +38,7 @@ class Product extends Component {
   componentDidMount() {}
 
   goBack() {
-    this.props.navigation.navigate('DepotTab');
+    this.props.navigation.goBack();
   }
 
   renderLeftComponent() {

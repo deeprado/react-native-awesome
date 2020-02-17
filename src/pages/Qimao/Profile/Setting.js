@@ -284,7 +284,7 @@ class Setting extends Component {
           },
         },
       ],
-      Platform.OS,
+      false,
     );
     this.setState({
       logoutAlert: logoutAlert,
@@ -325,7 +325,9 @@ class Setting extends Component {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>基本信息</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        基本信息
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -355,7 +357,9 @@ class Setting extends Component {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>账号与安全</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        账号与安全
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -385,7 +389,9 @@ class Setting extends Component {
                 }}>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{marginLeft: 10}}>
-                    <Text style={{fontSize: 20}}>夜间模式</Text>
+                    <Text style={{fontSize: 20, color: '#252525'}}>
+                      夜间模式
+                    </Text>
                   </View>
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -413,7 +419,9 @@ class Setting extends Component {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>阅读设置</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        阅读设置
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -443,7 +451,9 @@ class Setting extends Component {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>推送通知</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        推送通知
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -474,7 +484,9 @@ class Setting extends Component {
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>清理缓存</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        清理缓存
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -503,12 +515,14 @@ class Setting extends Component {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                    paddingTop: 15,
-                    paddingBottom: 15,
+                    paddingTop: 12,
+                    paddingBottom: 12,
                   }}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{marginLeft: 10}}>
-                      <Text style={{fontSize: 20}}>关于七猫免费小说</Text>
+                      <Text style={{fontSize: 20, color: '#252525'}}>
+                        关于七猫免费小说
+                      </Text>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -527,7 +541,7 @@ class Setting extends Component {
           {/* 退出登录 */}
           <View
             style={{
-              marginTop: 30,
+              marginTop: 50,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -544,16 +558,16 @@ class Setting extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Privacy')}>
                 <Text style={{color: '#FDA63B'}}>《隐私政策》</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Agreement')}>
                 <Text style={{color: '#FDA63B'}}>《用户协议》</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Copyright')}>
                 <Text style={{color: '#FDA63B'}}>《版权声明》</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Permission')}>
                 <Text style={{color: '#FDA63B'}}>《权限说明》</Text>
               </TouchableOpacity>
             </View>

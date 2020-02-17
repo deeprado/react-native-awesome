@@ -87,6 +87,10 @@ class Avatar extends Component {
     }
   }
 
+  goBack = () => {
+    this.props.navigation.goBack();
+  };
+
   renderLeftComponent() {
     return (
       <Icon

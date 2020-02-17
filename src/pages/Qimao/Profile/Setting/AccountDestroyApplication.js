@@ -120,7 +120,7 @@ class AccountDestroyApplication extends Component {
                 </View>
               </View>
             </View>
-            <View style={{marginTop: 30, paddingLeft: 50, paddingRight: 50}}>
+            <View style={{marginTop: 40, paddingLeft: 50, paddingRight: 50}}>
               <View style={{}}>
                 <LinearGradient
                   colors={['#FFB129', '#FF9108']}
@@ -132,8 +132,8 @@ class AccountDestroyApplication extends Component {
                     style={{
                       justifyContent: 'center',
                       alignItems: 'center',
-                      paddingTop: 12,
-                      paddingBottom: 12,
+                      paddingTop: 13,
+                      paddingBottom: 13,
                       borderRadius: 25,
                     }}>
                     <Text

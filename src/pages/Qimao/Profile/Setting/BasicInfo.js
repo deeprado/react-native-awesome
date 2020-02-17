@@ -16,6 +16,7 @@ class BasicInfo extends Component {
 
       sexVisible: false,
     };
+    this.closeSex = this.closeSex.bind(this);
   }
 
   goBack = () => {
@@ -87,11 +88,11 @@ class BasicInfo extends Component {
         <Provider>
           <View style={{marginTop: 10, backgroundColor: '#fff'}}>
             <View style={{paddingLeft: 20, paddingRight: 20}}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.goTarget('Avatar')}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 15,
+                    paddingBottom: 15,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -120,8 +121,8 @@ class BasicInfo extends Component {
               <TouchableOpacity onPress={() => this.goTarget('Nickname')}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 15,
+                    paddingBottom: 15,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
@@ -151,8 +152,8 @@ class BasicInfo extends Component {
               <TouchableOpacity onPress={() => this.showSexModal()}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 15,
+                    paddingBottom: 15,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
@@ -180,8 +181,8 @@ class BasicInfo extends Component {
               <TouchableOpacity>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 20,
+                    paddingBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
@@ -200,6 +201,7 @@ class BasicInfo extends Component {
 
           <Modal
             popup
+            maskClosable
             visible={this.state.sexVisible}
             animationType="slide-up"
             onClose={this.closeSex}>

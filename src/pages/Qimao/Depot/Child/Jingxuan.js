@@ -11,6 +11,8 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
+import {NavigationActions} from 'react-navigation';
+
 import {
   Carousel,
   Tabs,
@@ -60,29 +62,36 @@ class Jingxuan extends Component {
   };
 
   renderRankItems = books => {
+    let that = this;
     return (
       <View>
         {books.map((book, index) => {
           return (
-            <View style={styles.rankListBookBox} key={book.id}>
-              <View>
-                <Image source={book.cover} style={styles.rankBookIcon} />
-              </View>
-              <View style={{marginLeft: 5}}>
-                <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <Text style={{fontSize: 16, fontWeight: 'bold'}}>1 </Text>
-                  <Text
-                    style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5}}>
-                    {book.title}
-                  </Text>
+            <TouchableOpacity onPress={() => that.goTarget('Cover')}>
+              <View style={styles.rankListBookBox} key={book.id}>
+                <View>
+                  <Image source={book.cover} style={styles.rankBookIcon} />
                 </View>
-                <View
-                  style={{flexDirection: 'row', marginLeft: 16, marginTop: 5}}>
-                  <Text style={{color: '#6D6963'}}>热度: </Text>
-                  <Text style={{color: '#FF4343'}}>{book.heart}</Text>
+                <View style={{marginLeft: 5}}>
+                  <View style={{flexDirection: 'row', marginTop: 10}}>
+                    <Text style={{fontSize: 16, fontWeight: 'bold'}}>1 </Text>
+                    <Text
+                      style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5}}>
+                      {book.title}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginLeft: 16,
+                      marginTop: 5,
+                    }}>
+                    <Text style={{color: '#6D6963'}}>热度: </Text>
+                    <Text style={{color: '#FF4343'}}>{book.heart}</Text>
+                  </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </View>
@@ -122,6 +131,7 @@ class Jingxuan extends Component {
         return null;
       }
     }
+
     return (
       <View
         style={{
@@ -178,133 +188,141 @@ class Jingxuan extends Component {
   _renderSpecialItem = row => {
     let item = row.item;
     return (
-      <View
-        style={{
-          marginBottom: 20,
-          flexDirection: 'row',
-        }}
-        key={item.id}>
-        <View style={{width: 90, height: 120, overflow: 'hidden'}}>
-          <Image source={logoPng} style={{width: 90, height: 120}} />
-        </View>
+      <TouchableOpacity key={item.id * 5}>
         <View
           style={{
-            marginLeft: 10,
-            flex: 1,
+            marginBottom: 20,
+            flexDirection: 'row',
           }}>
+          <View style={{width: 90, height: 120, overflow: 'hidden'}}>
+            <Image source={logoPng} style={{width: 90, height: 120}} />
+          </View>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              marginLeft: 10,
+              flex: 1,
             }}>
-            <Text style={{fontSize: 20}}>
-              {item.title}
-              {item.id}
-            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={{fontSize: 20}}>
+                {item.title}
+                {item.id}
+              </Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignContent: 'flex-end',
+                  alignItems: 'flex-end',
+                }}>
+                <View>
+                  <Text
+                    style={{
+                      color: '#FF8D00',
+                      fontSize: 20,
+                      fontWeight: '700',
+                    }}>
+                    {item.fraction}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      color: '#FF8D00',
+                      paddingBottom: 2,
+                    }}>
+                    分
+                  </Text>
+                </View>
+              </View>
+            </View>
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignContent: 'flex-end',
-                alignItems: 'flex-end',
+                justifyContent: 'flex-start',
+                flexWrap: 'wrap',
+                marginTop: 10,
+                marginBottom: 10,
               }}>
-              <View>
-                <Text
-                  style={{
-                    color: '#FF8D00',
-                    fontSize: 20,
-                    fontWeight: '700',
-                  }}>
-                  {item.fraction}
-                </Text>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    color: '#FF8D00',
-                    paddingBottom: 2,
-                  }}>
-                  分
-                </Text>
-              </View>
+              <Text style={{fontSize: 16, color: '#6D6963'}} numberOfLines={2}>
+                {item.summery}
+              </Text>
             </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              flexWrap: 'wrap',
-              marginTop: 10,
-              marginBottom: 10,
-            }}>
-            <Text style={{fontSize: 16, color: '#6D6963'}} numberOfLines={2}>
-              {item.summery}
+            <Text style={{fontSize: 14, color: '#6D6963'}}>
+              连载 {item.count} 万字
             </Text>
           </View>
-          <Text style={{fontSize: 14, color: '#6D6963'}}>
-            连载 {item.count} 万字
-          </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   _renderCategoryItem = row => {
     let item = row.item;
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          marginBottom: 15,
-        }}>
-        <View>
-          <Image source={logoPng} style={{width: 60, height: 80}} />
-        </View>
-        <View style={{marginLeft: 15}}>
-          <Text style={{fontSize: 18, marginTop: 3, marginBottom: 3}}>
-            橙红年代
-          </Text>
-          <Text
-            style={{
-              color: '#6D6963',
-              fontSize: 12,
-              marginTop: 3,
-            }}>
-            都市高手
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              marginTop: 5,
-              alignItems: 'flex-end',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: '700',
-                color: 'orangered',
-              }}>
-              9.6
+      <TouchableOpacity key={item.id} onPress={() => this.goTarget('Cover')}>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 15,
+          }}>
+          <View>
+            <Image source={item.cover} style={{width: 60, height: 80}} />
+          </View>
+          <View style={{marginLeft: 15}}>
+            <Text style={{fontSize: 18, marginTop: 3, marginBottom: 3}}>
+              {item.title}
             </Text>
             <Text
               style={{
+                color: '#6D6963',
                 fontSize: 12,
-                color: '#FABD53',
-                marginLeft: 2,
-                paddingBottom: 2,
+                marginTop: 3,
               }}>
-              分
+              {item.category}
             </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 5,
+                alignItems: 'flex-end',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: 'orangered',
+                }}>
+                {item.fraction}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: '#FABD53',
+                  marginLeft: 2,
+                  paddingBottom: 2,
+                }}>
+                分
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   goTarget = routeName => {
-    this.props.navigation.navigate(routeName);
+    let navigateAction = NavigationActions.navigate({
+      routeName: routeName,
+      params: {},
+      action: NavigationActions.navigate({routeName: routeName}),
+    });
+    this.props.navigation.dispatch(navigateAction);
   };
 
   render() {
@@ -488,7 +506,7 @@ class Jingxuan extends Component {
                     }}>
                     {/* 列表 */}
                     <FlatList
-                      data={this.state.cityList}
+                      data={this.state.cityList2}
                       keyExtractor={this._keyExtractor}
                       renderItem={this._renderCategoryItem}
                       ItemSeparatorComponent={this._separator}
@@ -531,7 +549,7 @@ class Jingxuan extends Component {
                     }}>
                     {/* 列表 */}
                     <FlatList
-                      data={this.state.cityList}
+                      data={this.state.cityList3}
                       keyExtractor={this._keyExtractor}
                       renderItem={this._renderCategoryItem}
                       ItemSeparatorComponent={this._separator}
@@ -565,34 +583,41 @@ class Jingxuan extends Component {
                 }}>
                 {this.state.searchList.map((item, index) => {
                   return (
-                    <View style={{width: 90}} key={item.id}>
-                      <Image
-                        source={logoPng}
-                        style={{height: 124, width: 90}}
-                      />
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'flex-start',
-                          flexWrap: 'wrap',
-                        }}>
-                        <Text
+                    <TouchableOpacity
+                      key={item.id}
+                      onPress={() => this.goTarget('Cover')}>
+                      <View style={{width: 90}}>
+                        <Image
+                          source={logoPng}
+                          style={{height: 124, width: 90}}
+                        />
+                        <View
                           style={{
-                            color: '#333',
-                            fontSize: 16,
-                            marginTop: 3,
-                            marginBottom: 3,
+                            flexDirection: 'row',
                             justifyContent: 'flex-start',
                             flexWrap: 'wrap',
                           }}>
-                          {item.title}
+                          <Text
+                            style={{
+                              color: '#333',
+                              fontSize: 16,
+                              marginTop: 3,
+                              marginBottom: 3,
+                              justifyContent: 'flex-start',
+                              flexWrap: 'wrap',
+                            }}>
+                            {item.title}
+                          </Text>
+                        </View>
+                        <Text style={{color: '#6D6963'}}>
+                          {item.count}次搜索
                         </Text>
                       </View>
-                      <Text style={{color: '#6D6963'}}>{item.count}次搜索</Text>
-                    </View>
+                    </TouchableOpacity>
                   );
                 })}
               </View>
+
               <View
                 style={{
                   flexDirection: 'row',
@@ -601,31 +626,37 @@ class Jingxuan extends Component {
                 }}>
                 {this.state.searchList.map((item, index) => {
                   return (
-                    <View style={{width: 90}} key={item.id}>
-                      <Image
-                        source={logoPng}
-                        style={{height: 124, width: 90}}
-                      />
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'flex-start',
-                          flexWrap: 'wrap',
-                        }}>
-                        <Text
+                    <TouchableOpacity
+                      key={item.id}
+                      onPress={() => this.goTarget('Cover')}>
+                      <View style={{width: 90}}>
+                        <Image
+                          source={logoPng}
+                          style={{height: 124, width: 90}}
+                        />
+                        <View
                           style={{
-                            color: '#333',
-                            fontSize: 16,
-                            marginTop: 3,
-                            marginBottom: 3,
+                            flexDirection: 'row',
                             justifyContent: 'flex-start',
                             flexWrap: 'wrap',
                           }}>
-                          {item.title}
+                          <Text
+                            style={{
+                              color: '#333',
+                              fontSize: 16,
+                              marginTop: 3,
+                              marginBottom: 3,
+                              justifyContent: 'flex-start',
+                              flexWrap: 'wrap',
+                            }}>
+                            {item.title}
+                          </Text>
+                        </View>
+                        <Text style={{color: '#6D6963'}}>
+                          {item.count}次搜索
                         </Text>
                       </View>
-                      <Text style={{color: '#6D6963'}}>{item.count}次搜索</Text>
-                    </View>
+                    </TouchableOpacity>
                   );
                 })}
               </View>

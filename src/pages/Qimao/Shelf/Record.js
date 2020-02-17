@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {
   View,
-  TouchableHighlight,
+  Easing,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
   FlatList,
+  Animated,
+  StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import moment from 'moment';
 import {
@@ -16,20 +19,30 @@ import {
   Button,
   CheckBox,
 } from 'react-native-elements';
-import {Tabs, Provider, Modal, Toast} from '@ant-design/react-native';
+import {Provider, Modal, Toast} from '@ant-design/react-native';
 
 const {width, height} = Dimensions.get('window');
 const logoPng = require('../../../assets/qimao/image/logo.png');
 
-const tabList = [{title: '浏览记录'}, {title: '书架记录'}];
+const offsetLeftLength = (width / 2 - 20) / 2;
+const offsetRightLength = width / 2 + (width / 2 - 20) / 2;
+const offsetLength = width / 2;
 
 class Record extends Component {
-  static navigationOptions = {
-    title: '书架',
-  };
   constructor(props) {
     super(props);
     this.state = {
+      opOpcity: new Animated.Value(0.5),
+      opFlag: false,
+
+      tabOffset: new Animated.Value(0),
+      offsetLeft: true,
+      offsetIndex: 0,
+      offsetLength: offsetLength,
+      offsetLeftLength: offsetLeftLength,
+      offsetRightLength: offsetRightLength,
+
+      hideStatusBar: false,
       editing: false,
       edittext: '',
 
@@ -64,11 +77,13 @@ class Record extends Component {
     this._fetchViewRecords();
     this._fetchShelfRecords();
   }
+
   startMa() {
     this.setState({
       editing: true,
     });
   }
+
   completeMa() {
     this.setState({
       editing: false,
@@ -97,13 +112,17 @@ class Record extends Component {
     if (this.state.editing) {
       return (
         <TouchableOpacity onPress={this.completeMa}>
-          <Text>完成</Text>
+          <Text style={{fontSize: 17, color: '#414141'}}>完成</Text>
         </TouchableOpacity>
       );
     } else {
       return (
-        <TouchableOpacity onPress={this.startMa}>
-          <Text>管理</Text>
+        <TouchableOpacity
+          onPress={this.startMa}
+          style={{
+            marginRight: 10,
+          }}>
+          <Text style={{color: '#3C3C3C', fontSize: 17}}>管理</Text>
         </TouchableOpacity>
       );
     }
@@ -207,33 +226,41 @@ class Record extends Component {
   _renderViewItem = row => {
     let data = row.item;
     return (
-      <TouchableHighlight onPress={() => this._pressViewItem(data)}>
+      <TouchableOpacity onPress={() => this._pressViewItem(data)}>
         <View style={styles.bookBox}>
-          <View>
-            <Image source={logoPng} style={styles.bookImage} />
-          </View>
-          <View style={styles.bookTextBox}>
-            <View style={styles.bookTitleBox}>
-              <Text style={styles.bookTitle}>{data.title}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View>
+              <Image source={logoPng} style={styles.bookImage} />
             </View>
-            <View style={styles.bookAuthorBox}>
-              <Text style={styles.bookAuthor} numberOfLines={1}>
-                {data.author}
-              </Text>
-            </View>
-            <View style={styles.bookTimeBox}>
-              <Text style={styles.bookTime} numberOfLines={1}>
-                浏览时间：{moment(data.viewAt, 'YYYYMMDD').fromNow()}
-              </Text>
+            <View style={styles.bookTextBox}>
+              <View style={styles.bookTitleBox}>
+                <Text style={styles.bookTitle}>{data.title}</Text>
+              </View>
+              <View style={styles.bookAuthorBox}>
+                <Text style={styles.bookAuthor} numberOfLines={1}>
+                  {data.author}
+                </Text>
+              </View>
+              <View style={styles.bookTimeBox}>
+                <Text style={styles.bookTime} numberOfLines={1}>
+                  浏览时间：{moment(data.viewAt, 'YYYYMMDD').fromNow()}
+                </Text>
+              </View>
             </View>
           </View>
           <View style={styles.bookBtnBox}>
             {this.state.editing ? (
-              <CheckBox
-                title=" "
-                checked={data.checked}
-                onPress={() => this._pressViewItem(data)}
-              />
+              <View
+                style={{
+                  backgroundColor: data.checked ? '#FFB028' : '#DDDDDD',
+                  borderRadius: 10,
+                  width: 20,
+                  height: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Icon name="check" type="feather" color="#fff" size={14} />
+              </View>
             ) : (
               <Button
                 title="打开"
@@ -244,14 +271,14 @@ class Record extends Component {
             )}
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   };
 
   _renderShelfItem = row => {
     let data = row.item;
     return (
-      <TouchableHighlight onPress={() => this._pressShelfItem(data)}>
+      <TouchableOpacity onPress={() => this._pressShelfItem(data)}>
         <View style={styles.bookBox}>
           <View>
             <Image source={logoPng} style={styles.bookImage} />
@@ -289,7 +316,7 @@ class Record extends Component {
             )}
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   };
 
@@ -309,10 +336,24 @@ class Record extends Component {
         selectIds.push(book.id);
       }
     });
+    // 透明度
+    let opFlag = false;
+    if (selectIds.length > 0 && !this.state.opFlag) {
+      Animated.timing(
+        // 随时间变化而执行动画
+        this.state.opOpcity, // 动画中的变量值
+        {
+          toValue: 1, // 透明度最终变为1，即完全不透明
+          duration: 100, // 让动画持续一段时间
+        },
+      ).start(); // 开始执行动画
+      opFlag = true;
+    }
     // 是否全选
     let allSelect = selectTotal === books.length;
     //
     this.setState({
+      opFlag: opFlag,
       allSelect: allSelect,
       selectTotal: selectTotal,
       allSelectText: allSelect ? '取消全选' : '全选',
@@ -383,6 +424,7 @@ class Record extends Component {
       });
     }
   }
+
   // 删除
   deleteBooks() {
     if (this.state.selectTotal <= 0) {
@@ -404,6 +446,7 @@ class Record extends Component {
       },
     ]);
   }
+
   // 加入书架
   joinShelf() {
     if (this.state.selectTotal <= 0) {
@@ -426,29 +469,168 @@ class Record extends Component {
       return (
         <View style={styles.opBox}>
           <TouchableOpacity onPress={this.selectAll}>
-            <Text>{this.state.allSelectText}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.deleteBooks}
-            style={{opacity: this.state.selectTotal > 0 ? 1 : 0.5}}>
-            <Text>删除 ({this.state.selectTotal})</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.joinShelf}
-            style={{opacity: this.state.selectTotal > 0 ? 1 : 0.5}}>
-            <Text style={{color: '#FF9105', fontWeight: '600'}}>
-              加入书架 ({this.state.selectTotal})
+            <Text style={{fontSize: 16, color: '#6C6C6C'}}>
+              {this.state.allSelectText}
             </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.deleteBooks}>
+            <Animated.View style={{opacity: this.state.opOpcity}}>
+              <Text style={{fontSize: 16, color: '#6C6C6C'}}>
+                删除 ({this.state.selectTotal})
+              </Text>
+            </Animated.View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.joinShelf}>
+            <Animated.View style={{opacity: this.state.opOpcity}}>
+              <Text style={{color: '#FF9105', fontWeight: '600', fontSize: 16}}>
+                加入书架 ({this.state.selectTotal})
+              </Text>
+            </Animated.View>
           </TouchableOpacity>
         </View>
       );
     }
     return null;
   }
+
+  // 向右
+  toRight() {
+    let that = this;
+    this.setState({
+      shelfBooks: [],
+      offsetIndex: 1,
+    });
+    Animated.parallel([
+      Animated.timing(this.state.tabOffset, {
+        easing: Easing.linear,
+        duration: 200,
+        toValue: 1,
+      }),
+    ]).start(finished => {
+      that._fetchShelfRecords();
+    });
+  }
+
+  // 向左
+  toLeft() {
+    let that = this;
+    this.setState({
+      viewBooks: [],
+      offsetIndex: 0,
+    });
+    Animated.parallel([
+      Animated.timing(this.state.tabOffset, {
+        easing: Easing.linear,
+        duration: 200,
+        toValue: 0,
+      }),
+    ]).start(finished => {
+      that._fetchViewRecords();
+    });
+  }
+
+  _renderTabUnderline = () => {
+    return (
+      <Animated.View
+        style={[
+          styles.tabBarUnderlineStyleBox,
+          {
+            transform: [
+              {
+                translateX: this.state.tabOffset.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, this.state.offsetLength],
+                }),
+              }, // x轴移动
+            ],
+          },
+        ]}>
+        <View
+          style={{
+            width: 20,
+            height: 4,
+            borderRadius: 5,
+            backgroundColor: '#FF8D00',
+          }}
+        />
+      </Animated.View>
+    );
+  };
+
+  _renderTabContent = () => {
+    if (this.state.offsetIndex === 0) {
+      if (this.state.viewBooks.length <= 0) {
+        return (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 80,
+            }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        );
+      }
+      return (
+        <View
+          style={[styles.tabBox, {marginBottom: this.state.editing ? 60 : 20}]}>
+          <FlatList
+            data={this.state.viewBooks}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderViewItem}
+            ListEmptyComponent={this._renderEmpty}
+            ItemSeparatorComponent={this._separator}
+            initialNumToRender={10}
+            extraData={this.state}
+            numColumns={1}
+            onEndReachedThreshold={0.1}
+            flashScrollIndicators={true}
+          />
+        </View>
+      );
+    } else {
+      if (this.state.shelfBooks.length <= 0) {
+        return (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 80,
+            }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        );
+      }
+      return (
+        <View
+          style={[styles.tabBox, {marginBottom: this.state.editing ? 60 : 20}]}>
+          <FlatList
+            data={this.state.shelfBooks}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderShelfItem}
+            ListEmptyComponent={this._renderEmpty}
+            ItemSeparatorComponent={this._separator}
+            initialNumToRender={10}
+            extraData={this.state}
+            numColumns={1}
+            onEndReachedThreshold={0.1}
+            flashScrollIndicators={true}
+          />
+        </View>
+      );
+    }
+  };
+
   render() {
     return (
       <Provider>
         <View style={styles.container}>
+          <StatusBar
+            backgroundColor={'#fff'}
+            translucent={true}
+            hidden={this.state.hideStatusBar}
+            animated={true}
+          />
           <Header
             backgroundColor={'#fff'}
             leftComponent={this.renderLeftComponent()}
@@ -459,55 +641,53 @@ class Record extends Component {
             rightComponent={this.renderRightComponent()}
           />
 
-          <View style={styles.tabBarBox}>
-            <Tabs
-              tabs={tabList}
-              initialPage={0}
-              animated={true}
-              tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
-              tabBarActiveTextColor={'#FF9105'}
-              tabBarInactiveTextColor={'#6C6C6C'}
-              tabBarTextStyle={styles.tabBarTextStyle}
-              onChange={this.changeTab}
-              onTabClick={this.clickTab}>
-              <View
-                style={[
-                  styles.tabBox,
-                  {marginBottom: this.state.editing ? 60 : 20},
-                ]}>
-                <FlatList
-                  data={this.state.viewBooks}
-                  keyExtractor={this._keyExtractor}
-                  renderItem={this._renderViewItem}
-                  ListEmptyComponent={this._renderEmpty}
-                  ItemSeparatorComponent={this._separator}
-                  initialNumToRender={10}
-                  extraData={this.state}
-                  numColumns={1}
-                  onEndReachedThreshold={0.1}
-                  flashScrollIndicators={true}
-                />
-              </View>
-              <View
-                style={[
-                  styles.tabBox,
-                  {marginBottom: this.state.editing ? 60 : 20},
-                ]}>
-                <FlatList
-                  data={this.state.shelfBooks}
-                  keyExtractor={this._keyExtractor}
-                  renderItem={this._renderShelfItem}
-                  ListEmptyComponent={this._renderEmpty}
-                  ItemSeparatorComponent={this._separator}
-                  initialNumToRender={10}
-                  extraData={this.state}
-                  numColumns={1}
-                  onEndReachedThreshold={0.1}
-                  flashScrollIndicators={true}
-                />
-              </View>
-            </Tabs>
+          <View style={{marginTop: 20}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => this.toLeft()}
+                style={{alignContent: 'center', justifyContent: 'center'}}>
+                <View
+                  style={{
+                    width: offsetLength,
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={
+                      this.state.offsetIndex === 0
+                        ? styles.activeTtabBarTextStyle
+                        : styles.tabBarTextStyle
+                    }>
+                    浏览记录
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.toRight()}
+                style={{alignContent: 'center', justifyContent: 'center'}}>
+                <View
+                  style={{
+                    width: offsetLength,
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={
+                      this.state.offsetIndex === 1
+                        ? styles.activeTtabBarTextStyle
+                        : styles.tabBarTextStyle
+                    }>
+                    书架记录
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {this._renderTabUnderline()}
           </View>
+          <View style={styles.tabBarBox}>{this._renderTabContent()}</View>
           {this._renderOpItems()}
         </View>
       </Provider>
@@ -519,8 +699,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   tabBarBox: {flex: 1},
+  tabBarUnderlineStyleBox: {
+    marginLeft: offsetLeftLength,
+    marginBottom: 10,
+  },
   tabBarUnderlineStyle: {
     width: 20,
     backgroundColor: '#FF9105',
@@ -530,8 +713,15 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   tabBarTextStyle: {
+    alignSelf: 'center',
+    fontSize: 18,
+    color: '#6C6C6C',
+  },
+  activeTtabBarTextStyle: {
+    alignSelf: 'center',
     fontSize: 18,
     fontWeight: '700',
+    color: '#FF9105',
   },
   tabBox: {
     flex: 1,
@@ -540,6 +730,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 10,
     marginBottom: 20,
+    borderWidth: 0,
   },
 
   bookBox: {
@@ -549,6 +740,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     width: width - 40,
   },
   bookImage: {width: 60, height: 80},
@@ -571,19 +763,27 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 20,
   },
-  bookBtnBox: {width: 80, justifyContent: 'center'},
+  bookBtnBox: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   bookBtn: {
-    borderColor: '#888',
+    borderColor: '#DDDDDD',
     borderRadius: 15,
     height: 30,
   },
-  bookBtnTitle: {fontSize: 14, color: '#333'},
+  bookBtnTitle: {
+    fontSize: 14,
+    color: '#666666',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
 
   opBox: {
     position: 'absolute',
     bottom: 0,
     width: width,
-    height: 40,
+    height: 50,
     backgroundColor: '#fff',
     flex: 1,
     flexDirection: 'row',

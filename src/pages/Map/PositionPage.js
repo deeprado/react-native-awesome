@@ -85,7 +85,6 @@ class PositionPage extends Component {
   }
 
   _setInterval() {
-    console.log('xxxxxxxxx');
     this.interval = setInterval(() => {
       fetch('http://www.reactnative.vip/')
         .then(function(data) {

@@ -15,7 +15,7 @@ class Panel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alRead: false,
+      readed: true,
     };
   }
 
@@ -93,9 +93,9 @@ class Panel extends Component {
           <View
             style={{
               backgroundColor: '#39B900',
-              borderRadius: 25,
-              paddingTop: 10,
-              paddingBottom: 10,
+              borderRadius: 35,
+              paddingTop: 15,
+              paddingBottom: 15,
               marginTop: 20,
             }}>
             <TouchableOpacity onPress={this.auth}>
@@ -105,15 +105,19 @@ class Panel extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Icon
-                  name="social-github"
-                  type="foundation"
-                  size={25}
-                  color="#fff"
-                />
-                <Text style={{color: '#fff', fontSize: 20}}>
-                  登录领最高10元红包
-                </Text>
+                <View style={{alignItems: 'center'}}>
+                  <Icon
+                    name="social-github"
+                    type="foundation"
+                    size={30}
+                    color="#fff"
+                  />
+                </View>
+                <View style={{marginLeft: 3, alignItems: 'center'}}>
+                  <Text style={{color: '#fff', fontSize: 20}}>
+                    登录领最高10元红包
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
           </View>
@@ -150,7 +154,7 @@ class Panel extends Component {
             <View
               style={{
                 position: 'absolute',
-                top: 0,
+                top: -1,
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'center',
@@ -159,7 +163,7 @@ class Panel extends Component {
                 paddingRight: 5,
               }}>
               <Text
-                style={{fontSize: 14, color: '#9B9B9B', alignSelf: 'center'}}>
+                style={{fontSize: 15, color: '#9B9B9B', alignSelf: 'center'}}>
                 其他登录方式
               </Text>
             </View>
@@ -191,13 +195,14 @@ class Panel extends Component {
           }}>
           <View
             style={{
-              backgroundColor: 'red',
+              paddingLeft: 5,
+              paddingRight: 5,
             }}>
             <Icon
               name="check-circle"
+              size={18}
+              color={this.state.readed ? '#FF8D00' : '#E3E3E3'}
               type="feather"
-              size={24}
-              color={'#DADADA'}
             />
           </View>
           <View

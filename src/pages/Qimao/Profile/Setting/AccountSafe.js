@@ -85,8 +85,8 @@ class AccountSafe extends Component {
               <TouchableOpacity>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 20,
+                    paddingBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -116,8 +116,8 @@ class AccountSafe extends Component {
               <TouchableOpacity onPress={() => this.goTarget('AccountMobile')}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 20,
+                    paddingBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
@@ -147,8 +147,8 @@ class AccountSafe extends Component {
               <TouchableOpacity onPress={() => this.auth()}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 20,
+                    paddingBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
@@ -176,8 +176,8 @@ class AccountSafe extends Component {
               <TouchableOpacity onPress={() => this.goTarget('AccountDestroy')}>
                 <View
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 10,
+                    paddingTop: 20,
+                    paddingBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>

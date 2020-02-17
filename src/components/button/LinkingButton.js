@@ -26,8 +26,9 @@ export default class LinkingButton extends Component {
   }
 
   test() {
-    console.log('xxxxxxxxxxx');
+    console.log('test');
   }
+
   render() {
     return (
       <TouchableHighlight

@@ -14,51 +14,6 @@ const {width, height} = Dimensions.get('window');
 
 const JingxuanRoute = () => (
   <ScrollView>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
-    <Text>xxxxxxxxxxx</Text>
     <View style={[styles.tabScene, {backgroundColor: '#ff4081'}]} />
   </ScrollView>
 );

@@ -102,12 +102,12 @@ class ImageCode extends React.Component {
     tipsIndex: 0,
   };
 
-  componentDidUpdate(prevProps) {
-    // 当父组件传入新的图片后，开始渲染
-    if (!!this.props.imageUrl && prevProps.imageUrl !== this.props.imageUrl) {
-      this.renderImage();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   // 当父组件传入新的图片后，开始渲染
+  //   if (!!this.props.imageUrl && prevProps.imageUrl !== this.props.imageUrl) {
+  //     this.renderImage();
+  //   }
+  // }
 
   renderImage = () => {
     // 初始化状态

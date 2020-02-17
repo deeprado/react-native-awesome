@@ -295,12 +295,12 @@ class SettingsScreen extends Component {
               WeChat.isWXAppInstalled().then(isInstalled => {
                 if (isInstalled) {
                   WeChat.pay({
-                    partnerId: 'xxxxxx', // 商家向财付通申请的商家id
-                    prepayId: 'xxxxxx', // 预支付订单
-                    nonceStr: 'xxxxxx', // 随机串，防重发
-                    timeStamp: 'xxxxxxx', // 时间戳，防重发.
+                    partnerId: 'partnerId', // 商家向财付通申请的商家id
+                    prepayId: 'prepayId', // 预支付订单
+                    nonceStr: 'nonceStr', // 随机串，防重发
+                    timeStamp: 'timeStamp', // 时间戳，防重发.
                     package: 'Sign=WXPay', // 商家根据财付通文档填写的数据和签名
-                    sign: 'xxxxxxxxx', // 商家根据微信开放平台文档对数据做的签名
+                    sign: 'sign', // 商家根据微信开放平台文档对数据做的签名
                   })
                     .then(requestJson => {
                       //支付成功回调

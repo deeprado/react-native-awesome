@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Text} from 'react-native';
 import AppIntro from 'react-native-app-intro';
-import PropTypes from 'prop-types';
-
 export default class AppIntroDemo extends Component {
   static navigationOptions = {
     title: 'Welcome to the app!',
@@ -69,9 +67,8 @@ export default class AppIntroDemo extends Component {
         onDoneBtnClick={this.doneBtnHandle}
         onSkipBtnClick={this.onSkipBtnHandle}
         onSlideChange={this.onSlideChangeHandle}
-        pageArray={pageArray}>
-        <Text>xxxxxxxxxx</Text>
-      </AppIntro>
+        pageArray={pageArray}
+      />
     );
   }
 }

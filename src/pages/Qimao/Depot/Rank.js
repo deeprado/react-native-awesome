@@ -57,7 +57,7 @@ class Rank extends Component {
   componentDidMount() {}
 
   goBack() {
-    this.props.navigation.navigate('DepotTab');
+    this.props.navigation.goBack();
   }
 
   _onPressLeft = () => {
@@ -310,6 +310,7 @@ class Rank extends Component {
           justifyContent: 'space-between',
           paddingBottom: 3,
           paddingTop: 3,
+          paddingRight: 15,
         }}>
         <Text style={{color: 'gray', fontSize: 12}}>
           基于近7天活跃阅读综合指标计算

@@ -5,45 +5,65 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  TouchableHighlight,
+  StatusBar,
+  TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import Intro from '../App/Intro';
+
 const {width, height} = Dimensions.get('window');
 
 const logoPng = require('../../../assets/qimao/image/logo.png');
 const launcherPng = require('../../../assets/qimao/image/launcher.jpg');
 
 class Index extends Component {
-  static navigationOptions = ({navigation, navigationOptions}) => {
-    const {params} = navigation.state;
+  // static navigationOptions = ({navigation, navigationOptions}) => {
+  //   const {params} = navigation.state;
 
-    return {
-      headerShown: false,
-      title: params ? params.otherParam : 'A Nested Details Screen',
-      /* These values are used instead of the shared configuration! */
-      headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
-      },
-      headerTintColor: '#fff',
-    };
-  };
+  //   return {
+  //     headerShown: false,
+  //     headerStyle: {
+  //       backgroundColor: navigationOptions.headerTintColor,
+  //     },
+  //     headerTintColor: '#fff',
+  //   };
+  // };
 
   // 构造
   constructor(props) {
     super(props);
     this.state = {
+      hideStatusBar: true,
       max: 5,
       count: 0,
+      showSlider: false,
+      firstInstall: false,
     };
 
     this.calTimer = this.calTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
     this.jumpOver = this.jumpOver.bind(this);
-    this.jumpOver = this.jumpOver.bind(this);
   }
+
+  checkFirst = () => {
+    let that = this;
+    AsyncStorage.getItem('firstInstall')
+      .then(res => {
+        that.setState({
+          firstInstall: res ? false : true,
+        });
+      })
+      .catch(() => {
+        that.setState({
+          firstInstall: false,
+        });
+      });
+  };
 
   componentDidMount() {
     this.startTimer();
+    this.checkFirst();
   }
 
   startTimer() {
@@ -69,22 +89,56 @@ class Index extends Component {
   clearTimer() {
     this.timer && clearTimeout(this.timer);
   }
+
   jumpOver() {
     this.clearTimer();
-    this.props.navigation.navigate('SwitchPage');
+    if (this.state.firstInstall) {
+      this.showSlider();
+    } else {
+      this.switchPage();
+    }
   }
-  render() {
+
+  showSlider() {
+    this.setState({
+      hideStatusBar: false,
+      showSlider: true,
+    });
+  }
+
+  switchPage = () => {
+    let that = this;
+    AsyncStorage.setItem('firstInstall', 'yes').then(res => {
+      that.props.navigation.navigate('AppPage');
+    });
+  };
+
+  _renderSlider() {
+    return (
+      <View>
+        <Intro switchPage={this.switchPage} />
+      </View>
+    );
+  }
+
+  _renderAd = () => {
     let surplus = this.state.max - this.state.count;
     return (
       <View style={styles.container}>
+        <StatusBar
+          backgroundColor="#ff0000"
+          translucent={true}
+          hidden={this.state.hideStatusBar}
+          animated={true}
+        />
         <View style={styles.timerBox}>
-          <TouchableHighlight onPress={this.jumpOver}>
+          <TouchableOpacity onPress={this.jumpOver}>
             <View style={styles.timerTouch}>
               <Text style={{color: 'red', fontSize: 14}}>{surplus}s</Text>
               <Text style={{color: '#fff', fontSize: 14}}> | </Text>
               <Text style={{color: '#fff', fontSize: 14}}>跳过</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         <View style={styles.adBox}>
           <Image source={launcherPng} style={styles.launcher} />
@@ -95,6 +149,18 @@ class Index extends Component {
         </View>
       </View>
     );
+  };
+
+  _renderContent = () => {
+    if (this.state.showSlider && this.state.firstInstall) {
+      return this._renderSlider();
+    } else {
+      return this._renderAd();
+    }
+  };
+
+  render() {
+    return this._renderContent();
   }
 }
 

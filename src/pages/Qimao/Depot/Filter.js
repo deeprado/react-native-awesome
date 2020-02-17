@@ -20,18 +20,18 @@ const logoPng = require('../../../assets/qimao/image/logo.png');
 const filterData = require('./Data/filterData.json');
 
 class Filter extends Component {
-  static navigationOptions = {
-    title: '书架',
-  };
   constructor(props) {
     super(props);
 
     let routeParams = props.navigation.state.params;
-    let cateId = routeParams ? routeParams.cateId : 0;
+    let cateId = routeParams ? routeParams.cateId : 1;
     let cateTitle = filterData.data.cates[cateId];
 
+    // 类型
     let types = ['全部'].concat(filterData.data.types[cateId]);
+    // 完结程度
     let comps = ['全部'].concat(filterData.data.comps);
+    // 字数
     let nums = ['全部'].concat(filterData.data.nums);
     this.state = {
       cateId: cateId,
@@ -64,6 +64,10 @@ class Filter extends Component {
 
   goBack() {
     this.props.navigation.goBack();
+  }
+
+  goTarget(routeName) {
+    this.props.navigation.navigate(routeName);
   }
 
   _onPressLeft = () => {
@@ -108,76 +112,78 @@ class Filter extends Component {
   _renderSpecialItem = row => {
     let item = row.item;
     return (
-      <View
-        style={{
-          marginBottom: 20,
-          flexDirection: 'row',
-        }}
-        key={item.id}>
-        <View style={{width: 90, height: 120, overflow: 'hidden'}}>
-          <Image source={logoPng} style={{width: 90, height: 120}} />
-        </View>
+      <TouchableOpacity onPress={() => this.goTarget('Cover')}>
         <View
           style={{
-            marginLeft: 10,
-            flex: 1,
-          }}>
+            marginBottom: 20,
+            flexDirection: 'row',
+          }}
+          key={item.id}>
+          <View style={{width: 90, height: 120, overflow: 'hidden'}}>
+            <Image source={logoPng} style={{width: 90, height: 120}} />
+          </View>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              marginLeft: 10,
+              flex: 1,
             }}>
-            <Text style={{fontSize: 20}}>
-              {item.title}
-              {item.id}
-            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={{fontSize: 20}}>
+                {item.title}
+                {item.id}
+              </Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignContent: 'flex-end',
+                  alignItems: 'flex-end',
+                }}>
+                <View>
+                  <Text
+                    style={{
+                      color: '#FF8D00',
+                      fontSize: 20,
+                      fontWeight: '700',
+                    }}>
+                    {item.fraction}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      color: '#FF8D00',
+                      paddingBottom: 2,
+                    }}>
+                    分
+                  </Text>
+                </View>
+              </View>
+            </View>
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignContent: 'flex-end',
-                alignItems: 'flex-end',
+                justifyContent: 'flex-start',
+                flexWrap: 'wrap',
+                marginTop: 10,
+                marginBottom: 10,
               }}>
-              <View>
-                <Text
-                  style={{
-                    color: '#FF8D00',
-                    fontSize: 20,
-                    fontWeight: '700',
-                  }}>
-                  {item.fraction}
-                </Text>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    color: '#FF8D00',
-                    paddingBottom: 2,
-                  }}>
-                  分
-                </Text>
-              </View>
+              <Text style={{fontSize: 16, color: '#6D6963'}} numberOfLines={2}>
+                {item.summery}
+              </Text>
             </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              flexWrap: 'wrap',
-              marginTop: 10,
-              marginBottom: 10,
-            }}>
-            <Text style={{fontSize: 16, color: '#6D6963'}} numberOfLines={2}>
-              {item.summery}
+            <Text style={{fontSize: 14, color: '#6D6963'}}>
+              连载 {item.count} 万字
             </Text>
           </View>
-          <Text style={{fontSize: 14, color: '#6D6963'}}>
-            连载 {item.count} 万字
-          </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

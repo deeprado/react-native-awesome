@@ -136,13 +136,13 @@ class Teenager extends Component {
                 </Text>
               </View>
               <View style={{marginTop: 20}}>
-                <Text style={{fontSize: 17, color: '#222222'}}>
+                <Text style={{fontSize: 17, color: '#222222', lineHeight: 24}}>
                   1.
                   为呵护青少年健康成长，七猫免费小说特别推出青少年模式，该模式下将有部分功能不开放使用。该模式下，我们精选了一批教育类、知识类内容呈现在书城，以供青少年模式下的用户阅读。
                 </Text>
               </View>
               <View style={{marginTop: 20}}>
-                <Text style={{fontSize: 17, color: '#222222'}}>
+                <Text style={{fontSize: 17, color: '#222222', lineHeight: 24}}>
                   2.
                   青少年模式是我们为促使青少年健康成长做出的一次尝试，我们优先针对核心场景进行了优化，也将继续致力于更多场景。
                 </Text>

@@ -483,7 +483,7 @@ class Search extends Component {
           </View>
           <TouchableOpacity onPress={() => this.clearHistory()}>
             <View>
-              <Icon name="trash" type="foundation" size={20} color="#B3B3B3" />
+              <Icon name="trash-2" type="feather" size={20} color="#B3B3B3" />
             </View>
           </TouchableOpacity>
         </View>

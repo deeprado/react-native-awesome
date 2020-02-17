@@ -4,7 +4,7 @@ import codePush from 'react-native-code-push';
 
 // 手动更新
 let codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
-const deploymentKey = 'xxxxxxxx';
+const deploymentKey = 'asfasdfasdfsdf';
 
 export default class CodePushDemo extends Component {
   static navigationOptions = {

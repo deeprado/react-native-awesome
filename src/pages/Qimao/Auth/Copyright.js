@@ -39,7 +39,7 @@ class Copyright extends Component {
   renderCenterComponent() {
     return (
       <View>
-        <Text style={{color: '#000', fontSize: 24}}>用户协议</Text>
+        <Text style={{color: '#000', fontSize: 24}}>版权声明</Text>
       </View>
     );
   }

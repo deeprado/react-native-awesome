@@ -121,7 +121,7 @@ class BasicInfo extends Component {
                   secureTextEntry={false}
                   value={this.state.nickname}
                   // keyboardType="numeric"
-                  placeholderTextColor={'#BBBBBB'}
+                  placeholderTextColor={'#999999'}
                   selectTextOnFocus={false}
                   onChangeText={this.onNicknameChange}
                 />
@@ -176,9 +176,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   edit: {
-    fontSize: 16,
+    fontSize: 20,
     height: 50,
-    color: '#242424',
+    color: '#999999',
   },
   linearGradient: {
     alignContent: 'center',

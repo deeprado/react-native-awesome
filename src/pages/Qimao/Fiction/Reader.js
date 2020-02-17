@@ -43,7 +43,7 @@ class Reader extends Component {
   renderCenterComponent() {
     return (
       <View>
-        <Text style={{color: '#000', fontSize: 24}}>用户协议</Text>
+        <Text style={{color: '#000', fontSize: 24}}>阅读器</Text>
       </View>
     );
   }

@@ -85,25 +85,25 @@ let searchList = [
   {
     id: 1,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 2,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 3,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 4,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
 ];
@@ -112,25 +112,25 @@ let originList = [
   {
     id: 1,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 2,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 3,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
   {
     id: 4,
     cover: logoPng,
-    title: 'xxxxxxxxxx',
+    title: '阿斯顿发撒',
     count: 2323232,
   },
 ];
@@ -214,21 +214,67 @@ let cityList = [
   {
     id: 1,
     cover: logoPng,
-    title: '寒门小福妻',
+    title: '寒门小福妻1',
     category: '都市高手',
     fraction: 8.4,
   },
   {
     id: 2,
     cover: logoPng,
-    title: '寒门小福妻',
+    title: '寒门小福妻2',
     category: '都市高手',
     fraction: 8.4,
   },
   {
     id: 3,
     cover: logoPng,
-    title: '寒门小福妻',
+    title: '寒门小福妻3',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+];
+let cityList2 = [
+  {
+    id: 100,
+    cover: logoPng,
+    title: '寒门小福妻1',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+  {
+    id: 101,
+    cover: logoPng,
+    title: '寒门小福妻2',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+  {
+    id: 102,
+    cover: logoPng,
+    title: '寒门小福妻3',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+];
+let cityList3 = [
+  {
+    id: 10,
+    cover: logoPng,
+    title: '寒门小福妻1',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+  {
+    id: 20,
+    cover: logoPng,
+    title: '寒门小福妻2',
+    category: '都市高手',
+    fraction: 8.4,
+  },
+  {
+    id: 30,
+    cover: logoPng,
+    title: '寒门小福妻3',
     category: '都市高手',
     fraction: 8.4,
   },
@@ -275,6 +321,8 @@ export default {
   originList,
   specialList,
   cityList,
+  cityList2,
+  cityList3,
   recommendList,
   goodList,
 };
