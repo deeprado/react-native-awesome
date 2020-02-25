@@ -18,7 +18,13 @@ import AuthPage from '../pages/Auth/AuthPage';
 import AuthSyncPage from '../pages/Auth/AuthSyncPage';
 import SplashPageExample from '../pages/Splash/SplashPageExample';
 import MineScene from '../pages/Mine/MineScene';
-import Demo from '../pages/TabView/Demo1';
+// import TabViewDemo1 from '../pages/TabView/Demo1';
+import Demo from '../pages/Device/Demo2';
+import Reader from '../pages/Reader/Demo2';
+// import Reader from '../pages/Animate/Demo2';
+// import Reader from '../pages/Modal/HomeActionBar';
+// import LottieAnimatedExample from '../pages/Lottie/Official/LottieAnimatedExample';
+// import SvgExample from '../pages/Svg/SvgExample';
 
 let ProfileStack = createStackNavigator(
   {
@@ -90,13 +96,14 @@ const SwitchStack = createSwitchNavigator(
   {
     App: AppTabNavigator,
     Auth: AuthStack,
+    Reader: Reader,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Reader',
   },
 );
 
-const SplashStack = createStackNavigator(
+const SplashStack = createSwitchNavigator(
   {
     SplashPage: {
       screen: SplashPageExample,

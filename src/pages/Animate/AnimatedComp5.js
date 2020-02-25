@@ -43,7 +43,8 @@ class AnimatedComp extends Component {
                 },
               ],
             },
-          ]}></Animated.View>
+          ]}
+        />
 
         <TouchableOpacity
           style={styles.btnContainerStyle}

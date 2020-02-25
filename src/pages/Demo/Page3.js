@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button, Image} from 'react-native';
 
-const logo = require('../../static/img/logo.png');
+const logo = require('../../assets/image/logo.png');
 
 export default class Page3 extends Component {
   static navigationOptions = {

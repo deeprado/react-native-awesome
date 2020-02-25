@@ -25,7 +25,7 @@ export default class SplashPageExample extends Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      this.props.navigation.replace('SwitchPage');
+      this.props.navigation.navigate('SwitchPage');
       this.timer && clearTimeout(this.timer);
     }, 1000);
   }

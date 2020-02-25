@@ -12,12 +12,21 @@ import {
   TouchableOpacity,
   StatusBar,
   Alert,
+  Switch,
+  Platform,
+  BackHandler,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-// import axios from 'axios';
+import DeviceInfo from 'react-native-device-info';
+import {Icon, Slider} from 'react-native-elements';
+import moment from 'moment';
+import {Provider, Modal, Toast} from '@ant-design/react-native';
+
 import Util from './utils/util';
 import Request from './lib/request';
-import {Icon, Slider} from 'react-native-elements';
+import Battery from '../../components/qimao/Battery';
+
+const logoPng = require('../../assets/qimao/image/logo.png');
 
 let chapter1 = {
   _id: '58ccc05923ff5c6b9d5053cc',
@@ -45,16 +54,173 @@ let firstRenderChapters = {
   countChapter: 23232,
 };
 
+// console.log(
+//   DeviceInfo.getPowerStateSync(),
+//   DeviceInfo.getPhoneNumberSync(),
+//   DeviceInfo.getBrand(),
+// );
+
+// 背景颜色
+const Colors = [
+  '#F6D998',
+  '#DBE6C5',
+  '#FAFAFA',
+  '#E7E1C6',
+  '#463D3D',
+  '#3A3F44',
+];
+// 翻页方式
+const PageTurns = ['无', '覆盖', '平滑', '仿真'];
+// 间距（行高）
+const Spaces = [5, 10, 15];
+// 所有章节
+const allChapters = [
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+];
+// 书签
+const allBookmarks = [
+  {
+    id: 1,
+    title: '娶个媳妇',
+  },
+  {
+    id: 2,
+    title: '娶个媳妇',
+  },
+  {
+    id: 3,
+    title: '娶个媳妇',
+  },
+];
+
 class Reader extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      offset: new Animated.Value(0),
+      hideStatusBar: true,
       opacity: new Animated.Value(0),
 
-      hideStatusBar: true,
-      hide: true,
+      offsetOption: new Animated.Value(0),
+      offsetRead: new Animated.Value(0),
+      offsetLight: new Animated.Value(0),
+      offsetDirectory: new Animated.Value(0),
+      opacityDirectory: new Animated.Value(0),
+      hideMask: true,
+
+      hideOption: true,
+      hideRead: true,
+      hideLight: true,
+      hideDirectory: true,
+
       searching: false,
       first: true,
 
@@ -63,8 +229,31 @@ class Reader extends Component {
       chapterNum: 100,
       _data: [],
       firstRenderChapters: null,
+
+      firstOpen: true,
+      curTime: null,
+      batteryLevel: 100,
+
+      curFontSize: 24,
+      curColorInt: 0,
+      curSpaceInt: 0,
+      curPageTurnInt: 1,
+
+      lightNum: 20,
+      maxLightNum: 100,
+
+      flowSystem: false,
+      protectMode: false,
+
+      showChapters: true,
+      chapters: allChapters,
+      bookmarks: allBookmarks,
+
+      isInnShelf: false, // 是否书架中
+      showAddShelfModal: false, // 是否显示加入书架弹窗
+      bookId: 232,
     };
-    this.uuid = 130;
+    this.uuid = DeviceInfo ? DeviceInfo.getDeviceId() : '12123123';
 
     this.count = 0;
     this.currentChapter = '';
@@ -73,15 +262,97 @@ class Reader extends Component {
     this.x = 0;
     this.a = 0;
     this.i = 0;
+
+    this.hideReadOption = this.hideReadOption.bind(this);
   }
 
   componentDidMount() {
-    // console.log(this.props.firstRenderChapters);
-    AsyncStorage.setItem('userToken', 'adfasdfsdfas');
-    this.getFirstRenderChapters(this.uuid);
+    if (Platform.OS === 'android') {
+      BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+    }
+    //
+    this.initData();
   }
 
   componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    }
+    this.clearTimer();
+    this.clearData();
+  }
+
+  // 返回
+  onBackPress = () => {
+    if (!this.state.isInnShelf) {
+      if (this.state.showAddShelfModal) {
+        this.closeAddShelfModal();
+      } else {
+        this.showAddShelfModal();
+      }
+      return true;
+    }
+    return false;
+  };
+
+  addShelf = () => {
+    const {goBack, state} = this.props.navigation;
+    if (state.params && state.params.addShelf) {
+      let bookId = this.state.bookId;
+      state.params.addShelf(bookId);
+    }
+    goBack();
+  };
+
+  showAddShelfModal = () => {
+    this.setState({
+      showAddShelfModal: true,
+    });
+  };
+
+  closeAddShelfModal = () => {
+    this.setState({
+      showAddShelfModal: false,
+    });
+  };
+
+  initData = () => {
+    // 临时
+    AsyncStorage.setItem('userToken', 'adfasdfsdfas');
+    this.setState({
+      batteryLevel: this.getBatteryInfo(),
+      curTime: this.getCurTime(),
+    });
+    this.getFirstRenderChapters(this.uuid);
+    this.startTimer();
+  };
+
+  getBatteryInfo = () => {
+    let tmpbatteryLevel = DeviceInfo.getBatteryLevelSync();
+    let batteryLevel = Math.round(tmpbatteryLevel * 100).toFixed(2);
+    return batteryLevel;
+  };
+
+  getCurTime = () => {
+    return moment().format('HH:mm');
+  };
+
+  startTimer = () => {
+    let that = this;
+    // 每分钟获取一次时间
+    this.timer = setInterval(function() {
+      that.setState({
+        batteryLevel: that.getBatteryInfo(),
+        curTime: that.getCurTime(),
+      });
+    }, 60 * 1000);
+  };
+
+  clearTimer = () => {
+    this.timer && clearInterval(this.timer);
+  };
+
+  clearData = () => {
     if (this.a !== 0) {
       this.a = this.a + 375;
     }
@@ -109,11 +380,7 @@ class Reader extends Component {
         console.log('err', e);
       });
     // this.props.firstRenderChapters = {}
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    // console.log(nextProps);
-  }
+  };
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   return true;
@@ -121,7 +388,6 @@ class Reader extends Component {
 
   UNSAFE_componentWillUpdateXXX(nextProps, nextState) {
     const that = this;
-    console.log('nextProps, nextState', nextProps, nextState);
     if (nextProps.navigation.state.params.first) {
       nextProps.navigation.state.params.first = false;
       AsyncStorage.getItem('userToken').then(token => {
@@ -211,7 +477,6 @@ class Reader extends Component {
 
   // 获取第一个章节
   getFirstRenderChapters(uuid) {
-    console.log('uuid', uuid);
     // axios.get(`/chapters/firstRender/${uuid}`).then(res => {
     //   that.firstRenderChapters = res.data.response;
     // });
@@ -267,17 +532,21 @@ class Reader extends Component {
   };
 
   // 切换目录
-  goDerictory() {
-    this.iknow();
-    this.props.navigation.navigate('Directory', {
-      id: this.props.navigation.state.params.id,
-      name: this.props.navigation.state.params.name,
-    });
+  openDerictory() {
+    this.hideAll();
+    // this.props.navigation.navigate('Directory', {
+    //   id: this.props.navigation.state.params.id,
+    //   name: this.props.navigation.state.params.name,
+    // });
   }
+
+  goTarget = routeName => {
+    this.props.navigation.navigate(routeName);
+  };
 
   // 返回
   goBack() {
-    this.iknow();
+    this.hideAll();
     this.props.navigation.goBack();
   }
 
@@ -301,7 +570,7 @@ class Reader extends Component {
   }
 
   // 通过章节获取内容
-  getContent(chapterInfo) {
+  getContent = chapterInfo => {
     const content = chapterInfo.content;
     let arr = [];
     let _content = this.nbsp2Space(content);
@@ -317,7 +586,7 @@ class Reader extends Component {
       arr.push(_chapterInfo);
     });
     return arr;
-  }
+  };
 
   // 滑动事件
   handleScroll(e) {
@@ -384,17 +653,13 @@ class Reader extends Component {
     }
   }
 
-  _keyExtractor = (item, index) => index.toString();
+  _keyContentExtractor = (item, index) => index.toString() + 'content';
+  _keyChapterExtractor = (item, index) => index.toString() + 'chapter';
 
-  _renderItem = ({item}) => {
+  _renderItem = ({item, index}) => {
     return (
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity
-          style={{height: Util.size.height, width: Util.size.width}}
-          activeOpacity={1}
-          onPress={() => this.show()}>
-          {this.renderContent(item)}
-        </TouchableOpacity>
+      <View style={{flexDirection: 'row', flexWrap: 'wrap'}} key={index}>
+        {this.renderContent(item)}
       </View>
     );
   };
@@ -454,29 +719,33 @@ class Reader extends Component {
     return null;
   };
 
-  renderListView() {
+  // 渲染章节内容
+  renderChapter() {
     return (
-      <FlatList
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        horizontal={true}
-        data={this.state._data}
-        extraData={this.state._data}
-        keyExtractor={this._keyExtractor}
-        renderItem={this._renderItem}
-        ListEmptyComponent={this._renderEmpty}
-        ListFooterComponent={this._renderFooter}
-        ItemSeparatorComponent={this._separator}
-        initialNumToRender={10}
-        numColumns={1}
-        flashScrollIndicators={true}
-      />
+      <View
+        style={{
+          backgroundColor: Colors[this.state.curColorInt],
+          // backgroundColor: 'red',
+        }}>
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          horizontal={true}
+          data={this.state._data}
+          extraData={this.state}
+          keyExtractor={this._keyChapterExtractor}
+          renderItem={this._renderItem}
+          ListEmptyComponent={this._renderEmpty}
+          ListFooterComponent={this._renderFooter}
+          ItemSeparatorComponent={this._separator}
+          initialNumToRender={10}
+          numColumns={1}
+          flashScrollIndicators={true}
+        />
+        <View style={styles.foot}>{this._renderBottomInfo()}</View>
+      </View>
     );
   }
-
-  // List() {
-  //   return Object.keys(this.props.firstRenderChapters).map(key => this.props.firstRenderChapters[key])
-  // }
 
   loading() {
     return (
@@ -491,37 +760,40 @@ class Reader extends Component {
     );
   }
 
-  renderContent(rowData) {
-    console.log('rowData', rowData);
+  _renderContentItem = ({item, index}) => {
+    // console.log('item', item)
+    return (
+      <Text
+        style={{
+          color: '#604733',
+          fontSize: this.state.curFontSize,
+          marginTop: Spaces[this.state.curSpaceInt],
+          flexWrap: 'wrap',
+        }}
+        key={index}>
+        {item}
+      </Text>
+    );
+  };
+  // 渲染内容
+  renderContent = rowData => {
     return (
       <View style={styles.contentContainer}>
-        <View style={styles.top}>
+        <View style={styles.topBox}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-
-                borderWidth: 1,
-                borderColor: '#D4BA90',
-
-                paddingTop: 3,
-                paddingBottom: 5,
-                paddingLeft: 10,
-                paddingRight: 10,
-                borderRadius: 10,
-              }}>
-              <Icon
-                name="align-justify"
-                type="feather"
-                color="#A69673"
-                size={14}
-              />
-              <Text style={{marginLeft: 5, color: '#A69673', fontSize: 12}}>
-                菜单
-              </Text>
-            </View>
+            <TouchableOpacity onPress={() => this.showReaderOptions()}>
+              <View style={styles.topMenuBox}>
+                <Icon
+                  name="align-justify"
+                  type="feather"
+                  color="#A69673"
+                  size={14}
+                />
+                <Text style={{marginLeft: 5, color: '#A69673', fontSize: 12}}>
+                  菜单
+                </Text>
+              </View>
+            </TouchableOpacity>
 
             <View style={{marginLeft: 20}}>
               <Text style={styles.chapterName}>{rowData.title}</Text>
@@ -539,74 +811,321 @@ class Reader extends Component {
           </View>
         </View>
         <View style={styles.chapterContent}>
-          {rowData.content
-            ? rowData.content.map((value, index, chapterContent) => {
-                return (
-                  <Text style={styles.ficContent} key={index}>
-                    {value}
-                  </Text>
-                );
-              })
-            : null}
-        </View>
-        <View style={styles.foot}>
-          <View style={styles.footLeft}>
-            <Text style={styles.chapterName}>16:28</Text>
-          </View>
-
-          <View>
-            <Text>提醒：请勿向他人泄露银行卡信息</Text>
-          </View>
-          <View style={styles.footRight}>
-            <Text style={styles.chapterName}>
-              本章进度100% {rowData.num}/1022
-            </Text>
-          </View>
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={rowData.content}
+            extraData={this.state}
+            renderItem={this._renderContentItem}
+            keyExtractor={this._keyContentExtractor}
+            numColumns={1}
+            flashScrollIndicators={true}
+          />
         </View>
       </View>
     );
-  }
+  };
 
-  renderRow(rowData, sectionID, rowID, highlightRow) {
+  _renderBottomInfo = () => {
     return (
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity
-          style={{height: Util.size.height, width: Util.size.width}}
-          activeOpacity={1}
-          onPress={() => this.show()}>
-          {this.renderContent(rowData)}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingLeft: 10,
+          paddingRight: 10,
+          paddingTop: 5,
+          paddingBottom: 5,
+        }}>
+        <View style={styles.footLeft}>
+          <Battery
+            type={'nogrid'}
+            size={20}
+            percent={this.state.batteryLevel}
+            color={'#948A6B'}
+          />
+          <Text
+            style={{
+              marginLeft: 3,
+              fontSize: 12,
+              color: '#A58F72',
+            }}>
+            {this.state.curTime}
+          </Text>
+        </View>
+        <View>
+          <Text style={{color: '#9E9474', fontSize: 12}}>
+            提醒：请勿向他人泄露银行卡信息
+          </Text>
+        </View>
+        <View style={styles.footRight}>
+          <Text
+            style={{
+              fontSize: 12,
+              color: '#A58F72',
+            }}>
+            本章进度100%
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
+  _renderBottomAd = () => {
+    if (this.state.firstOpen) {
+      return (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            backgroundColor: Colors[this.state.curColorInt],
+            paddingTop: 13,
+            paddingBottom: 13,
+          }}>
+          <Text style={{fontSize: 24, color: '#D3C093', fontWeight: '700'}}>
+            免费看书100年
+          </Text>
+          <Text style={{fontSize: 24, color: '#D3C093', fontWeight: '700'}}>
+            七猫免费小说
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            backgroundColor: Colors[this.state.curColorInt],
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                borderRadius: 5,
+                overflow: 'hidden',
+              }}>
+              <Image source={logoPng} style={{width: 100, height: 48}} />
+            </View>
+            <View style={{marginLeft: 10}}>
+              <View>
+                <Text
+                  style={{fontSize: 16, color: '#353028', fontWeight: '600'}}>
+                  快手
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text
+                  style={{fontSize: 12, color: '#D3C093', fontWeight: '700'}}
+                  numberOfLines={1}>
+                  一场自导自演的首富认证与梦想
+                </Text>
+                <Text
+                  style={{fontSize: 12, color: '#D3C093', fontWeight: '700'}}>
+                  腾讯广告
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View>
+            <TouchableOpacity>
+              <View
+                style={{
+                  backgroundColor: '#FAB337',
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  borderRadius: 10,
+                }}>
+                <Text style={{color: '#eee', fontSize: 14}}>点击下载</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
+  };
+
+  _prev = () => {
+    console.log('上一页');
+  };
+
+  _next = () => {
+    console.log('下一页');
+  };
+
+  _renderDefaultOption = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: 45,
+          left: 0,
+          width: Util.size.width,
+          height: Util.size.height - 110,
+          backgroundColor: 'rgb(0,0,0,0)',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity onPress={() => this._prev()}>
+          <View
+            style={{
+              width: (Util.size.width - 120) / 2,
+              height: Util.size.height - 110,
+            }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this._next()}>
+          <View
+            style={{
+              width: 120,
+              height: Util.size.height - 110,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity onPress={() => this.showReaderOptions()}>
+              <View
+                style={{
+                  width: 100,
+                  height: Util.size.height - 320,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this._next()}>
+          <View
+            style={{
+              width: (Util.size.width - 120) / 2,
+              height: Util.size.height - 110,
+            }}
+          />
         </TouchableOpacity>
       </View>
     );
-  }
-
-  // {this.state.searching ? this.loading() : this.renderContent(rowData)}
+  };
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar
-          backgroundColor={'#3B3A38'}
-          translucent={true}
-          hidden={this.state.hideStatusBar}
-          animated={true}
-          barStyle="light-content"
-        />
-        <ScrollView
-          ref={scrollView => (this.scrollView = scrollView)}
-          scrollEventThrottle={800}
-          horizontal={true}
-          onScroll={e => this.handleScroll(e)}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          pagingEnabled={true}>
-          {this.state.searching ? this.loading() : this.renderListView()}
-        </ScrollView>
-        {this.showReaderOptions()}
-      </View>
+      <Provider>
+        <View style={styles.container}>
+          <StatusBar
+            backgroundColor={'#3B3A38'}
+            translucent={true}
+            hidden={this.state.hideStatusBar}
+            animated={true}
+            barStyle="light-content"
+          />
+          <ScrollView
+            ref={scrollView => (this.scrollView = scrollView)}
+            scrollEventThrottle={800}
+            horizontal={true}
+            onScroll={e => this.handleScroll(e)}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            pagingEnabled={true}>
+            {this.state.searching ? this.loading() : this.renderChapter()}
+          </ScrollView>
+          <View style={{}}>{this._renderBottomAd()}</View>
+
+          {/* {this._renderDefaultOption()} */}
+          {this._renderReaderOptions()}
+          {this._renderReadSetting()}
+          {this._renderLightSetting()}
+          {this._renderDirectorySetting()}
+        </View>
+        <Modal
+          popup
+          closable
+          maskClosable
+          visible={this.state.showAddShelfModal}
+          animationType="slide-up"
+          onClose={this.closeAddShelfModal}>
+          <View style={{}}>
+            {/* 标题 */}
+            <View
+              style={{
+                paddingLeft: 30,
+                paddingRight: 15,
+                paddingTop: 10,
+                paddingBottom: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 22, color: '#333'}}>加入书架</Text>
+              <TouchableOpacity onPress={() => this.closeAddShelfModal()}>
+                <Icon name="x" type="feather" color="#D8D8D8" size={30} />
+              </TouchableOpacity>
+            </View>
+            {/* 内容 */}
+            <View
+              style={{
+                alignContent: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingTop: 30,
+                paddingBottom: 40,
+              }}>
+              <Text style={{fontSize: 18, color: '#333'}}>
+                喜欢本书就加入书架吧！
+              </Text>
+            </View>
+            {/* 按钮 */}
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                borderTopColor: '#EBEBEB',
+                borderTopWidth: 1,
+              }}>
+              <TouchableOpacity
+                onPress={() => this.goBack()}
+                style={{
+                  flexGrow: 1,
+                  flexBasis: '50%',
+                }}>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    paddingTop: 15,
+                    paddingBottom: 15,
+                  }}>
+                  <Text style={{color: '#666666', fontSize: 20}}>取消</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.addShelf()}
+                style={{
+                  flexGrow: 1,
+                  flexBasis: '50%',
+                }}>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    paddingTop: 15,
+                    paddingBottom: 15,
+                    backgroundColor: '#FFDC34',
+                  }}>
+                  <Text style={{color: '#222222', fontSize: 20}}>确定</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </Provider>
     );
   }
 
-  _renderShelfBox = () => {
+  _renderReaderShelfBox = () => {
     if (this.state.alAddShelf) {
       return null;
     }
@@ -617,273 +1136,1165 @@ class Reader extends Component {
           {
             transform: [
               {
-                translateX: this.state.offset.interpolate({
+                translateX: this.state.offsetOption.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [100, 0],
+                  outputRange: [120, 0],
                 }),
               }, // x轴移动
             ],
           },
         ]}>
-        <View
-          style={{
-            backgroundColor: '#444444',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: 10,
-            paddingBottom: 10,
+        <TouchableOpacity>
+          <View
+            style={{
+              backgroundColor: '#444444',
+              alignContent: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: 10,
+              paddingBottom: 10,
 
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-          }}>
-          <Text style={{fontSize: 18, color: '#fff'}}>加入书架</Text>
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 20,
+            }}>
+            <Text style={{fontSize: 18, color: '#fff'}}>加入书架</Text>
+          </View>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  };
+
+  // 操作顶部
+  _renderReaderOptionsTop = () => {
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateY: this.state.offsetOption.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-90, 0],
+              }),
+            },
+          ],
+        }}>
+        <View style={styles.alertTop}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity
+              style={{flexDirection: 'row', alignItems: 'center'}}
+              onPress={() => {
+                this.goBack();
+              }}>
+              <Image
+                style={styles.backImg}
+                source={require('./imgs/back.png')}
+              />
+              <Text style={{fontSize: 20, color: '#fff'}}>返回</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginRight: 20,
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity>
+              <View
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#F58902',
+                  marginTop: 1,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                  borderRadius: 15,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#F58902', fontSize: 16}}>全本下载</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{marginLeft: 30, alignItems: 'center'}}>
+                <Icon name="headphones" type="feather" color="#fff" size={24} />
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <View style={{marginLeft: 30, alignItems: 'center'}}>
+                <Icon
+                  name="more-horizontal"
+                  type="feather"
+                  color="#fff"
+                  size={24}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </Animated.View>
     );
   };
 
-  showReaderOptions() {
-    if (this.state.hide) {
+  _renderReaderOptionsMiddle = () => {
+    return (
+      <TouchableOpacity onPress={() => this.hideReadOption()}>
+        <View style={{height: Util.size.height}} />
+      </TouchableOpacity>
+    );
+  };
+
+  _renderReaderOptionsBottom = () => {
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateY: this.state.offsetOption.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -240],
+              }),
+            },
+          ],
+          zIndex: 99,
+        }}>
+        <View style={[styles.alertFoot, styles.alertFootOption]}>
+          {this._renderSliderChapter()}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingTop: 20,
+              paddingBottom: 20,
+            }}>
+            <TouchableOpacity>
+              <View>
+                <Text style={{color: '#C8C8C8', fontSize: 16}}>上一章</Text>
+              </View>
+            </TouchableOpacity>
+            <View style={{justifyContent: 'center', width: 200}}>
+              <Slider
+                value={this.state.chapterNum}
+                maximumValue={this.state.maxChapterNum}
+                step={1}
+                minimumValue={1}
+                minimumTrackTintColor={'#F18500'}
+                maximumTrackTintColor={'#666666'}
+                thumbTintColor={'#F18500'}
+                onValueChange={chapterNum =>
+                  this.setState({chapterNum, showSliderChapter: true})
+                }
+              />
+            </View>
+            <TouchableOpacity>
+              <View>
+                <Text style={{color: '#C8C8C8', fontSize: 16}}>下一章</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              paddingBottom: 20,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                this.openDirectorySetting();
+              }}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                }}>
+                <Icon name="list" type="feather" color="#A8A8A8" size={24} />
+                <Text style={styles.directoryText}>目录</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.openDerictory();
+              }}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                }}>
+                <Icon
+                  name="ios-moon"
+                  type="ionicon"
+                  color="#A8A8A8"
+                  size={24}
+                />
+                <Text style={styles.directoryText}>夜间模式</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.openLightSetting();
+              }}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                }}>
+                <Icon name="list" type="feather" color="#A8A8A8" size={24} />
+
+                <Text style={styles.directoryText}>亮度</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.openReadSetting();
+              }}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                }}>
+                <Icon
+                  name="widget"
+                  type="foundation"
+                  color="#A8A8A8"
+                  size={24}
+                />
+                <Text style={styles.directoryText}>阅读设置</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
+  _renderReaderOptions = () => {
+    if (this.state.hideOption) {
       return null;
     }
     return (
-      <View style={styles.alertContainer}>
-        <Animated.View
-          style={{
-            transform: [
-              {
-                translateY: this.state.offset.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [-70, 0],
-                }),
-              },
-            ],
-          }}>
-          <View style={styles.alertTop}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <TouchableOpacity
-                style={{flexDirection: 'row', alignItems: 'center'}}
-                onPress={() => {
-                  this.goBack();
-                }}>
-                <Image
-                  style={styles.backImg}
-                  source={require('./imgs/back.png')}
-                />
-                <Text style={{fontSize: 20, color: '#fff'}}>返回</Text>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                marginRight: 20,
-                alignItems: 'center',
-              }}>
-              <TouchableOpacity>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#F58902',
-                    marginTop: 1,
-                    paddingTop: 3,
-                    paddingBottom: 3,
-                    paddingLeft: 10,
-                    paddingRight: 10,
-                    borderRadius: 15,
-                    alignItems: 'center',
-                  }}>
-                  <Text style={{color: '#F58902', fontSize: 14}}>全本下载</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={{marginLeft: 30, alignItems: 'center'}}>
-                  <Icon
-                    name="headphones"
-                    type="feather"
-                    color="#fff"
-                    size={24}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <View style={{marginLeft: 30, alignItems: 'center'}}>
-                  <Icon
-                    name="more-horizontal"
-                    type="feather"
-                    color="#fff"
-                    size={24}
-                  />
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Animated.View>
-        {this._renderShelfBox()}
-        <TouchableOpacity
-          style={{height: Util.size.height - 300}}
-          onPress={this.iknow.bind(this)}
-        />
-        <Animated.View
-          style={{
-            transform: [
-              {
-                translateY: this.state.offset.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [100, 0],
-                }),
-              },
-            ],
-          }}>
-          <View style={styles.alertFoot}>
-            {this._renderSliderChapter()}
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                paddingTop: 20,
-                paddingBottom: 20,
-              }}>
-              <TouchableOpacity>
-                <View>
-                  <Text style={{color: '#C8C8C8', fontSize: 16}}>上一章</Text>
-                </View>
-              </TouchableOpacity>
-              <View style={{justifyContent: 'center', width: 200}}>
-                <Slider
-                  value={this.state.chapterNum}
-                  maximumValue={this.state.maxChapterNum}
-                  step={1}
-                  minimumValue={1}
-                  minimumTrackTintColor={'#F18500'}
-                  maximumTrackTintColor={'#666666'}
-                  thumbTintColor={'#F18500'}
-                  onValueChange={chapterNum =>
-                    this.setState({chapterNum, showSliderChapter: true})
-                  }
-                />
-              </View>
-              <TouchableOpacity>
-                <View>
-                  <Text style={{color: '#C8C8C8', fontSize: 16}}>下一章</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                paddingBottom: 20,
-              }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.goDerictory();
-                }}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                  }}>
-                  <Icon name="list" type="feather" color="#A8A8A8" size={24} />
-                  <Text style={styles.directoryText}>目录</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.goDerictory();
-                }}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                  }}>
-                  <Icon name="list" type="feather" color="#A8A8A8" size={24} />
-                  <Text style={styles.directoryText}>夜间模式</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.goDerictory();
-                }}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                  }}>
-                  <Icon name="list" type="feather" color="#A8A8A8" size={24} />
-
-                  <Text style={styles.directoryText}>亮度</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  this.goDerictory();
-                }}>
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                  }}>
-                  <Icon
-                    name="widget"
-                    type="foundation"
-                    color="#A8A8A8"
-                    size={24}
-                  />
-                  <Text style={styles.directoryText}>夜间阅读</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Animated.View>
+      <View style={[styles.alertContainer, {zIndex: 20}]}>
+        {this._renderReaderOptionsTop()}
+        {this._renderReaderShelfBox()}
+        {this._renderReaderOptionsMiddle()}
+        {this._renderReaderOptionsBottom()}
       </View>
     );
-  }
+  };
+
+  _renderReadSettingMiddle = () => {
+    return (
+      <TouchableOpacity onPress={() => this.outReadSetting()}>
+        <View style={{height: Util.size.height}} />
+      </TouchableOpacity>
+    );
+  };
+
+  chooseBackColor = index => {
+    this.setState({
+      curColorInt: index,
+    });
+  };
+
+  _renderBackColor = (index = 0) => {
+    let bgcolor = Colors[index];
+    let curColorInt = this.state.curColorInt;
+    return (
+      <TouchableOpacity onPress={() => this.chooseBackColor(index)}>
+        <View style={[{backgroundColor: bgcolor}, styles.backColorBox]}>
+          {curColorInt === index ? (
+            <Icon name="check" type="feather" color="#FBA205" size={20} />
+          ) : null}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  chooseSpace = index => {
+    this.setState({
+      curSpaceInt: index,
+    });
+  };
+
+  _renderSpaceBox = (index = 0) => {
+    let n;
+    let mp;
+    if (index === 0) {
+      n = 5;
+      mp = 2;
+    } else if (index === 1) {
+      n = 4;
+      mp = 4;
+    } else {
+      n = 3;
+      mp = 5;
+    }
+    let curSpaceInt = this.state.curSpaceInt;
+    let bgcolor = index === curSpaceInt ? '#FCA000' : '#B6B6B6';
+    let brcolor = index === curSpaceInt ? '#FCA000' : '#B6B6B6';
+    let brwidth = index === curSpaceInt ? 2 : 1;
+    let renderItem = key => {
+      return (
+        <View
+          style={{
+            height: 2,
+            backgroundColor: bgcolor,
+            width: 30,
+            marginTop: mp,
+          }}
+          key={key}
+        />
+      );
+    };
+
+    let ar = Array(n).fill(true);
+    return (
+      <TouchableOpacity
+        onPress={() => this.chooseSpace(index)}
+        style={
+          {
+            // backgroundColor: 'red',
+          }
+        }>
+        <View
+          style={{
+            height: 45,
+            paddingLeft: 45,
+            paddingRight: 45,
+            borderWidth: brwidth,
+            borderColor: brcolor,
+            borderRadius: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          {ar.map(function(item, index) {
+            return renderItem(index);
+          })}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  changeFontSize = chfs => {
+    let curFontSize = this.state.curFontSize;
+    let newFontSize = curFontSize + chfs / 2;
+    this.setState({
+      curFontSize: newFontSize,
+    });
+  };
+
+  _renderPageTurn = index => {
+    let curPageTurnInt = this.state.curPageTurnInt;
+    let tmpPageTurn = PageTurns[index];
+    let brcolor = index === curPageTurnInt ? '#F29A02' : '#636363';
+    let brwidth = index === curPageTurnInt ? 2 : 1;
+    let fontcolor = index === curPageTurnInt ? '#F29A02' : '#BDBDBD';
+    return (
+      <TouchableOpacity>
+        <View
+          style={{
+            width: 80,
+            alignContent: 'center',
+            borderRadius: 20,
+            borderWidth: brwidth,
+            borderColor: brcolor,
+            alignItems: 'center',
+            paddingTop: 8,
+            paddingBottom: 8,
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 14, color: fontcolor}}>{tmpPageTurn}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderReadSettingBottom = () => {
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateY: this.state.offsetRead.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -370],
+              }),
+            },
+          ],
+        }}>
+        <View style={[styles.alertFoot, styles.alertFootSetting]}>
+          <View style={{paddingTop: 12, paddingBottom: 12}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                paddingTop: 15,
+                paddingBottom: 15,
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#8F8F8F', fontSize: 16}}>字号</Text>
+              </View>
+              <View
+                style={{
+                  width: Util.size.width - 90,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => this.changeFontSize(-2)}
+                    style={{}}>
+                    <View
+                      style={{
+                        paddingTop: 2,
+                        paddingBottom: 5,
+                        paddingLeft: 40,
+                        paddingRight: 40,
+                        borderWidth: 1,
+                        borderColor: '#646464',
+                        borderRadius: 25,
+                      }}>
+                      <Text style={{fontSize: 24, color: '#CCCCCC'}}>A-</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <View
+                    style={{
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                    }}>
+                    <Text style={{fontSize: 16, color: '#969696'}}>
+                      {this.state.curFontSize * 2}
+                    </Text>
+                  </View>
+                  <TouchableOpacity onPress={() => this.changeFontSize(2)}>
+                    <View
+                      style={{
+                        paddingTop: 2,
+                        paddingBottom: 5,
+                        paddingLeft: 40,
+                        paddingRight: 40,
+                        borderWidth: 1,
+                        borderColor: '#646464',
+                        borderRadius: 25,
+                      }}>
+                      <Text style={{fontSize: 24, color: '#CCCCCC'}}>A+</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    paddingTop: 9,
+                    paddingBottom: 9,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    borderWidth: 1,
+                    borderColor: '#646464',
+                    borderRadius: 25,
+                  }}>
+                  <Text style={{fontSize: 16, color: '#CCCCCC'}}>切换字体</Text>
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                paddingTop: 15,
+                paddingBottom: 15,
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#8F8F8F', fontSize: 16}}>背景</Text>
+              </View>
+              <View
+                style={{
+                  width: Util.size.width - 90,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                {this._renderBackColor(0)}
+                {this._renderBackColor(1)}
+                {this._renderBackColor(2)}
+                {this._renderBackColor(3)}
+                {this._renderBackColor(4)}
+                {this._renderBackColor(5)}
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                paddingTop: 15,
+                paddingBottom: 15,
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#8F8F8F', fontSize: 16}}>间距</Text>
+              </View>
+              <View
+                style={{
+                  width: Util.size.width - 90,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                {this._renderSpaceBox(0)}
+                {this._renderSpaceBox(1)}
+                {this._renderSpaceBox(2)}
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                paddingTop: 15,
+                paddingBottom: 15,
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#8F8F8F', fontSize: 16}}>翻页</Text>
+              </View>
+              <View
+                style={{
+                  width: Util.size.width - 90,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                {this._renderPageTurn(0)}
+                {this._renderPageTurn(1)}
+                {this._renderPageTurn(2)}
+                {this._renderPageTurn(3)}
+              </View>
+            </View>
+          </View>
+          <View style={{backgroundColor: '#404040', height: 1}} />
+          <View>
+            <TouchableOpacity onPress={() => this.goTarget('ReadSetting')}>
+              <View
+                style={{
+                  paddingTop: 20,
+                  paddingBottom: 20,
+                  alignContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{fontSize: 14, color: '#C3C3C3'}}>
+                  更多阅读设置
+                </Text>
+                <Icon
+                  name="chevron-right"
+                  type="feather"
+                  color="#C3C3C3"
+                  size={14}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
+  _renderReadSetting = () => {
+    if (this.state.hideRead) {
+      return null;
+    }
+    return (
+      <View style={[styles.alertContainer, {zIndex: 30}]}>
+        {this._renderReadSettingMiddle()}
+        {this._renderReadSettingBottom()}
+      </View>
+    );
+  };
+
+  _renderLightSettingMiddle = () => {
+    return (
+      <TouchableOpacity onPress={() => this.hideLightSetting()}>
+        <View style={{height: Util.size.height}} />
+      </TouchableOpacity>
+    );
+  };
+
+  _renderLightSettingBottom = () => {
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateY: this.state.offsetLight.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -230],
+              }),
+            },
+          ],
+        }}>
+        <View style={[styles.alertFoot, styles.alertFootLight]}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingTop: 20,
+              paddingBottom: 20,
+            }}>
+            <View
+              style={{
+                width: 40,
+                alignContent: 'flex-start',
+                alignItems: 'flex-start',
+              }}>
+              <Icon name="circle" type="feather" color="#B8B8B8" size={12} />
+            </View>
+            <View
+              style={{justifyContent: 'center', width: Util.size.width - 160}}>
+              <Slider
+                value={this.state.lightNum}
+                maximumValue={this.state.maxLightNum}
+                step={1}
+                minimumValue={1}
+                minimumTrackTintColor={'#F18500'}
+                maximumTrackTintColor={'#666666'}
+                thumbTintColor={'#F18500'}
+                onValueChange={lightNum => this.setState({lightNum})}
+              />
+            </View>
+            <View
+              style={{
+                width: 40,
+              }}>
+              <Icon name="sun" type="feather" color="#B8B8B8" size={20} />
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: 20,
+              paddingBottom: 20,
+            }}>
+            <Text style={{color: '#C9C9C9', fontSize: 17}}>亮度跟随系统</Text>
+            <Switch
+              trackColor="red"
+              thumbColor="blue"
+              value={this.state.flowSystem}
+              onValueChange={flowSystem => {
+                this.setState({
+                  flowSystem,
+                });
+              }}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: 20,
+              paddingBottom: 20,
+            }}>
+            <Text style={{color: '#C9C9C9', fontSize: 17}}>护眼模式</Text>
+            <Switch
+              trackColor="red"
+              thumbColor="blue"
+              value={this.state.protectMode}
+              onValueChange={protectMode => {
+                this.setState({
+                  protectMode,
+                });
+              }}
+            />
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
+  _renderLightSetting = () => {
+    if (this.state.hideLight) {
+      return null;
+    }
+    return (
+      <View style={[styles.alertContainer, {zIndex: 30}]}>
+        {this._renderLightSettingMiddle()}
+        {this._renderLightSettingBottom()}
+      </View>
+    );
+  };
+
+  _renderDirectorySettingMiddle = () => {
+    // if (this.state.hideMask) {
+    //   return null;
+    // }
+    return (
+      <TouchableOpacity onPress={() => this.hideDirectorySetting()}>
+        {/* <Animated.View
+          style={{
+            height: Util.size.height,
+            width: Util.size.width,
+            backgroundColor: '#000',
+            opacity: this.state.opacityDirectory,
+          }}
+        /> */}
+        <View
+          style={{
+            height: Util.size.height,
+            width: Util.size.width,
+            backgroundColor: '#000',
+            opacity: this.state.opacityDirectory,
+          }}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  _renderChapterItem = ({item, index}) => {
+    return (
+      <TouchableOpacity>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingTop: 15,
+            paddingBottom: 15,
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              color: '#EFA62B',
+              fontWeight: '700',
+              fontSize: 18,
+            }}>
+            第一章 百诡维嘉宅
+          </Text>
+          <Text style={{fontSize: 14, color: '#EFA62B'}}>免费</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  _renderDirectoryContent = () => {
+    // 展示目录
+    if (this.state.showChapters) {
+      return (
+        <View>
+          {/* 章节数量 */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  color: '#5E4B28',
+                }}>
+                已完结
+              </Text>
+              <Text
+                style={{
+                  marginLeft: 5,
+                  fontSize: 13,
+                  color: '#5E4B28',
+                }}>
+                共733章
+              </Text>
+            </View>
+            <View>
+              <TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Icon
+                    name="arrow-down"
+                    type="foundation"
+                    color="#6F5C3B"
+                    size={14}
+                  />
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      fontSize: 14,
+                      color: '#5E4B28',
+                    }}>
+                    倒序
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* 章节列表 */}
+          <View
+            style={{
+              paddingTop: 20,
+              paddingBottom: 40,
+            }}>
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              data={this.state.chapters}
+              extraData={this.state.chapters}
+              keyExtractor={this._keyExtractor}
+              renderItem={this._renderChapterItem}
+              ListEmptyComponent={this._renderEmpty}
+              initialNumToRender={10}
+              numColumns={1}
+              flashScrollIndicators={true}
+            />
+          </View>
+        </View>
+      );
+    } else {
+      // 展示书签
+      return (
+        <View>
+          {/* 书签列表 */}
+          <View
+            style={{
+              paddingTop: 20,
+              paddingBottom: 40,
+            }}>
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              data={this.state.bookmarks}
+              extraData={this.state.bookmarks}
+              keyExtractor={this._keyExtractor}
+              renderItem={this._renderChapterItem}
+              ListEmptyComponent={this._renderEmpty}
+              initialNumToRender={10}
+              numColumns={1}
+              flashScrollIndicators={true}
+            />
+          </View>
+        </View>
+      );
+    }
+  };
+
+  switchChapter = showChapters => {
+    this.setState({
+      showChapters,
+    });
+  };
+
+  _renderDirectorySettingBottom = () => {
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateX: this.state.offsetDirectory.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-(Util.size.width * 0.8), 0],
+              }),
+            },
+          ],
+          width: Util.size.width * 0.8,
+        }}>
+        <View
+          style={{
+            height: Util.size.height,
+            // backgroundColor: Colors[this.state.curColorInt],
+            backgroundColor: '#FAECCD',
+            width: Util.size.width * 0.8,
+          }}>
+          <View
+            style={{
+              paddingTop: 30,
+              paddingLeft: 20,
+              paddingRight: 20,
+              position: 'relative',
+              height: Util.size.height,
+            }}>
+            {/* 小说名称 */}
+            <View
+              style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+              }}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: '700',
+                  color: '#5E4B28',
+                }}>
+                活人禁忌
+              </Text>
+            </View>
+            {this._renderDirectoryContent()}
+            {/* Tabbar */}
+            <View
+              style={{
+                width: Util.size.width * 0.8,
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                paddingTop: 10,
+                paddingBottom: 20,
+                backgroundColor: '#FAECCD',
+              }}>
+              <TouchableOpacity onPress={() => this.switchChapter(true)}>
+                <View>
+                  <Text
+                    style={
+                      this.state.showChapters
+                        ? styles.activeDirectoryText
+                        : styles.defaultDirectoryText
+                    }>
+                    目录
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.switchChapter(false)}>
+                <View>
+                  <Text
+                    style={
+                      !this.state.showChapters
+                        ? styles.activeDirectoryText
+                        : styles.defaultDirectoryText
+                    }>
+                    书签
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Animated.View>
+    );
+  };
+
+  _renderDirectorySetting = () => {
+    if (this.state.hideDirectory) {
+      return null;
+    }
+    return (
+      <View style={[styles.alertContainer, {zIndex: 30, flexDirection: 'row'}]}>
+        {this._renderDirectorySettingBottom()}
+        {this._renderDirectorySettingMiddle()}
+      </View>
+    );
+  };
+
+  // 打开阅读器选型
+  openReadSetting = () => {
+    this.hideReadOption();
+    this.setState(
+      {
+        hideRead: false,
+      },
+      () => {
+        this.inReadSetting();
+      },
+    );
+  };
+
+  // 打开亮度
+  openLightSetting = () => {
+    this.hideReadOption();
+    this.setState(
+      {
+        hideLight: false,
+      },
+      () => {
+        this.inLightSetting();
+      },
+    );
+  };
+
+  // 打开目录
+  openDirectorySetting = () => {
+    this.hideReadOption();
+    // this.setState(
+    //   {
+    //     // hideMask: false,
+    //     hideDirectory: false,
+    //   },
+    //   () => {
+    //     this.inDirectorySetting();
+    //   },
+    // );
+  };
 
   //显示动画
-  in() {
+  inReaderOption() {
     Animated.parallel([
-      Animated.timing(this.state.offset, {
+      Animated.timing(this.state.offsetOption, {
         easing: Easing.linear,
-        duration: 200,
+        duration: 300,
         toValue: 1,
       }),
     ]).start();
   }
 
   // 隐藏动画
-  out() {
+  outReaderOption() {
     Animated.parallel([
-      Animated.timing(this.state.offset, {
+      Animated.timing(this.state.offsetOption, {
         easing: Easing.linear,
-        duration: 200,
+        duration: 300,
         toValue: 0,
       }),
     ]).start(finished =>
       this.setState({
-        hide: true,
+        hideOption: true,
         showSliderChapter: false,
       }),
     );
   }
 
-  // 取消
-  iknow() {
-    if (!this.state.hide) {
-      this.out();
-    }
+  // 阅读设置
+  inReadSetting() {
+    Animated.parallel([
+      Animated.timing(this.state.offsetRead, {
+        easing: Easing.linear,
+        duration: 500,
+        toValue: 1,
+      }),
+    ]).start();
   }
 
-  show() {
-    if (this.state.hide) {
-      this.setState({hide: false}, this.in);
+  outReadSetting() {
+    Animated.parallel([
+      Animated.timing(this.state.offsetRead, {
+        easing: Easing.linear,
+        duration: 500,
+        toValue: 0,
+      }),
+    ]).start(finished =>
+      this.setState({
+        hideRead: true,
+      }),
+    );
+  }
+
+  hideReadSetting = () => {
+    if (!this.state.hideRead) {
+      this.outReadSetting();
+    }
+  };
+
+  // 亮度设置
+  inLightSetting() {
+    Animated.parallel([
+      Animated.timing(this.state.offsetLight, {
+        easing: Easing.linear,
+        duration: 300,
+        toValue: 1,
+      }),
+    ]).start();
+  }
+
+  outLightSetting() {
+    Animated.parallel([
+      Animated.timing(this.state.offsetLight, {
+        easing: Easing.linear,
+        duration: 300,
+        toValue: 0,
+      }),
+    ]).start(finished =>
+      this.setState({
+        hideLight: true,
+      }),
+    );
+  }
+
+  hideLightSetting = () => {
+    if (!this.state.hideLight) {
+      this.outLightSetting();
+    }
+  };
+
+  // 目录设置
+  inDirectorySetting() {
+    Animated.parallel([
+      // Animated.timing(this.state.opacityDirectory, {
+      //   easing: Easing.linear,
+      //   duration: 100,
+      //   toValue: 0.2,
+      // }),
+      Animated.timing(this.state.offsetDirectory, {
+        easing: Easing.linear,
+        duration: 500,
+        toValue: 1,
+      }),
+    ]).start();
+  }
+
+  outDirectorySetting() {
+    // this.setState({
+    //   hideMask: true,
+    // });
+    Animated.parallel([
+      // Animated.timing(this.state.opacityDirectory, {
+      //   easing: Easing.linear,
+      //   duration: 100,
+      //   toValue: 0,
+      // }),
+      Animated.timing(this.state.offsetDirectory, {
+        easing: Easing.linear,
+        duration: 500,
+        toValue: 0,
+      }),
+    ]).start(finished =>
+      this.setState({
+        hideDirectory: true,
+      }),
+    );
+  }
+
+  hideDirectorySetting = () => {
+    if (!this.state.hideDirectory) {
+      this.outDirectorySetting();
+    }
+  };
+
+  // 取消
+  hideReadOption = () => {
+    if (!this.state.hideOption) {
+      this.outReaderOption();
+    }
+  };
+
+  hideAll = () => {
+    this.hideReadOption();
+    this.hideReadSetting();
+  };
+
+  showReaderOptions() {
+    if (this.state.hideOption) {
+      this.setState({hideOption: false}, this.inReaderOption);
     }
   }
 
@@ -895,24 +2306,40 @@ class Reader extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E9DFC7',
+    // backgroundColor: '#E9DFC7',
   },
   contentContainer: {
     position: 'relative',
     width: Util.size.width,
+    flexWrap: 'wrap',
   },
-  top: {
+  topBox: {
+    width: Util.size.width - 20,
     marginTop: 10,
     marginLeft: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  topMenuBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D4BA90',
+    paddingTop: 3,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 15,
+  },
   chapterContent: {
     marginTop: 10,
     marginRight: 10,
     marginLeft: 10,
-    height: Util.size.height - 50,
+    width: Util.size.width - 20,
+    height: Util.size.height - 140,
+    // backgroundColor: 'red',
   },
   chapterName: {
     fontSize: 14,
@@ -927,15 +2354,13 @@ const styles = StyleSheet.create({
     lineHeight: 40,
   },
   foot: {
-    marginLeft: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     position: 'absolute',
-    bottom: 90,
+    bottom: 0,
     left: 0,
-    width: Util.size.width - 20,
+    width: Util.size.width,
   },
   footLeft: {
+    alignItems: 'center',
     flexDirection: 'row',
   },
   footRight: {
@@ -947,9 +2372,12 @@ const styles = StyleSheet.create({
     right: 0,
     width: 120,
     height: 50,
+    zIndex: 99,
   },
   alertContainer: {
     position: 'absolute',
+    top: 0,
+    left: 0,
     width: Util.size.width,
     height: Util.size.height,
   },
@@ -958,16 +2386,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 20,
+    paddingTop: 42,
     paddingBottom: 20,
   },
   alertMiddle: {
     height: Util.size.height - 140,
   },
   alertFoot: {
-    minHeight: 200,
-    position: 'relative',
-    backgroundColor: '#3B3A38',
+    backgroundColor: '#333333',
+  },
+  alertFootOption: {
+    minHeight: 240,
+  },
+  alertFootSetting: {
+    minHeight: 400,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  alertFootLight: {
+    minHeight: 320,
+    paddingTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   backImg: {
     marginLeft: 10,
@@ -977,7 +2417,30 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   directoryText: {
+    marginTop: 2,
     color: '#B6B6B6',
+    fontSize: 14,
+  },
+
+  backColorBox: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  activeBackColor: {
+    borderWidth: 1,
+    borderColor: '#FBA204',
+  },
+  activeDirectoryText: {
+    color: '#5E4B28',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  defaultDirectoryText: {
+    color: '#937743',
     fontSize: 14,
   },
 });

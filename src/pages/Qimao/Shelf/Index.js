@@ -3,23 +3,23 @@ import {
   View,
   StyleSheet,
   StatusBar,
-  UIManager,
-  ImageBackground,
   Animated,
   Dimensions,
+  Easing,
   ScrollView,
+  Modal,
   FlatList,
   TouchableOpacity,
 } from 'react-native';
 import {Header, Text, Icon, Image} from 'react-native-elements';
+
 const {width, height} = Dimensions.get('window');
+
+let mwidth = 150;
+let mheight = 110;
 
 const logoPng = require('../../../assets/qimao/image/logo.png');
 class Index extends Component {
-  static navigationOptions = {
-    title: '书架',
-  };
-
   constructor(props) {
     super(props);
 
@@ -53,6 +53,14 @@ class Index extends Component {
           type: 'ad',
         },
       ],
+
+      w1: new Animated.Value(0),
+      h1: new Animated.Value(0),
+
+      w2: new Animated.Value(0),
+      h2: new Animated.Value(0),
+
+      f1: new Animated.Value(0),
     };
 
     this.signIn = this.signIn.bind(this);
@@ -72,17 +80,29 @@ class Index extends Component {
   renderRightComponent() {
     return (
       <View style={styles.topBtnBox}>
-        <TouchableOpacity onPress={this.signIn} style={styles.topBtn}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={this.signIn}
+          style={styles.topBtn}>
           <Icon name="calendar" type="antdesign" size={24} color="#FF741C" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.search} style={styles.topBtn}>
-          <Icon name="search" type="octicon" color="#000" size={22} />
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={this.search}
+          style={styles.topBtn}>
+          <Icon name="search" type="octicon" color="#333333" size={22} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.record} style={styles.topBtn}>
-          <Icon name="clock" type="feather" size={24} />
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={this.record}
+          style={styles.topBtn}>
+          <Icon name="clock" type="feather" size={24} color="#333333" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.more} style={styles.topBtn}>
-          <Icon name="more-vertical" type="feather" size={26} />
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={this.more}
+          style={styles.topBtn}>
+          <Icon name="more-vertical" type="feather" size={26} color="#333333" />
         </TouchableOpacity>
       </View>
     );
@@ -125,9 +145,11 @@ class Index extends Component {
   }
   // 更多
   more() {
-    this.setState({
-      showMore: true,
-    });
+    if (this.state.showMore) {
+      this.closePopModal();
+    } else {
+      this.showPopModal();
+    }
   }
 
   // 切换路由到书城
@@ -171,7 +193,10 @@ class Index extends Component {
 
   _renderFooter = () => {
     return (
-      <TouchableOpacity style={styles.footerBox} onPress={() => this.goDepot()}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.footerBox}
+        onPress={() => this.goDepot()}>
         <View style={styles.footer}>
           <View
             style={{
@@ -211,7 +236,10 @@ class Index extends Component {
 
   _renderAd = data => {
     return (
-      <TouchableOpacity onPress={() => this.openAd(data)} key={data.id}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => this.openAd(data)}
+        key={data.id}>
         <View style={styles.bookBox}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View>
@@ -258,7 +286,10 @@ class Index extends Component {
 
   _renderBook = data => {
     return (
-      <TouchableOpacity onPress={() => this.openReader(data)} key={data.id}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => this.openReader(data)}
+        key={data.id}>
         <View style={styles.bookBox}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View>
@@ -327,6 +358,184 @@ class Index extends Component {
     });
   };
 
+  showPopModal = () => {
+    this.setState(
+      {
+        showMore: true,
+      },
+      () => {
+        Animated.parallel([
+          Animated.timing(this.state.w2, {
+            toValue: 18,
+            easing: Easing.linear,
+            duration: 300,
+          }),
+          Animated.timing(this.state.h2, {
+            toValue: 18,
+            easing: Easing.linear,
+            duration: 300,
+          }),
+          Animated.timing(this.state.f1, {
+            toValue: 18,
+            easing: Easing.linear,
+            duration: 300,
+          }),
+          Animated.timing(this.state.w1, {
+            toValue: mwidth,
+            easing: Easing.linear,
+            duration: 360,
+          }),
+          Animated.timing(this.state.h1, {
+            toValue: mheight,
+            easing: Easing.linear,
+            duration: 360,
+          }),
+        ]).start(finished => {
+          // if (finished) {
+          //   this.setState({
+          //     isVisible: false,
+          //   });
+          // }
+        });
+      },
+    );
+  };
+
+  closePopModal = () => {
+    Animated.parallel([
+      Animated.timing(this.state.w2, {
+        toValue: 0,
+        easing: Easing.linear,
+        duration: 120,
+      }),
+      Animated.timing(this.state.h2, {
+        toValue: 0,
+        easing: Easing.linear,
+        duration: 120,
+      }),
+      Animated.timing(this.state.f1, {
+        toValue: 0,
+        easing: Easing.linear,
+        duration: 120,
+      }),
+      Animated.timing(this.state.w1, {
+        toValue: 0,
+        easing: Easing.linear,
+        duration: 300,
+      }),
+      Animated.timing(this.state.h1, {
+        toValue: 0,
+        easing: Easing.linear,
+        duration: 300,
+      }),
+    ]).start(finished => {
+      if (finished) {
+        this.setState({
+          showMore: false,
+        });
+      }
+    });
+  };
+
+  // 弹窗
+  _renderPopWindow = () => {
+    if (!this.state.showMore) {
+      return null;
+    }
+    return (
+      <Modal
+        transparent={true}
+        visible={this.state.showMore}
+        animationType={'fade'}
+        onRequestClose={() => this.closePopModal()}>
+        <View style={[styles.popContainer]}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => this.closePopModal()}>
+            <View style={[styles.popContainer]} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={e => console.log(e)}
+            style={{
+              position: 'absolute',
+              width: mwidth,
+              top: 52,
+              right: 20,
+              zIndex: 100,
+            }}>
+            <View style={styles.modalBox}>
+              <Animated.View
+                style={[
+                  styles.modal,
+                  {
+                    width: this.state.w1,
+                    height: this.state.h1,
+                  },
+                ]}>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => console.log('xxxxxxx')}>
+                  <View style={styles.itemView}>
+                    <Animated.View
+                      style={{
+                        width: this.state.w2,
+                        height: this.state.h2,
+                      }}>
+                      <Icon
+                        name="folder-plus"
+                        type="feather"
+                        color="#666666"
+                        size={18}
+                      />
+                    </Animated.View>
+                    <Animated.Text
+                      style={[
+                        styles.textStyle,
+                        {
+                          fontSize: this.state.f1,
+                        },
+                      ]}>
+                      书架管理
+                    </Animated.Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => console.log('点击了付款码')}>
+                  <View style={styles.itemView}>
+                    <Animated.View
+                      style={{
+                        width: this.state.w2,
+                        height: this.state.h2,
+                      }}>
+                      <Icon
+                        name="folder-plus"
+                        type="feather"
+                        color="#666666"
+                        size={18}
+                      />
+                    </Animated.View>
+                    <Animated.Text
+                      style={[
+                        styles.textStyle,
+                        {
+                          fontSize: this.state.f1,
+                        },
+                      ]}>
+                      导入书籍
+                    </Animated.Text>
+                  </View>
+                </TouchableOpacity>
+              </Animated.View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    );
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -336,6 +545,8 @@ class Index extends Component {
           hidden={this.state.hideStatusBar}
           animated={true}
         />
+        {this._renderPopWindow()}
+
         <Animated.View
           style={{
             opacity: this.state.fadeAnim,
@@ -362,6 +573,7 @@ class Index extends Component {
           onScroll={this.onScroll}>
           <View style={styles.placeHolderBox}>
             <TouchableOpacity
+              activeOpacity={1}
               onPress={this.openCover}
               style={{
                 height: 100,
@@ -418,6 +630,7 @@ class Index extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
     backgroundColor: '#FFFFFF',
   },
   topContainer: {
@@ -426,13 +639,14 @@ const styles = StyleSheet.create({
   },
   topBackImg: {width: width},
   topBtnBox: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
   topBtn: {
-    marginLeft: 20,
+    marginLeft: 30,
   },
   placeHolderBox: {
     position: 'relative',
@@ -544,6 +758,40 @@ const styles = StyleSheet.create({
   footerContent: {
     fontSize: 16,
     color: '#9B9B9B',
+  },
+
+  popContainer: {
+    width: width,
+    height: height,
+    position: 'relative',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  modalBox: {
+    borderRadius: 5,
+  },
+  modal: {
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#EFEFEF',
+  },
+  itemView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  textStyle: {
+    color: '#2E2E2E',
+    fontSize: 20,
+    marginLeft: 8,
+  },
+  imgStyle: {
+    width: 20,
+    height: 20,
   },
 });
 

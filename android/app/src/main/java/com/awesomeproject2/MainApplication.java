@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
@@ -36,7 +38,6 @@ import com.theweflex.react.WeChatPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactPackage;
-// import com.awesomeproject2.geetest.SensebotPackage;
 
 public class MainApplication extends Application implements ReactApplication {
     // 设置为 true 将不弹出 toast
@@ -106,6 +107,10 @@ public class MainApplication extends Application implements ReactApplication {
 
                     // 权限
                     // packages.add(new RNPermissionsPackage());
+
+                    // 设备信息
+                    // packages.add(new RNDeviceInfo());
+
 
                     return packages;
                 }

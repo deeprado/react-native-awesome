@@ -1,6 +1,6 @@
 import React from 'react';
 import {PanResponder, View, StyleSheet} from 'react-native';
-import AnimHeart from '../../components/AnimHeart';
+import AnimHeart from './AnimHeart';
 import shortid from 'shortid';
 
 class AnimHeartPage extends React.Component {

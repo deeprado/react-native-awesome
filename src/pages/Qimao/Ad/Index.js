@@ -17,18 +17,6 @@ const logoPng = require('../../../assets/qimao/image/logo.png');
 const launcherPng = require('../../../assets/qimao/image/launcher.jpg');
 
 class Index extends Component {
-  // static navigationOptions = ({navigation, navigationOptions}) => {
-  //   const {params} = navigation.state;
-
-  //   return {
-  //     headerShown: false,
-  //     headerStyle: {
-  //       backgroundColor: navigationOptions.headerTintColor,
-  //     },
-  //     headerTintColor: '#fff',
-  //   };
-  // };
-
   // 构造
   constructor(props) {
     super(props);

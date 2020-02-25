@@ -213,6 +213,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-svg')
+    implementation project(':react-native-device-info')
     implementation project(':react-native-permissions')
     implementation project(':lottie-react-native')
     implementation project(':@yyyyu_react-native-geetest-sensebot')

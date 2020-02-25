@@ -71,8 +71,6 @@ import Cover from '../pages/Qimao/Fiction/Cover';
 // 阅读器
 import Reader from '../pages/Qimao/Fiction/Reader';
 
-import Demo2 from '../pages/Reader/Demo2';
-
 // 书城
 import Category from '../pages/Qimao/Depot/Category';
 import Rank from '../pages/Qimao/Depot/Rank';
@@ -476,7 +474,7 @@ let AppAllStack = createStackNavigator(
   },
 );
 
-const SplashStack = createStackNavigator(
+const SplashStack = createSwitchNavigator(
   {
     SplashPage: {
       screen: SplashPage,

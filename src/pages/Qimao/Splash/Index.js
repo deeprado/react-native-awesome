@@ -26,7 +26,7 @@ class Index extends Component {
 
   componentDidMount() {
     this.timer = setTimeout(() => {
-      this.props.navigation.replace('AdPage');
+      this.props.navigation.navigate('AdPage');
       this.timer && clearTimeout(this.timer);
     }, 2000);
   }

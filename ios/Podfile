@@ -66,6 +66,10 @@ target 'AwesomeProject2' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'AwesomeProject2Tests' do
     inherit! :search_paths
     # Pods for testing
