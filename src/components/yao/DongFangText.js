@@ -6,10 +6,10 @@ import NewsList from './NewsList';
 import NewsImportant from './NewsImportant';
 
 const news = [
-  'xxxxxxxx',
+  '啊时代发生的发生的发生发生的发',
   'yyyyyyyyyy',
   '啊时代发生的发生的发生发生的发啊时代发生的发暗示法阿斯蒂芬暗示法阿斯蒂芬阿斯蒂啊沙发上的方法啊是发顺丰阿斯蒂芬芬阿斯蒂芬爱上打上单服asd啊',
-  'bbbbbbbbbb',
+  '啊时代发生的发生的发生发生的发',
 ];
 
 export default class DongFangText extends Component {
@@ -17,7 +17,7 @@ export default class DongFangText extends Component {
     return (
       <View style={styles.flex}>
         <NewsHeader />
-        <NewsList title={'xxxxxxxxxxx'} />
+        <NewsList title={'啊时代发生的发生的发生发生的发'} />
         <NewsImportant news={news} />
       </View>
     );

@@ -213,6 +213,10 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-svg')
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-permissions')
+    implementation project(':lottie-react-native')
     implementation project(':@yyyyu_react-native-geetest-sensebot')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-wechat')
@@ -224,9 +228,7 @@ dependencies {
     implementation project(':react-native-pdf')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-image-picker')
-    implementation project(':react-native-amap3d')
     implementation project(':react-native-baidu-map')
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':jpush-react-native')  // 添加 jpush 依赖
     implementation project(':jcore-react-native')  // 添加 jcore 依赖
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -235,29 +237,29 @@ dependencies {
     // }
 
     implementation project(':react-native-contacts')
-    implementation project(':aliyun-oss-react-native')
     implementation project(':RCTWeChat')
     implementation project(':react-native-fs')
     implementation project(':react-native-code-push')
 
     //
     implementation project(':@react-native-community_async-storage')
+
+    //
+    implementation project(':@react-native-community_cameraroll')
+    // 渐变
+    implementation project(':react-native-linear-gradient')
+
+    // implementation project(':react-native-video')
+    // implementation "androidx.appcompat:appcompat:1.0.0"
+
     // 如果你需要支持GIF动图
-    implementation 'com.facebook.fresco:animated-gif:1.3.0'
+    implementation 'com.facebook.fresco:animated-gif:2.0.0'
 
     // 如果你需要支持WebP格式，包括WebP动图
     implementation 'com.facebook.fresco:animated-webp:1.3.0'
     implementation 'com.facebook.fresco:webpsupport:1.3.0'
 
-    // 如果只需要支持WebP格式而不需要动图
-    implementation 'com.facebook.fresco:webpsupport:1.3.0'
-
-    //
-    implementation project(':@react-native-community_cameraroll')
-
-    // implementation project(':react-native-video')
-    // implementation "androidx.appcompat:appcompat:1.0.0"
-
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
@@ -275,4 +277,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-

@@ -3,12 +3,12 @@ import {Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import ShoppingCart from '../pages/ShoppingCart';
-import CityList from '../pages/CityList';
-import NativePage from '../pages/NativePage';
-import ContactsPage from '../pages/ContactsPage';
-import CategoryList from '../pages/CategoryList';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
+import ShoppingCart from '../pages/Cart/ShoppingCart';
+import CityList from '../pages/List/CityList';
+import NativePage from '../pages/Example/NativePage';
+import ContactsPage from '../pages/Contacts/ContactsPage';
+import CategoryList from '../pages/Category/CategoryList';
 
 class SettingsScreen extends Component {
   render() {

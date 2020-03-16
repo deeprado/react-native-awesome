@@ -1,16 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Dimensions,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Alert,
-  Button,
-  Platform,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {View, Text, Button, Platform, StyleSheet} from 'react-native';
 
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {
@@ -18,19 +7,18 @@ import {
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
+import {createDrawerNavigator} from 'react-navigation-drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SafeAreaView from 'react-native-safe-area-view';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import HomePage from '../pages/DrawerHome';
-import Page1 from '../pages/Page1';
-import Page2 from '../pages/Page2';
-import Page3 from '../pages/Page3';
-import Page4 from '../pages/Page4';
-import Page5 from '../pages/Page5';
-import Login from '../pages/DrawerLogin';
+import HomePage from '../pages/Drawer/DrawerHome';
+import Page1 from '../pages/Demo/Page1';
+import Page2 from '../pages/Demo/Page2';
+import Page3 from '../pages/Demo/Page3';
+import Page4 from '../pages/Demo/Page4';
+import Page5 from '../pages/Demo/Page5';
+import Login from '../pages/Drawer/DrawerLogin';
+import CustomDrawerContentComponent from '../pages/Drawer/CustomDrawerContentComponent';
 
 const styles = StyleSheet.create({
   container: {
@@ -117,7 +105,7 @@ const DrawerNav = createDrawerNavigator(
   },
   {
     order: ['Page4', 'Page5', 'Main'],
-    drawerWidth: '30%',
+    drawerWidth: '80%',
     initialRouteName: 'Page4',
     contentOptions: {
       activeTintColor: '#e91e63',
@@ -129,9 +117,11 @@ const DrawerNav = createDrawerNavigator(
       },
     },
     useNativeAnimations: true,
-    drawerPosition: 'right',
+    drawerPosition: 'left',
     drawerBackgroundColor: 'white',
     overlayColor: 'rgba(0,0,0,0.1)',
+    // overlayColor: 'red',
+    contentComponent: CustomDrawerContentComponent,
     // contentComponent: props => (
     //   <ScrollView style={{backgroundColor: '#789', flex: 1}}>
     //     <SafeAreaProvider>

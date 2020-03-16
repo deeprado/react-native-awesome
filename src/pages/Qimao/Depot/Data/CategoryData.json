@@ -1,0 +1,143 @@
+{
+  "data": [
+    {
+      "firstCateName": "女生",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "现代言情",
+          "total": 985,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["总裁豪门", "婚恋爱情", "重生异能"]
+        },
+        {
+          "secondCateName": "古代言情",
+          "total": 870,
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "secondCateId": "1000001",
+          "titles": ["穿越", "工位宅斗", "种田", "女强"]
+        },
+        {
+          "secondCateName": "幻想言情",
+          "total": 558,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["仙侠", "玄幻", "科幻", "魔法"]
+        },
+        {
+          "secondCateName": "青春校园",
+          "total": 327,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["浪漫青春", "青春成长"]
+        }
+      ]
+    },
+    {
+      "firstCateName": "男生",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "玄幻奇幻",
+          "total": 1238,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["东方玄幻", "异界大陆", "时空穿梭", "王朝争霸", "西方奇幻"]
+        },
+        {
+          "secondCateName": "都市人生",
+          "total": 1021,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": [
+            "都市高手",
+            "异术超能",
+            "乡村生活",
+            "都市休闲",
+            "热血校园",
+            "商职战场",
+            "明显娱乐",
+            "现实百态"
+          ]
+        },
+        {
+          "secondCateName": "武侠仙侠",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": [
+            "幻想修真",
+            "上古洪荒",
+            "古典仙侠",
+            "武侠幻想",
+            "国士无双",
+            "传统武侠"
+          ]
+        },
+        {
+          "secondCateName": "奇闻异事",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["神秘怪谭", "奇门秘书", "侦探推理", "惊心动魄", "寻宝探险"]
+        },
+        {
+          "secondCateName": "游戏",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["虚拟网络", "游戏异界", "电子竞技"]
+        },
+        {
+          "secondCateName": "科幻",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["未来幻想", "末世危机", "星际机甲"]
+        },
+        {
+          "secondCateName": "历史",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["穿越历史", "架空历史", "历史传记"]
+        }
+      ]
+    },
+    {
+      "firstCateName": "图书",
+      "firstCateId": "0000001",
+      "secondCateItems": [
+        {
+          "secondCateName": "文学艺术",
+          "total": 308,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["影视原著", "初版小说", "经典文学", "人物传记", "散文随笔"]
+        },
+        {
+          "secondCateName": "人文社科",
+          "total": 234,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["政治军事", "历史宗教", "科学教育", "心理健康"]
+        },
+        {
+          "secondCateName": "经管立志",
+          "total": 49,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["经管", "立志"]
+        },
+        {
+          "secondCateName": "公版经典",
+          "total": 284,
+          "secondCateId": "1000001",
+          "itemImg": "//img14.360buyimg.com/n1/s150x150_jfs/t1/106733/12/1980/86147/5dc90a28Ea8eb48e3/2868fbbe4c2bd80c.jpg.dpg",
+          "titles": ["中国名著", "外国名著"]
+        }
+      ]
+    }
+  ]
+}

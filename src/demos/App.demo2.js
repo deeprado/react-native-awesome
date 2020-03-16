@@ -1,20 +1,13 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 
-import IndexPage from '../pages/IndexPage';
-import MyPage from '../pages/MyPage';
-import SplashPage from '../pages/SplashPage';
-import CartPage from '../pages/CartPage';
-import CategoryPage from '../pages/CategoryPage';
+import IndexPage from '../pages/Home/IndexPage';
+import MyPage from '../pages/Mine/MyPage';
+import SplashPage from '../pages/Splash/SplashPage';
+import CartPage from '../pages/Chat/CartPage';
+import CategoryPage from '../pages/Category/CategoryPage';
 
 const AppNavigator = createStackNavigator(
   {

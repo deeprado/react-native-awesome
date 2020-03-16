@@ -12,11 +12,11 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import SafeAreaView from 'react-native-safe-area-view';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 
 import MainStyles from '../styles/Main';
 
-import AnimatedPage from '../pages/AnimatedPage';
+import AnimatedPage from '../pages/Animate/AnimatedPage';
 
 const isAndroid = Platform.OS === 'ios' ? false : true;
 

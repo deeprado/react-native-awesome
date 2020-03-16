@@ -62,6 +62,14 @@ target 'AwesomeProject2' do
 
   pod 'RNLGeetestSensebot', :path => '../node_modules/@yyyyu/react-native-geetest-sensebot'
 
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'AwesomeProject2Tests' do
     inherit! :search_paths
     # Pods for testing

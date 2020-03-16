@@ -1,10 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Modal,
-  StyleSheet,
-  StatusBar,
-  Platform,
-} from 'react-native';
+import {StyleSheet, StatusBar, Platform} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -12,11 +7,11 @@ import {createStackNavigator} from 'react-navigation-stack';
 import SafeAreaView from 'react-native-safe-area-view';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 
-import MovieTalk from '../pages/MovieTalk';
-import MovieDetail from '../pages/MovieDetail';
+import MovieTalk from '../pages/Movie/MovieTalk';
+import MovieDetail from '../pages/Movie/MovieDetail';
 
 const isAndroid = Platform.OS === 'ios' ? false : true;
 

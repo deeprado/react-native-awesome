@@ -5,6 +5,10 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
+import com.airbnb.android.react.lottie.LottiePackage;
 import com.rnlib.geetestsensebot.RNLGeetestSensebotPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.theweflex.react.WeChatPackage;
@@ -30,9 +34,10 @@ import cn.reactnative.modules.update.UpdateContext;
 import com.reactnativecommunity.cameraroll.CameraRollPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
-import com.reactlibrary.RNAliyunOssPackage;
 import com.theweflex.react.WeChatPackage;
 import com.microsoft.codepush.react.CodePush;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.facebook.react.ReactPackage;
 
 public class MainApplication extends Application implements ReactApplication {
     // 设置为 true 将不弹出 toast
@@ -65,6 +70,7 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new CameraRollPackage());
                     // 视频播放
                     // packages.add(new MainReactPackage(),
+
                     // new RNLGeetestSensebotPackage(),
                     // new RNFetchBlobPackage(),
                     // new WeChatPackage(),
@@ -82,16 +88,29 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new ImagePickerPackage());
                     // packages.add(new ReactVideoPackage());
 
-                    // packages.add(new RNAliyunOssPackage());
-
-                    // 添加自定义包管理器
-//                    packages.add(new MyMainPackage());
-                    packages.add(myMainPackage);
-                    // <-- 添加这一行，类名替换成你的Package类的名字 name.
-                    packages.add(new CustomToastPackage());
+                    // 渐变
+                    // packages.add(new LinearGradientPackage());
 
                     // 联系人
-//                    packages.add(new ReactNativeContacts());
+                    // packages.add(new ReactNativeContacts());
+
+                    // 动画
+                    //packages.add(new LottiePackage());
+
+                    // 添加自定义包管理器
+                    // packages.add(new MyMainPackage());
+                    packages.add(myMainPackage);
+                    // 添加这一行，类名替换成你的Package类的名字 name.
+                    packages.add(new CustomToastPackage());
+                    // 极验
+                    // packages.add(new SensebotPackage());
+
+                    // 权限
+                    // packages.add(new RNPermissionsPackage());
+
+                    // 设备信息
+                    // packages.add(new RNDeviceInfo());
+
 
                     return packages;
                 }

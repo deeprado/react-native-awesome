@@ -1,18 +1,18 @@
 import React from 'react'; //只要在页面中使用了基础组件 都需要导入这句话 不然会报错
 import {Button, Platform} from 'react-native';
 
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createAppContainer} from 'react-navigation';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import HomePage from '../pages/DrawerHome';
-import Page1 from '../pages/Page1';
-import Page2 from '../pages/Page2';
-import Page3 from '../pages/Page3';
-import Page4 from '../pages/Page4';
+import HomePage from '../pages/Drawer/DrawerHome';
+import Page1 from '../pages/Demo/Page1';
+import Page2 from '../pages/Demo/Page2';
+import Page3 from '../pages/Demo/Page3';
+import Page4 from '../pages/Demo/Page4';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const AppTopNavigator = createMaterialTopTabNavigator(

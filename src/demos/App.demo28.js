@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import ShoppingCart from '../pages/ShoppingCart';
-import CategoryList from '../pages/CategoryList';
-import OssExample from '../pages/OssExample';
-import SettingsScreen from '../pages/SettingsScreen';
-import AliPayPage from '../pages/AliPayPage';
-import TabView from '../pages/TabView';
-import CustomTabView from '../pages/CustomTabView';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
+import ShoppingCart from '../pages/Cart/ShoppingCart';
+import CategoryList from '../pages/Category/CategoryList';
+import OssExample from '../pages/Oss/OssExample';
+import SettingsScreen from '../pages/Settings/SettingsScreen';
+import AliPayPage from '../pages/Pay/AliPayPage';
+import TabView from '../pages/Example/TabView';
+import CustomTabView from '../pages/Example/CustomTabView';
 
 const TabNavigator = createBottomTabNavigator(
   {

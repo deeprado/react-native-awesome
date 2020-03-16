@@ -15,7 +15,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import SafeAreaView from 'react-native-safe-area-view';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 import {
   Avatar,
@@ -26,8 +26,8 @@ import {
 } from 'react-native-elements';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-import MovieTalk from '../pages/MovieTalk';
-import MovieDetail from '../pages/MovieDetail';
+import MovieTalk from '../pages/Movie/MovieTalk';
+import MovieDetail from '../pages/Movie/MovieDetail';
 
 const isAndroid = Platform.OS === 'ios' ? false : true;
 

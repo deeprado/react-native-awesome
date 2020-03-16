@@ -3,14 +3,14 @@ import {Text, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeIconWithBadge from '../components/HomeIconWithBadge';
-import ShoppingCart from '../pages/ShoppingCart';
-import CameraRollPage from '../pages/CameraRollPage';
-import ImagePickerPage from '../pages/ImagePickerPage';
-import PositionPage from '../pages/PositionPage';
-import ClipboardPage from '../pages/ClipboardPage';
-import VideoPlayer from '../pages/VideoPlayer';
-import CategoryList from '../pages/CategoryList';
+import HomeIconWithBadge from '../components/badge/HomeIconWithBadge';
+import ShoppingCart from '../pages/Cart/ShoppingCart';
+import CameraRollPage from '../pages/Camera/CameraRollPage';
+import ImagePickerPage from '../pages/Image/ImagePickerPage';
+import PositionPage from '../pages/Map/PositionPage';
+import ClipboardPage from '../pages/Clipboard/ClipboardPage';
+import VideoPlayer from '../pages/Video/VideoPlayer';
+import CategoryList from '../pages/Category/CategoryList';
 
 class SettingsScreen extends Component {
   render() {
