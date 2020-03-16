@@ -6,7 +6,7 @@
 
 import {Platform} from 'react-native';
 
-export const appName = 'AwsomeProject2';
+export const appName = '无脑工具';
 export const webUrl = 'http://sunwei.top';
 export const appApi = 'https://api.surmon.me';
 export const staticApi = 'https://cdn.surmon.me';
