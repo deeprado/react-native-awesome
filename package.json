@@ -21,7 +21,7 @@
     "GitHubTrending": "^3.1.5",
     "apsl-react-native-button": "^3.1.1",
     "autobind-decorator": "^2.4.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "^35.0.1",
     "expo-localization": "^7.0.0",
     "gravatar": "^1.8.0",
